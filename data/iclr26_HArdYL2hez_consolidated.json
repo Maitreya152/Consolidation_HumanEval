@@ -1,0 +1,32 @@
+{
+    "paper_id": "HArdYL2hez",
+    "conference": "iclr26",
+    "summary": "MSSR, a novel symbolic regression framework, tackles the challenge of the vast search space by strategically reusing sub-expressions. This approach, leveraging a multi-agent reinforcement learning paradigm, involves agents dedicated to selecting left sub-expressions, operators, and right sub-expressions according to a defined formulation. Empirical results showcase MSSR's effectiveness in delivering substantial efficiency gains compared to conventional symbolic regression techniques, highlighting its potential for advancing the field.",
+    "strengths": [
+        "Paper is organized in an easy-to-read way and is intuitive.",
+        "Using MI to evaluate sub-expressions provides a noise-resistant measure of relevance, contributing to the method's robustness in noisy data scenarios; however, it's worth considering whether unique relevance (UR) might be a more applicable concept.",
+        "The sub-expression library is dynamic and evolves using GP based on mutual information (MI) with the target, ensuring it remains relevant and enriched with components that have high predictive utility, especially under noisy conditions.",
+        "The paper presents a novel engineering solution that utilizes a variety of techniques (i.e., information theory, evolutionary computation, reinforcement learning) in an appropriate manner that is competitive. However, the discussion of SR literature needs to be more specific and nuanced to accurately reflect current SR literature, particularly in regards to the reuse of meaningful sub-expressions, and the literature review lacks depth in several key areas, such as GP-based methods with similar ideas like Genetic Programming with Automatically Defined Functions (GP-ADF) or modular GP.",
+        "The idea is novel and promising, but methodological clarifications are needed, and the paper has numerous writing and formatting issues that should be addressed during the rebuttal phase.",
+        "The paper identifies an under-explored direction — reusing sub-expressions to shrink the symbolic search space, which is well justified both theoretically and empirically. However, the paper lacks integration with other frameworks, such as Deep RL, MCTS, or LLM-based symbolic regression frameworks, and does not adequately compare with prior works like GP-RL or hierarchical RL approaches for expression construction."
+    ],
+    "weaknesses": [
+        "**2. Insufficient Coverage of Related Work​**",
+        "What is the definition of “symbolic recovery rate” defined? There are different definitions in SR literature, it should be stated clearly in the paper. How are the constants treated for equality (i.e., is 0.999 treated effectively the same as 1 in an equation)?",
+        "[1] Fong, K. S., & Motani, M. Pareto-Optimal Fronts for Benchmarking Symbolic Regression Algorithms. In Forty-second International Conference on Machine Learning.",
+        "The ablation study is a nice addition, but it is limited to a few datasets and should be expanded to cover all benchmark categories (PMLB, FSRB, Strogatz) to demonstrate generalizability.",
+        "The experimental comparisons and baselines could be improved by including GP-ADF, which directly addresses sub-expression reuse, and pretrained approaches like SNIP or NeSymReS, which excel in model complexity reduction.",
+        "The rationale for modeling the problem as a cooperative Multi-Agent Reinforcement Learning (MARL) setup is unclear, with a significant conceptual gap between the motivation of mining valuable sub-expressions and the decision to formulate it as a MARL problem. A stronger conceptual or mathematical justification for this modeling choice is needed to make the approach more convincing.",
+        "The paper lacks sufficient background on symbolic regression and (multi-agent) reinforcement learning, and the citation format is inconsistent. Additionally, mathematical notation is inconsistent, and Theorem 1 should be presented as an equation or proposition with a derivation, not as a theorem accompanied by a proof. Finally, in Table 5, the variable should be written as $u_0$ and all mathematical operators should use LaTeX commands for proper typesetting consistency."
+    ],
+    "questions": [
+        "Please address the weaknesses above. In addition to the weaknesses, below are some questions that could possibly justify a further increase in recommendation score.",
+        "What algorithm is used to estimate MI (e.g., KSG [2])? Please discuss and cite the algorithm used along with the settings, because while the definition of MI is not ambiguous, there are many variants of MI estimators, each with potentially very different outputs. And, was the choice of MI estimator justified via experimentation?",
+        "However, the manuscript omits critical details about how MI is computed between a sub-expression and the target, including the exact formulation and whether continuous outputs are discretized, which is essential for reproducibility.",
+        "Can the paper clarify what happens to the sub-expression library when there is an optimized constant in the sub-expression (e.g., x^2.5)? The proposed method inherently assumes that target expressions can be decomposed into a weighted sum of sub-expressions, which may favor expressions naturally adhering to this form but could struggle with expressions that do not decompose additively, potentially leading to less parsimonious fits than methods without this structural bias.",
+        "The framework employs 3 agents per sub-expression, implying 3×n agents for an expression with n terms, but it is unclear how the search space scales with term count or how inter-term dependencies are handled. Since agents update independently, the approach may overlook synergies between terms, potentially hindering global optimization."
+    ],
+    "divergent_perspectives": [
+        "The paper seems to be missing SR algorithms published post-2021, and the results in Figures 2 and 3 are contradictory, with Operon being Pareto optimal despite having a larger model size than MSSR in PMLB. Furthermore, the comparison with state-of-the-art methods is undermined by the omission of PySR, a recently published and widely recognized SR tool."
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "paper_id": "tZCqSVncRf",
+    "conference": "iclr25",
+    "summary": "This research presents Mirage, a meticulously crafted synthetic dataset aimed at evaluating the inductive and deductive reasoning abilities of LLMs.  The study  explores two reasoning paradigms: specific-to-specific (leveraging neighbor information) and specific-to-general-to-specific (relying on rule extraction).  Findings indicate LLMs demonstrate superior performance in the neighbor-based inductive setting, suggesting a preference for learning from similar examples rather than abstract rules. While LLMs exhibit weaknesses in traditional deductive reasoning, their effectiveness with neighbor information highlights a  'neighbor-based inductive reasoner' trait.  Crucially, the work underscores the importance of differentiating true reasoning from pattern matching within LLMs, prompting further research into their underlying cognitive processes.",
+    "strengths": [
+        "The analysis in terms of neighbor-based reasoning, especially the investigation into the scope is also interesting. However, it might not be surprising, since the similarity of in-context demonstrations has been discussed extensively in previous papers.",
+        "Various advanced prompting techniques, including SR and HR, along with the latest LLMs, are tested in the experiments.",
+        "The authors present a synthetic data generation framework to evaluate inductive and deductive reasoning processes, providing clear steps detailing the data generation process, including rule generation and question generation procedures. However, the data setting may lack sufficient complexity to effectively demonstrate inductive reasoning capabilities in real-life scenarios.",
+        "The main finding is insightful, that setting (2) outperforms setting (1), which can bring in more discussions on how LLMs perform inductive reasoning. Additionally, could the authors also check if fine-tuning over the synthetic data helps the inductive reasoning of LLMs?",
+        "The paper covered a broad range of related works and provided another valuable benchmark for evaluating LLMs' reasoning power. The tasks have been formulated in four representations to ensure diversity, and the effective scope analysis for neighbor reasoning supports the claim that LLMs are effective neighbor-based reasoners. A new synthetic dataset is created and contributed to the reasoning evaluation of LLMs, which concludes that LLMs are good at neighbor-based reasoning.",
+        "The authors make two interesting hypotheses on LLM's behaviour, and carefully designed several experiments to verify them. The evaluation metrics are well-designed and explained, with detailed discussions and clear visualizations."
+    ],
+    "weaknesses": [
+        "First of all, all the experiments are behavioural studies and empirical evaluations, and there is no mathematical evidence about LLM's induction/deduction power. IMHO, if there is no mathematical proof, then claims such as \"we prove that LLMs are poor in inductive reasoning\" would be too strong.",
+        "It is not surprising that LLMs are good at \"predicting\" based on neighborhood context, as this is one of the important methods to train them.",
+        "However, it's worth noting that the paper also reports experiments on deductive reasoning of LLMs, which seems to be outside the scope of the title.",
+        "However, the authors use the term 'Feature Space' to denote the space of observed facts and test samples, but it's unclear where the features in this space originate.",
+        "Moreover, the authors coined the nice term 'neighbor-based reasoning', but it's unclear whether it's reasoning or just pattern-matching, as there is no term of 'neighbor-based inductive reasoning' in the literature of logic or psychology."
+    ],
+    "questions": [
+        "The writing is not clear, specifically: a) what does the 'substitution' in line 414 and line 443 mean? b) after finding IF, CF, and OF, how are they used? c) what is the metric in Table 1? Additionally, could the authors offer additional insights or empirical evidence on the model's performance with real-world datasets or in less controlled environments?",
+        "Although the performance that setting (2) outperforms setting (1) is provided, there might be a lack of a more in-depth analysis of when LLMs use neighbor-based reasoning, and when LLMs use the general pattern thinking. Or is it that LLMs can purely do neighbor-based reasoning, and never use the general pattern thinking at all? It seems that although each experiment is interesting, but I don't know what is the takeaway knowledge from this paper."
+    ],
+    "divergent_perspectives": [
+        "The claim that LLM is a poor rule-based inductive reasoner is too strong and unacceptable, and the authors have not provided a clear definition of 'poor' or mathematical proof. Furthermore, the claim that LLM is a neighbor-based inductive reasoner also lacks mathematical proof.",
+        "However, I wouldn't call the other task as 'deduction' since the rules are not provided. From the definition from logic, a deductive inference needs both input facts and the logic rules for deducing the outputs. Additionally, do you assume any causal relations between the input and the output of rules, or just associative relations? If only associative relations, how do you distinguish deductive from inductive reasoning?"
+    ]
+}

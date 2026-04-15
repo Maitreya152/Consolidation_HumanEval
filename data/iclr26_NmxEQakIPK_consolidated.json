@@ -1,0 +1,29 @@
+{
+    "paper_id": "NmxEQakIPK",
+    "conference": "iclr26",
+    "summary": "iFlame, a novel Transformer architecture, tackles the challenge of efficient unconditional 3D mesh generation by introducing an innovative interleaving mechanism of full and linear attention layers within a multi-scale hourglass structure. This approach, termed iBlocks,  balances accuracy and computational efficiency, leading to significantly reduced training and inference costs compared to existing methods. As a result, iFlame enables the generation of complex meshes with up to 4,000 faces at a lower computational burden while maintaining high quality. This architectural advancement  effectively addresses the need for scalable and efficient modeling of intricate 3D data.",
+    "strengths": [
+        "This approach combines the staggered attention mechanism with an hourglass structure for mesh generation, effectively balancing efficiency and expressiveness, which is a strong architectural innovation.",
+        "This approach successfully increases the maximum number of faces for unconditional mesh generation from 800 to 4,000, with potential for further expansion, and generates high-quality meshes after only two days of training on four A100 images, demonstrating promising prospects for practical deployment.",
+        "The combination of an interleaved attention mechanism within an hourglass structure is a conceptually novel design that addresses the efficiency problem at both a block-level and global-level scale, with substantial gains in computational efficiency, training cost, and memory footprint, highlighting the method’s potential for practical deployment.",
+        "The paper proposes a hybrid architecture that can optimize training/inference speed while reducing the memory footprint of the KV cache, leading to significant efficiency improvements in training time, memory usage, inference speed, and key-value caching.",
+        "The paper is well written and clearly motivated. The comprehensive experimental design, which compares the approach with mainstream methods across multiple datasets and metrics, validates its effectiveness and versatility, although the proposed method does not significantly impact the results."
+    ],
+    "weaknesses": [
+        "Lack of in-depth analysis of the architectural choice: Why was the \"3 linear + 1 full attention\" iBlock architecture chosen? Ablation experiments are lacking to support this.",
+        "The proposed method is merely replacing some of the full attention layers in the hourglass transformer, which requires further justification on why the architecture is designed this way and why it is good for mesh generation. However, the exploration on linear attention and more efficient training is important and impressive, using this amount of compute to make mesh generation work.",
+        "However, the fixed 3:1 ratio of linear to full attention layers is a key design choice that lacks empirical justification or sensitivity analysis; exploring alternative ratios (e.g., 1:1 or 7:1) would clarify its effect on the trade-off between performance and efficiency.",
+        "The visualization method in Figure 1 is not ideal, as a truncated histogram can lead to misunderstandings about the multiplicative relationships between data points.",
+        "The primary weakness is that the experiment scale is relatively small compared to related works, with the model trained on only 39K meshes, which raises questions about the generalization capability and scalability of the method.",
+        "See weakness part. Understanding the ability to model long sequences is not fully verified: while it supports 4,000 faces, its performance on longer sequences (e.g., 10,000+ faces) is not demonstrated. Furthermore, comparison with other efficient sequence models (e.g., Mamba, RetNet, or Hyena) in terms of both efficiency and mesh quality is also needed.",
+        "The model focuses only on unconditional generation and has not verified its performance on conditional generation tasks (e.g., image/point cloud to mesh). However, it's hard to tell if the model can generalize to unseen objects with unconditional generation setting, and it's unclear if the proposed method can show promising speed up in training for conditional generation tasks.",
+        "The baseline comparison is not comprehensive, as it does not compare with recently proposed efficient Transformer variants such as Mamba and RetNet. Additionally, generation quality still has room for improvement, as it does not comprehensively surpass baselines such as MeshXL in some metrics like COV and MMD."
+    ],
+    "questions": [
+        "However, it is important to validate the effectiveness of the observation that linear attention achieves lower performance compared to attention-based architectures on auto-regressive mesh generation.",
+        "Could the authors further clarify the rationale for selecting the 3:1 ratio of linear to full attention layers within the iBlock? Was this choice guided by theoretical considerations, empirical tuning, or prior design heuristics?",
+        "In Figure 5, the novelty analysis based on Chamfer distance is interesting, but could the authors provide qualitative examples to illustrate whether high-distance samples correspond to meaningful creative variations or to geometric artifacts?",
+        "Does the author believe that the linear attention could further scale up to larger models and datasets? What's the potential problems? Most recent mesh generation works still use a standard transformer, I'm curious about the authors' opinion on their choices."
+    ],
+    "divergent_perspectives": []
+}

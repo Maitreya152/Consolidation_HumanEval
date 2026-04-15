@@ -1,0 +1,27 @@
+{
+    "paper_id": "0hdSiZ1br0",
+    "conference": "iclr26",
+    "summary": "This paper presents a groundbreaking watermarking technique for discrete diffusion language models (dLLMs) named dMARK.  It ingeniously embeds watermark signals by controlling the decoding order  according to binary hash rules tied to a watermarking key, ensuring minimal disruption to token probabilities and text quality. This approach, compatible with standard decoding strategies and improvable through beam search,  was rigorously tested across multiple dLLM models and datasets.  Results highlight its effectiveness with low FPR, competitive text quality, and robustness against common adversarial attacks like random token modifications and paraphrasing.",
+    "strengths": [
+        "The proposed method is designed to be effectively combined with any decoding strategy, including confidence, entropy, margin, and greedy-based rules, but it can increase detectability at the cost of inference cost and PPL, so more analysis on the computational overhead is needed.",
+        "The paper proposes the first method that deals with watermarking dLLMs, which makes sense in the scenario of dLLMs where the order matters very much, and this is a significant contribution to the field, signaling a current need for such a method."
+    ],
+    "weaknesses": [
+        "The writing is quite rough; for example, references to appendices in the main text lack chapter numbers, and the wording is imprecise. The abbreviation for discrete diffusion language models should be \"ddlms,\" not \"dllms,\" which refers to \"diffusion large language models.\"",
+        "The algorithm's 'unbiasedness' is not proved, and the concept of 'unbiasedness' is only a marginal unbiasedness with respect to key $\\xi$. A self-contained proof is necessary to establish the algorithm's unbiasedness, and the authors should be more precise in their definition of 'unbiasedness'.",
+        "The paragraph on robustness to post-editing is very short, and it would be valuable to see more discussions on robustness evaluations against more sophisticated post-editing transformations. Furthermore, there is a lack of an Ethics Statement and Reproducibility Statement sections.",
+        "The text quality seems to degrade by a large degree, which might be due to modifying the order of generation, a core ingredient in developing high-quality dLLMs. However, the paper provides experimental analysis from the perspectives of detectability, text quality, and robustness.",
+        "Although it is claimed to be the first watermarking method done on dLLMs, comparing against other watermarking methods on other language models can help demonstrate the effectiveness of the method. Furthermore, it would be helpful to have a method figure, describing a pipeline framework of the proposed method from input to output."
+    ],
+    "questions": [
+        "What are the fundamental differences between this approach and KGW? It seems to be merely a substitution of the hash scheme.",
+        "According to Table 3, the text generation quality between the dMARK method and the dMARK+ 3-beam does not seem to vary much on MMLU and GSM-8K. Is there any extended discussion on why that is?",
+        "Does the \"beam search\" mentioned in the paper refer to sampling tokens from multiple positions at the same timestep?",
+        "What is the performance on short answers (small number of output tokens)?",
+        "Does this mean the segmentation across all positions is identical, given that the input to the hash function only consists of the watermark key and tokens from the vocabulary?"
+    ],
+    "divergent_perspectives": [
+        "The self-hashing algorithm is easy to implement and robust, but its novelty is undermined due to similarities with the self-hashing algorithm of Kirchenbauer et al. 2023, which has the same detection method and outcome, although the conduction may be different.",
+        "The overall motivation of this paper is solid - identifying a gap in research on a fast-rising new variant of LLMs (dLLMs) and exploiting new vulnerabilities introduced by the unique design of such models: the order-agnostic property forces decoding strategy to be an essential design choice. However, the logic in the Introduction section is somewhat disorganized, alternating between discussions of LLMs and dLLMs, and the motivation for the paper is not clearly presented. Furthermore, the description of the proposed method is rather simplistic, with much of it being based on prior work, such as dLLM decoding, beam search sampling, and window-based detection, making it hard to discern the core innovation."
+    ]
+}

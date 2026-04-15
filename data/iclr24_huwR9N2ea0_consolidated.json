@@ -1,0 +1,28 @@
+{
+    "paper_id": "huwR9N2ea0",
+    "conference": "iclr24",
+    "summary": "This paper addresses the significant challenge of Semi-Supervised Domain Generalization (SSDG), a scenario where data inequality exists with only one labeled domain and the rest unlabeled. To tackle this, the authors introduce ProUD, a novel algorithm employing domain-aware prototypes, uncertainty-adaptive mixing strategies, and pseudo-labeling. ProUD progressively generalizes across domains, demonstrating superior performance compared to existing methods on benchmark datasets like PACS, Digits-DG, and Office-Home. These experiments highlight its effectiveness in handling data scarcity and domain adaptation, further extending its applicability to encompass the assignment problem as a specialized case within its framework.",
+    "strengths": [
+        "**[The problem of this paper is critical in practice.]** In the previous studies under domain generalization, they always assume that labels of multiple source domains are available. However, it is sometimes infeasible to obtain such perfect source domains, which gives rise to the importance of SSDG.",
+        "The paper addresses a very important problem: studying situations when we have limited access to labeled data is of paramount importance in practice. It proposes an interesting setting Semi-Supervised Domain Generalization (SSDG), in which only one domain is labeled while the rest are unlabeled, and lists some data inequality scenarios where SSDG may be used (Table 1). Furthermore, it's a good try to introduce semi-supervised learning to the domain generalization community, e.g., how to construct pseudo labels.",
+        "The algorithm combines different techniques to provide a good solution to this problem, verifying each component's importance in the ablation study, and provides extensive analysis and comparison with the state-of-the-art to verify the superiority of their method. Additionally, the description of experimental settings in the appendix is detailed.",
+        "The presentation of the paper is good, and the direction of the research is meaningful with the potential to generate positive impact."
+    ],
+    "weaknesses": [
+        "**[Motivation of this proposed method is unclear.]** It is unclear why the authors propose this method. For example, if there exists a research gap for current studies on SSGD?",
+        "The proposed model learns a single model for each domain, but this may not be effective when an unlabeled domain is under-represented, as the loss would be less influenced by the fewer samples on this domain. It would be useful to clarify the shift considered in the distribution of features and provide intuitions behind some equations.",
+        "The proposed method is a combination of DA + DG, but it lacks novelty. It would be good to consider whether there is a way to generalize the method to be domain label-free and introduce some theoretical analysis to give more insights or intuition about the ProUD."
+    ],
+    "questions": [
+        "Can you provide insights to answer the questions in Weakness 2 and Weakness 3?",
+        "A couple of suggestions: dist is the cosine distance, and it would be useful to add a synthetic explanation of what a prototype is for clarity. Additionally, the shift considered is only on the distribution of the features, but the classification problem is the same across all tasks.",
+        "How was Equation 7 derived, and what is the rationale behind choosing it?",
+        "It’s unclear why the accuracy is averaged over the last 5 train epochs rather than only on the last epoch. Furthermore, I cannot find an explanation on how the hyper-parameters are chosen for your algorithms (is there a validation step?), and how the hyper-parameters are chosen for the baseline algorithms. This is important when evaluating methods on a new dataset (without overfitting due to the choice of the hyper-parameters). Additionally, what is the improvement brought about by data augmentation, and how would the results compare if all algorithms used the same number of data augmentations in the comparison?",
+        "It's unclear how the average accuracy is reported, specifically the standard deviation across 3 runs with different seeds, and the choice of threshold λ∗. Can you provide more information on the experimental setup, including hyper-parameters and how accuracy is reported?"
+    ],
+    "divergent_perspectives": [
+        "The proposed method is not explored deeply, and it is unclear how the accuracy of pseudo-labels affects the final performance. The algorithm uses prototypes obtained from soft labels when acquiring pseudo-labels, and prototypes obtained from hard labels are used in subsequent calculations of uncertainty and loss functions. However, the reason for these choices and the difference in effectiveness between the two types of prototypes is unclear.",
+        "The experiment is not sufficiently refined due to the use of simple and small-scale datasets, relatively small performance improvements, non-uniform partition proportions, and the lack of explanation for the random seed choice. Furthermore, the paper misses important benchmark datasets and fails to compare with state-of-the-art methods published in 2022 and 2023. The results do not convincingly show that ProUD outperforms EID by a large margin, casting doubt on the usefulness of the proposed method.",
+        "The paper is well-written and easy to follow, with a clear description of the algorithm, making it easy to read and reproduce. However, the algorithm lacks both theoretical support and adequate explanation, making it difficult to understand the authors' rationale behind the algorithm design."
+    ]
+}

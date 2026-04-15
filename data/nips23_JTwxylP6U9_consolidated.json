@@ -1,0 +1,28 @@
+{
+    "paper_id": "JTwxylP6U9",
+    "conference": "nips23",
+    "summary": "This paper introduces Diff-PGD, a novel framework utilizing a diffusion model to enhance the generation of stealthy and realistic adversarial examples within the context of Projected Gradient Descent (PGD) attacks. Diff-PGD integrates Stochastic Diffusion Editing (SDEdit) steps, ensuring generated adversarial samples closely resemble the original data distribution while boosting attack efficacy. This approach demonstrates superior transferability and anti-purification capabilities compared to standard gradient-based methods, leading to high-quality adversarial samples. Notably, Diff-PGD offers adaptability for various attack types, including regional, style-customized, digital, and physical-world scenarios, showcasing its comprehensive applicability in adversarial machine learning.",
+    "strengths": [
+        "The proposed method is novel and performs well on both digital world and physical world.",
+        "1.The proposed method can improve the stealthiness, anti-purification ability and transferability together. In addition, the proposed method can also be implemented in the physical world. 2.The experiments show that the proposed method is effective.",
+        "The paper is well-written, effectively communicates the key concepts and ideas, and the method analysis is clear with helpful visualization.",
+        "The experiments are solid and comprehensive, but please address the questions in the weakness section.",
+        "The idea of using diffusion models to improve the quality of adversarial examples is interesting. The proposed method, Diff-PGD, is a novel framework that combines diffusion models with adversarial sample generation, providing a thorough description of its underlying principles. By introducing Diff-PGD, the authors offer a solution that improves the stealthiness of adversarial samples while maintaining their effectiveness, as supported by the provided experimental evaluations."
+    ],
+    "weaknesses": [
+        "Lack of the performance of proposed method under different L-p constraint.",
+        "Although the proposed method can enhance the transferability, the authors has never explained the reason of that. [1] DiffProtect: Generate Adversarial Examples with Diffusion Models for Facial Privacy Protection",
+        "(-) The phenomenon of the vulnerability of DNNs/ViTs to AEs is well known. How does the proposed attack perform against hardened models, i.e. adversarially trained models? (-) Did the authors experiment with transformer-based models, such as ViT? I would be interested in the attack performance of these models as well.",
+        "Many of the experiment results only provide less than five examples, which are inadequate to support the claims (i.e., the four questions listed in Lines 220 - 224) about the proposed methods. For example, the result in Figure 6 (a) is conducted only on 250 samples (rather than the entire 50,000 ImageNet validation samples). The answers to Q2 and Q3 are based only on the examples shown in the figures. It is unclear how well Diff-PGD and its variants perform at a larger scale.",
+        "The performance of the proposed method on transformer-based vision models is unclear, and it lacks performance on this type of model.",
+        "The comparison with baselines is not very comprehensive, and it is unclear if the results will be better if other adversarial purification methods are used in the pipeline. For example, Figure 4 only shows a qualitative comparison with AdvCam, but no attack success rate is considered in this comparison."
+    ],
+    "questions": [
+        "I am curious about the computation cost of the proposed method, and a lack of the efficiency report is a notable omission.",
+        "Does the diffusion model necessary in the pipeline? If we use other adversarial purification method in the pipeline, will the results will be better?",
+        "The evaluation considers different attack scenarios, including digital and physical attacks. However, the evaluation metric used in Table 2 is unclear; is it the attack success rate?"
+    ],
+    "divergent_perspectives": [
+        "The novelty of the paper is somewhat limited, as the gradient-based adversarial attack method has already been proposed [1], and the authors have not cited the paper. However, it is essential to improve the transferability of the adversarial attack. Furthermore, the proposed method is much more computationally expensive (in terms of both time and GPU memory) than regular adversarial attacks, and its advantage over existing methods seems marginal (Figure 6(a))."
+    ]
+}

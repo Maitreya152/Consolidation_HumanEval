@@ -1,0 +1,29 @@
+{
+    "paper_id": "WIfns41MAb",
+    "conference": "colm25",
+    "summary": "ReLeak, a groundbreaking black-box red-teaming framework powered by reinforcement learning, is presented to expose privacy vulnerabilities in LLMs. This method trains a specialized attack agent to generate adversarial prompts capable of revealing either hidden system prompts or verbatim portions of an LLM's training data.  ReLeak achieves this through a novel dense reward function based on embedding similarity, a dynamic temperature schedule for balanced exploration and exploitation during prompt creation, and a diversity regularizer. Notably, for training data extraction, a two-stage search strategy enhances precision. Experiments conclusively show ReLeak outperforms existing rule-based and automated approaches, achieving superior results in both system prompt leakage and training data recovery,  underscoring its practical impact and effectiveness in real-world LLM security assessments.",
+    "strengths": [
+        "Winning strategy at Berkeley LLM Agent Hackathon.",
+        "The paper is easy to read, and the problem it aims to solve is clearly articulated. The proposed method is logical and intuitive.",
+        "The topic of privacy preserving is very important in the LLM field.",
+        "ReLeak is the first unified framework that automates both system-prompt and training-data leakage in a pure black-box setting, advancing beyond gradient or fuzzing approaches that address only one threat surface. It has practical significance, using only query access, converging in 4–6 hours on a single GPU, and transferring across models, making it a realistic tool for auditors. The authors also show that ReLeak-generated prompts improve defensive fine-tuning (ReLeak-D) with less utility loss than SecAlign, highlighting its dual use for safety hardening.",
+        "Extensive experiments on prompt and training data extraction show that ReLeak yields the highest similarity scores and is the only technique to extract all 12 real-world GPT-Store system prompts while surviving PromptGuard filtering.",
+        "The problem is clearly defined, and the use of reinforcement learning is intuitive. The paper systematically identifies three potential limitations of this approach and provides reasonable methods to mitigate each one. It motivates each RL component, introduces a principled reward that avoids sparse feedback, and demonstrates via ablations (–diversity, –temperature, alternative metrics) that performance drops without them.",
+        "The paper presents rigorous experimental results across various settings, showing that the proposed method performs well, and the effectiveness of the three mitigation strategies is convincingly demonstrated through ablation studies. However, the authors acknowledge that training is seed-sensitive and occasionally collapses, yet mitigation strategies remain future work."
+    ],
+    "weaknesses": [
+        "The method’s effectiveness may depend heavily on the initial prompt. However, the paper does not clearly address how to select an “effective” initial prompt. How sensitive is the model to different initial prompts? Does the performance vary significantly based on the choice of initial prompt? Since this is likely to be critical for the success of the attack, a more thorough discussion is needed.",
+        "The presentation of the paper can generally be improved. I am not too confident I am reproduce the results by just reading the paper. It might help to have a few more framework/pipeline figure for different settings, or improving figure 3 for clarity. Psuedo code clearly mark different components would also help. As an empirical approach, release code and/or model would be even better.",
+        "The custom WES similarity drives most headline gains, yet its calibration parameters are hand‑tuned and only partially validated; ROUGE improvements are smaller, and no human evaluation of semantic equivalence is provided.",
+        "Some recent studies should be included as the baselines.",
+        "However, several baselines are re-implemented on newer models without author confirmation, and Pleak is handicapped in proprietary-model tests because of its white-box assumption. Ethical safeguards for releasing such an attack agent are discussed only briefly.",
+        "However, despite being “the first automated training-data extractor,” ReLeak recovers only 5.9% of queried samples from an open-source model, leaving the real-world severity ambiguous.",
+        "While meaningful results are confirmed in the appendix, including Figure 2 in the main text may not be necessary; instead, including Figure 5 in the main manuscript to better highlight the impact of dynamic temperature adjustment on training acceleration might be more useful."
+    ],
+    "questions": [
+        "The method looks practical and using RL to improve adversarial prompts makes sense, but I would hope to see more analysis and insights on the adversarial prompts discovered, and the approach seems a bit ad-hoc in general, so maybe we have ablation studies for various components/improvement on training attack agent and generating adversarial prompts?"
+    ],
+    "divergent_perspectives": [
+        "The performance of the proposed method is promising according to the experiments, but the novelty of this paper is limited."
+    ]
+}

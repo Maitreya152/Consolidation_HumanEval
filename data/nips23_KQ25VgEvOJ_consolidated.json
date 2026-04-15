@@ -1,0 +1,36 @@
+{
+    "paper_id": "KQ25VgEvOJ",
+    "conference": "nips23",
+    "summary": "This paper tackles the continual semantic segmentation problem with a novel approach centered on fairness. Recognizing the bias inherent in class distribution imbalances, it proposes a framework integrating a  prototype contrastive clustering loss to combat catastrophic forgetting, manage unknown classes, and address background shift.  This loss, coupled with a conditional structural consistency loss ensuring segmentation structure integrity, leads to demonstrably improved fairness and performance. Experiments on standard benchmarks (ADE20K, Cityscapes, Pascal VOC) validate the effectiveness, yielding state-of-the-art results and highlighting the significance of incorporating fairness considerations in continual learning paradigms for semantic segmentation.",
+    "strengths": [
+        "The paper considers multiple perspectives to improve fairness among classes of the model.",
+        "The paper designs various loss functions to enhance the segmentation performance of the model under continual learning, and it makes a significant contribution to the field by addressing the issue of maintaining fairness in continual segmentation systems, which is a well-defined problem with a fairness metric used to obtain the error-rate among the classes.",
+        "Extensive ablation studies provide valuable insights into the challenges of continual semantic segmentation.",
+        "The paper is well written and the motivation is good. The problem formulation is nicely done.",
+        "The paper analyzes several problems that need to be solved in continuous learning in detail, and clearly presents the loss function corresponding to the three objectives from the perspective of formula derivation. Deriving the learning objective through analysis of the effect of class distribution is novel. However, the paper lacks experiments specifically focused on the upper bound design for continual learning."
+    ],
+    "weaknesses": [
+        "The proposed inter-class fairness in the paper seems to be addressing the semantic segmentation problem rather than the main focus of continuous learning. However, this issue has already been well discussed in [1]. [1] Truong, T. D., Le, N., Raj, B., Cothren, J., & Luu, K. (2023). Fredom: Fairness domain adaptation approach to semantic scene understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 19988-19997).",
+        "How is the margin △ selected?",
+        "The motivation for learning conditional structural consistency loss is not clear and should be discussed to give more intuition. Also, some qualitative analysis of prediction consistency will be good to show the effectiveness of the structural consistency loss.",
+        "The results on Pascal VOC are not convincing, with high forgetting rates and insignificant improvements compared to methods like RCIL. Experiments on more settings similar to PLOP and RCIL would be beneficial, and a fair comparison with other methods using DeepLabV2 is also needed. If the method is not effective for Pascal VOC, its limitations should be analyzed.",
+        "See weaknesses 1, 2, 3.",
+        "The organization of the method is not very clear, making it difficult to follow what the final loss function is and how each part of the loss is combined. The authors should clarify the concerns listed above, including the final integrated training loss and the balance weights between different losses.",
+        "More detail explanation of the Prototypical Contrastive Clustering Loss is needed."
+    ],
+    "questions": [
+        "Minor problems: when writting the related works, it better to use the surname other than the name. For example, Ziwei et al. should be Liu et al in line 93. In eq. 5, the yi,h should be yi,j in the left term?",
+        "Im my understanding, the conditional structural consistency mitigate the prediction gap among neighbour pixels. However, it will also smooth the edge pixels of an instance. According to the ablation study, it also improves the fairness of classes. Could the author give more explanation on it?",
+        "The comparison does not include a well performing baseline method - SSUL (from NeurIPS 21). If there is any specific reason for not comparing with SSUL, it should be discussed in the paper.",
+        "The paper chose to experiment with DeepLab v2 instead of the commonly used DeepLab v3, so why was this decision made?",
+        "Comparison in experiment results.",
+        "In Sec.3.2, 'a pseudo label where its assigned label is computed based on the closest cluster'. How is the pseudo label computed and utilized? Furthermore, the title is misleading as it suggests open-world environments imply a lack of labels, which is not the case with the proposed method."
+    ],
+    "divergent_perspectives": [
+        "Although the fairness loss improves mIoU values for different settings on ADE20K, its individual contribution is unclear, and a better measurement of fairness, such as variation of performance on rare and dominant classes with and without fairness loss, is needed.",
+        "The supplementary materials of the paper include an excellent presentation that makes it easier for readers to understand the superiority of the model, however, some mathematical derivations, such as eq. 5 and eq. 12 and 13, are not rigorous and need more explanation in the main paper or supplementary material, and eq. 5 is hard to understand and may not be intuitively achievable.",
+        "The novel prototype contrastive clustering loss represents the semantic segmentation pixels for different classes in the latent space and groups the features of unknown classes into the same cluster. However, pulling all features of unknown classes into one cluster may not be reasonable, and learning similar features from categories with significant differences could affect subsequent model training. Furthermore, the explanation that the prototypical contrastive clustering loss is an upper bound of the knowledge distillation approach is not rigorous, and minimizing Lcluster is not strictly equal to minimizing Ldistill. Additionally, the prototypical contrastive clustering loss requires additional memory to store the prototypical vector pc, and calculating pc is critical in achieving good performance.",
+        "The proposed method FairCL seems to be quite effective on several settings across multiple datasets with different backbones, but the comparison in experiments about network backbone is unfair as it doesn't align with previous methods such as Deeplab-v3 architecture with ResNet-101 in RCIL. However, strong performances are achieved on several standard benchmarks.",
+        "While it is good to see the results with both DeepLab-V2 and SegFormer backbones, the backbone networks of the compared methods should be mentioned for more clarity and fair comparison. However, there are inconsistent results in the tables: the overall mIoU for DeepLab-V2 backbone is 34.64 in table 1 but 36.99 in table 3, which should be clarified since the ablation experiment is claiming the contributions of the different losses. Furthermore, what is the result in the first line of DeepLab-V2 and SegFormer in Table 1?"
+    ]
+}

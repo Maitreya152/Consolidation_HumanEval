@@ -1,0 +1,31 @@
+{
+    "paper_id": "OnMRWwOqCs",
+    "conference": "iclr25",
+    "summary": "WinnowRAG, a training-free RAG framework, tackles the challenge of noise filtering in extensive document sets retrieved for question answering. It achieves this through a multi-stage process: query-aware clustering groups semantically similar documents, followed by agent initialization and a critic LLM-guided winnowing process. This iterative winnowing, employing  matrix operations and benefiting from GPU acceleration,  gradually refines the retained information, discarding incorrect agents while preserving valuable content. Experiments across QA tasks highlight WinnowRAG's effectiveness, demonstrating improved accuracy and efficiency compared to baselines, including notable speedups and showcasing its applicability to the assignment problem as a special case. This approach offers a robust solution for integrating external knowledge into language models, leading to more reliable, contextual, and knowledge-intensive applications.",
+    "strengths": [
+        "The paper features clear and effective figures, making the experimental results easy to interpret. Additionally, the method is precisely formulated, facilitating straightforward implementation.",
+        "The main research question of this paper is indeed important 'How to filter out the noise context'.",
+        "The paper is well-organized and clearly written, making it easy to follow and understand. The experiments are well-designed, effectively demonstrating the overall efficacy of the method and the effectiveness of its individual modules. The presentation is good and easy to follow.",
+        "The motivation is direct and broadly applicable to RAG frameworks. WinnowRAG combines query-aware clustering with multi-agent winnowing to effectively filter out noisy documents, which is a retrieval-augmented generation framework that clusters documents by topic and progressively filters out irrelevant or noisy documents using LLM agents.",
+        "WinnowRAG is a practical, training-free solution for document filtering, enhancing the relevance of retrieved information. However, the paper would benefit from a discussion comparing it with alternative methods such as reranking and truncation, as well as including additional baselines for comparison, such as a comparison with using SOTA Reranker."
+    ],
+    "weaknesses": [
+        "The primary concern is the efficiency of the method. The complex processing approach for retrieved documents, particularly the multi-agent winnowing with multiple iterations, significantly increases inference costs and time, limiting the system's usability.",
+        "Additional Baselines: Using simpler filters to assess the utility of retrieved texts—leading to lower computational overhead and smaller models—is an important baseline that is missing from the discussion. [1] Domain-aware Mashup Service Clustering Based on LDA Topic Model from Multiple Data Sources [2] Improving Factuality and Reasoning in Language Models Through Multi-Agent Debate [3] Examining Inter-Consistency of Large Language Models Collaboration [4] MedAgents: Large Language Models as Collaborators for Zero-Shot Medical Reasoning [5] Re2G: Retrieve, Rerank, Generate [6] List-Aware Reranking-Truncation Joint Model for Search and Retrieval-Augmented Generation",
+        "a comparison with a single agent to filter noise context: LLM-based Ranker",
+        "The technical contribution is limited. WinnowRAG is more biased towards the application of retrieval-augmented generation in engineering, but lacks sufficient insights for research. Methods in WinnowRAG, such as query-aware clustering, multi-agent winnowing are so common in this area. I cannot find inspiring enough ideas for the research of RAG from this paper.",
+        "The number of clusters significantly impacts performance and is highly sensitive to the total number of documents; however, the merging step is not entirely clear, and more examples are needed to demonstrate this strategy.",
+        "WinnowRAG’s use of multiple LLM-based agents for winnowing introduces significant computational overhead compared to mainstream RAG baselines, but it outperforms many RAG baselines that need training.",
+        "While the core methods of query-aware clustering and multi-agent winnowing resemble existing approaches [1,2,3,4], which limits the technical novelty of this work, the proposed method used multi-agent and critical LLM to enhance the robustness of the proposed framework and features multi-clusters and multiple LLM-based agents, which may lead to computing overhead being an important concern for WinnowRAG."
+    ],
+    "questions": [
+        "In the ablation study, merely removing the multi-round multi-agent winnowing module drastically reduced performance. As shown in Figure 3, \"Ours w/o W\" experiences a significant performance drop compared to \"Ours,\" and its performance on the MHQA dataset appears inferior to Zero-shot Prompting.",
+        "The question is the same with the weakness section.",
+        "There is a lack of experiments comparing and discussing the efficiency of the proposed WinnowRAG with existing methods, and can you provide the comparison of computing overhead of WinnowRAG and other baselines?",
+        "Why not consider other clustering methods, such as hierarchical clustering, which can dynamically adjust the number of clusters? Additionally, how is clustering performance evaluated before proceeding to the next step?",
+        "Can you provide more details of WinnowRAG, such as what LLM-based agents are you use?"
+    ],
+    "divergent_perspectives": [
+        "While 2WikiMQA seems to be the dataset that would most benefit from an increased retrieval number, as its retrieval model has the lowest Recall@5 and Recall@20 in Table 1, there is an inconsistency between the naming of the MHQA dataset in the figures and the 2WikiMQA mentioned in the text. Furthermore, increasing the number of retrieved documents did not yield the expected improvement for this dataset, so can you explain why this might be the case?"
+    ]
+}

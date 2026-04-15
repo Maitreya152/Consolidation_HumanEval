@@ -1,0 +1,31 @@
+{
+    "paper_id": "6lB5qtdYAg",
+    "conference": "iclr25",
+    "summary": "This paper presents a training-free approach to elevate prompt-guided image inpainting with diffusion models, directly tackling the issue of prompt neglect prevalent in methods like smartbrush and Imagen Editor.  The core innovation lies in two key techniques: Prompt-Aware Introverted Attention and Reweighting Attention Score Guidance. These mechanisms,  designed to ensure precise prompt adherence and high image quality, operate without requiring additional training or fine-tuning.  Extensive experiments on benchmarks like MSCOCO  reveal substantial performance gains, showcasing improved prompt alignment and overall generation quality compared to existing solutions. Notably, the method effectively integrates textual guidance and alignment within the inpainting process, broadening its applicability to diverse prompt-driven scenarios.",
+    "strengths": [
+        "The writing is clear to understand with detailed formulations and figures.",
+        "The discussion about prompt neglect is promising.",
+        "The results are superior when compared to other methods, but the successful rate of one case with sufficient sampling of different seeds is not clear.",
+        "The phenomena of Appendix B are very interesting, revealing that the original model maintains a similar visual pattern from other parts of images and the PAIntA would increase the probability to respond to the prompts. The method is intuitively clear and reasonable, with the modification to the self-attention block making sense, and the visualization of the attention map proving the efficiency of the method.",
+        "The proposed solution achieves strong results on evaluation metrics, but the experiments are conducted in cases with few instances; therefore, it would be interesting to know the performance in cases with multiple instances (>5).",
+        "The proposed RASG is cleverly simple yet effective, transforming the post-training alignment to the form of non-deterministic DDIM and efficiently avoiding noisy latent deviating too far from the original trajectory. However, in line 183, it should be VQGAN or VAE within SD, where usually VAE is chosen.",
+        "The hypothesis that the problems of existing methods is based because of the self-attention, and that this problem can be addressed there, is interesting and convincing (even though it is not well explained). However, the self-attention map analysis in Appendix B is important for the motivation of the paper and should be moved to the main paper to help provide a motivation in section 3.3 before just stating it in math, which would help the reader understand the proposed method. Furthermore, the explanation of the main idea behind section 3.3 is not well presented, and the introduction of c_j in the self-attention is not well explained in words.",
+        "The qualitative results clearly show the superiority of the proposed method, but the quantitative results do not seem to indicate the same level of improvement. The visual results are appealing, but the presentation of crucial sections 3.3-3.4 needs improvement."
+    ],
+    "weaknesses": [
+        "in the user study the results of DreamShaper are better than SmartBrush, but in figure 5 the results of DreamShaper are very bad not following the prompt at all, and SmartBrush is much better. Any explanation, this makes me doubt the correctness/usefullness of the user study. MINOR points: Think would be better to directly put equation of c_j also in (5), and then explain. Try to first explain the main idea, then the details (SOT, EOT, clipping etc). Now the main idea is hard to distill. More usage of \\citep might make reading easier (e.g. line 96). Too many forward references in introduction (to future tables and figures and appendices). References for relevant information to appendix are out of place in the introduction. The main information should be in the main paper; the introduction introduces the most relevant information of the paper. line 248. Maybe better to keep professional factual style (instead of diary-style 'we did this' 'than that'), so better 'a thorough analysis of Stable Inpainting led to the conclusion...'",
+        "Lack of experiments on running time. What is the additional time cost associated with the proposed method?",
+        "Lack of ablation study on hyperparameters. How sensitive is the model to different hyperparameters? Espscially $\\eta$.",
+        "Some discussion and analysis should be included, see the question part, particularly regarding the 'introverted' nature of the model, which may make it hard to use information from outside of the impainted region, for example, if you ask for an object with a whole behind which the background should continue, or a bike in front of a fence, etc.",
+        "Please see weaknesses.",
+        "Section 3.4 should also start out by stating the problem it addresses and how it is planning to address this. I found the presentation not good of this section, and very hard to understand.",
+        "Please check the weakness.",
+        "In Table 2, the bolded aesthetic score is not the best one, and a new metric may be needed to better show the superiority of the method."
+    ],
+    "questions": [
+        "How to derive Claim 1? How to define high-quality images?",
+        "Some questions below: Would this method be easily adapted to some modern models, for example, SDXL, SD3, or even FLUX? Will the proposed method work on transformer-based models like SD3 and FLUX?",
+        "Although a bit heuristic, the training-free nature makes the method easily extensible to other pretrained inpainting diffusion models, but the inference time cost should be reported and compared, and it's unclear if the method can deal with inpainting tasks with multiple masks in one inference."
+    ],
+    "divergent_perspectives": []
+}

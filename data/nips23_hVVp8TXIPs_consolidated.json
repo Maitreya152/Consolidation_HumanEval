@@ -1,0 +1,31 @@
+{
+    "paper_id": "hVVp8TXIPs",
+    "conference": "nips23",
+    "summary": "This paper proposes a novel method to bolster the reliability of image classifiers against hardware errors, particularly random-bit flipping, by integrating textual and visual information.  The technique initializes the classification layer with CLIP embeddings generated from GPT-3-crafted text prompts for each class. This leverages the robust generalization abilities of both CLIP and GPT-3 to construct resilient representations.  Evaluations on ImageNet classification with various models showcase a substantial improvement in reliability, achieving up to a 14× increase compared to conventional error handling techniques.  Moreover, the method exhibits enhanced saliency properties and lower last layer activations, indicating its effectiveness in minimizing misclassifications caused by hardware imperfections.",
+    "strengths": [
+        "Ablations are interesting and cover initial questions from reviewing the results section, and the experiment section includes rich ablation studies and intuitive explanations.",
+        "The paper is well-written and easy to follow, with clear explanations and effective visual aids, such as Figure 1, which provides the data shapes at each step.",
+        "The proposed method is simple and generalizes to standard image classification models, and it is interesting to utilize texture information to enhance the reliability of vision models, as demonstrated by experiments on ImageNet classification with several models.",
+        "The paper proposes a simple change with low overhead that improves hardware reliability rates."
+    ],
+    "weaknesses": [
+        "I would like to discuss with other reviewers about this aspect. I have a few more questions about the clarity of some metrics and experiments used in this work, which may be useful to the broader computer vision community. Please see the questions section below.",
+        "However, the proposed method requires textural information during inference, and the set of textural information collections would determine the final performance, which may be a limitation, especially when the input image contains information outside those classes in the ImageNet dataset, in which case it is unclear how to use the proposed method during inference, except for retraining the models.",
+        "The Top2Diff metric is unclear, and it's not used correctly in the paper. The authors should clarify what Top2Diff means and how it's computed. Additionally, the GoldenEye benchmark is not well-defined, and the authors should provide more information about how it's implemented.",
+        "The authors should report the classification flip rate in Table 1, as it would be more intuitive than the 14x number. Furthermore, the Top2Diff metric is not well-explained, and the authors should provide more clarity on what it means.",
+        "The method is simple and effective, but the experiments don't use more recent backbones such as BEiT and Swin Transformer, which are kind of out-of-dated. In Table 1, why do some backbones (ResNet-18 and ResNet-34) have increased parameters, whereas others' parameters reduce?",
+        "Since the clip embedding dimension is generally lower than classifier bottleneck dimension, a side effect is that the number of parameters are also reduced.",
+        "The positioning of the paper is a bit confusing. While finetuning pretrained clip models on ImageNet is not new in some sense, the paper seems to make the claim that for eg, in Figure 1 and Section 4.2 that this work proposes a new approach. The paper may be better positioned as an investigation of CLIP finetuning for hardware reliability."
+    ],
+    "questions": [
+        "Could the author explain how to apply the proposed method for cases when the image contains information outside the pretrained classes such as ImageNet in the paper? For Figure 3, it would be helpful to clarify whether the training set or validation set of ImageNet is used, and why the maximum absolute value of one neuron is chosen over the average of absolute values of all neurons of one layer, as the maximum value may favor more outliers.",
+        "The authors should provide more information about the GoldenEye benchmark, specifically how the error injection is done. Additionally, the classification flip rate should be reported in Table 1.",
+        "It might be nice to show some experiments on Vision Transformers, but this is more of a nice to have.",
+        "Using vision-language models to improve model resistance to hardware errors is an interesting idea, and a natural question is how robust are CLIP models both for zero-shot and fine-tuning to hardware failure, which could be explored further.",
+        "Do you train the classifier head, i.e., the projection layer, during training? If yes, do the head and the backbone use the same learning rate? If the head is updated significantly during training, would it lose the ability to guide the backbone learning representations?"
+    ],
+    "divergent_perspectives": [
+        "The evaluation metrics make sense, but there are weaknesses in the evaluation and comparison.",
+        "The authors verify the proposed method on a number of different convolutional architectures, but it's unclear how effective it might be on more efficient models or attention models."
+    ]
+}

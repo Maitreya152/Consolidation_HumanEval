@@ -1,0 +1,37 @@
+{
+    "paper_id": "xRdpCOdghl",
+    "conference": "nips24",
+    "summary": "This paper introduces RDSS, a novel sample selection method for semi-supervised learning, tackling the crucial challenge of selecting a representative and diverse subset from unlabeled data for annotation. RDSS leverages a modified Frank-Wolfe algorithm and an α-MMD criterion to achieve this,  demonstrating state-of-the-art performance in improving various SSL frameworks and outperforming existing AL and SSAL sampling techniques. Notably, RDSS exhibits significant performance gains, especially with constrained annotation budgets, and extends its applicability to encompass the assignment problem as a special case, showcasing its versatility in related machine learning contexts.",
+    "strengths": [
+        "1.This paper is in Well-written, logically organized, and smoothly expressed. The presented results demonstrate the effectiveness of the proposed approach.",
+        "RDSS considers both representativeness and diversity of samples, which is a convincing strategy, and the experimental results also demonstrate the effectiveness of this motivation; however, it would be helpful to see images of the actual selected samples and visualizations of the feature distribution to further demonstrate that RDSS indeed balances the representativeness and diversity.",
+        "I like the motivation of the problem and a neat theoretical derivation of the objective, and the provided theoretical analysis. Paper was also easy to follow and experiments are compelling.",
+        "The proposed framework [2] and [3] provide a comprehensive approach to label-efficient supervised finetuning of large language models. However, the problem of selecting the labeled set of self-supervised learning (SSL) differs from the problem setting of active learning, as highlighted by the question.",
+        "The paper is clearly written, the idea is well presented and intuitive, and the paper is easy to read and follow.",
+        "The idea of the paper is good and is well supported by theory, and the experimental setup convinces that the suggested method is better than random sampling when picking the labeled set of SSL. However, a better comparison to previous works is required, specifically including low-budget strategies such as [4] and [5].",
+        "The following references are relevant to active learning: Hacohen et al. (2022), Yehuda et al. (2022), and Mahmood et al. (2021)."
+    ],
+    "weaknesses": [
+        "Some of the claims made by paper already appeared in previous art. Specifically, [1] showed that \"traditional\" AL methods do not pick bad labeled sets for SSL when compared to random sampling. [2] showed that when the labeled set is particularly small, instead of traditional AL techniques, one should focus on labeling examples that are more typical and diverse, showing that such a method can drastically improve both AL and sampling techniques for SSL. [3] presented sampling strategy, showing that picking examples that are representative and diverse examples for the labeled set of SSL improves it by a big margin in low-budget scenarios.",
+        "Some details of the experiments are unclear, such as in Table 3.",
+        "Additionally, the vice-versa argument should also hold -- if AL methods can be applied in this case, this method can be used as a method for picking labeled examples for active learning purposes and should be tested as such, as the literature in AL is much broader than the literature of picking the labeled set in SSL, which can provide a much wider context for the given work.",
+        "[5] Wen, Ziting, et al. \"NTKCPL: Active Learning on Top of Self-Supervised Model by Estimating True Coverage.\" (2023).",
+        "[1] Mittal, Sudhanshu, et al. Parting with illusions about deep active learning. (2019).",
+        "The author conducted tests on two baseline methods (FlexMatch [58] and Freematch [50]), but neither of them represents the current state-of-the-art.",
+        "The author should objectively evaluate their method, including its limitations, as referred to in the weaknesses.",
+        "The definition and usage of variable X in the article are inconsistent. Is Y in the section starting from line 141 representing the point as X? If so, I suggest using notations like Xi, Xj for clarity.",
+        "The framing of the paper is a bit unclear, and it could benefit from explaining use cases where one has the option to pick in advance the labeled set for SSL, which is not already covered by AL use cases."
+    ],
+    "questions": [
+        "In Chapter 6, the determination of the kernel and parameters seems arbitrary. Could you provide some proofs, theories, or experiments to justify them?",
+        "The SOTA models selected by the author in the experiments are somewhat outdated. It is recommended to include some more updated methods.",
+        "In the experiment section, the author mentions the limitations of stratified sampling. What do these limitations refer to? Why was this method excluded? From the results, it seems that stratified sampling outperforms the proposed method in several settings. Additionally, in Table 2, what sampling method did the other comparison methods adopt?",
+        "From a purely combinatorial point of view, I think that the final objective is supermodular in nature. Given the vast literature on submodular/supermodular functions, is it not possible to get an algorithm purely from that standpoint? If so, how different would it be from the proposed one?",
+        "Can one derive things such as leverage scores to detect the outlier-ness of a given point (or any other score)? If so, then couldn't one use something such as diversity - outlier score (or add a score that models likelihood) , with diversity such as Facility location function, and optimize the final objective using greedy? Furthermore, in experiments, a strong baseline such as Facility Location function is missing, and it would be beneficial to add a small discussion on FL and include that baseline.",
+        "What dataset does Table 3 represent? What is the data distribution?",
+        "I'd appreciate one experiment on fine-tuning the CLIP models using the proposed method."
+    ],
+    "divergent_perspectives": [
+        "While sufficient theoretical analysis and experimental comparisons are conducted to demonstrate the effectiveness of the proposed method, the manuscript does not reference or compare to any of the existing works, which affects the novelty, significance, and quality of the proposed method."
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "paper_id": "qB0IV2DpeS",
+    "conference": "iclr24",
+    "summary": "This paper introduces a novel distributed algorithm,  designed for Byzantine robust learning in scenarios with partial client participation.  The algorithm utilizes gradient clipping to effectively limit the impact of malicious Byzantine clients, guaranteeing robustness even when they hold a majority within subsampled participant groups. This approach,  built upon matrix operations and GPU acceleration for efficiency,  achieves convergence rates comparable to leading theoretical benchmarks for algorithms employing variance reduction and communication compression. Notably, the method demonstrates significant performance gains over existing approaches, showcasing its effectiveness in handling Byzantine faults while allowing for flexible client involvement.",
+    "strengths": [
+        "The technical content and proofs are sound.",
+        "The paper is generally well-written and not hard to understand.",
+        "To the best of my knowledge, this is the first paper to allow partial participation for a robust distributed algorithm against Byzantine attacks.",
+        "The problem of partial participation is not well understood in Byzantine robust machine learning, and this paper makes a promising step towards solving it by introducing gradient clipping. Also, the use of the latter method is novel in this context.",
+        "The paper is clear and easy to follow, and a rigorous theoretical analysis is provided, although the proof seems to be correct."
+    ],
+    "weaknesses": [
+        "D. Assumptions: Some assumptions are poorly justified: there is no justification for why \"popular [...] robust aggregation rules presented in the literature\" verify Assumption 1. A formal, even simple, justification is important because the assumption seems necessary for the convergence theory.",
+        "The paper has several weaknesses, including the absence of experimental results, impractical choice of the clipping parameter, and unclear initialization of gk. Furthermore, the excess term in the convergence upper bound may not be tight, and there are several clarity-affecting issues, such as undefined quantities, incorrect notation, and conflicting statements.",
+        "The paper lacks a comparison with an important piece of related work, Data & Diggavi (2021), and contains inaccurate claims regarding related work. Moreover, using Bucketing (Karimireddy et al., 2021) may amplify the Byzantine fraction, which could be problematic when considering partial participation.",
+        "However, the partial participation mechanism in Byz-VR-MARINA-PP seems to perform poorly in tolerating inactive clients and accelerating training processes. Specifically, it cannot tolerate inactive clients and may limit the acceleration effect due to the small fraction of selected clients in each round.",
+        "The computation of full gradients is time-consuming, and it is unknown whether the gradient clipping is empirically compatible with the PAGE estimator. Empirical testing on federated learning benchmarks such as LEAF [1] is strongly suggested."
+    ],
+    "questions": [
+        "How do your results compare to the work of Data & Diggavi (2021)? (see C.1)",
+        "Given that the main motivation for this paper is to allow partial participation because it is more natural in practice, I would have expected to see some practical experiments to see how gradient clipping actually allow partial participation (and thus the sampling of a majority of Byzantine clients in some rounds) while maintaining good performance. It seems to me that even if clipping can control the impact of Byzantine clients, rounds where they are in the majority will still penalize learning. Do the authors have any insights or perhaps experiment results on the performance of the proposed algorithm?",
+        "Would it be possible to avoid full participation and use only partial participation in each round?",
+        "It is unclear how the clipping levels λk are given as inputs since they depend on the value of xk+1 and xk. Furthermore, the gradients are clipped at the first iteration since λ0 is not defined. Additionally, can the authors explain why full participation is needed in some rounds and how the clipping parameters are set in practice when smoothness constants cannot be computed?"
+    ],
+    "divergent_perspectives": []
+}

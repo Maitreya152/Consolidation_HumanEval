@@ -1,0 +1,44 @@
+{
+    "paper_id": "fvG6ZHrH0B",
+    "conference": "nips24",
+    "summary": "This paper delves into the stability and functional robustness of continuous attractors, models crucial for understanding brain functions like memory and navigation, despite their theoretical susceptibility to perturbations.  The research reveals that even under disturbances, continuous attractors exhibit persistent slow manifold structures, ensuring approximate functionality and acting as a resilient basis for analog memory. This resilience is empirically validated through analyses and experiments involving recurrent neural networks performing analog memory tasks, demonstrating comparable performance between perturbed and original attractors in finite time. Notably, the study extends this understanding to ring attractors, a model for continuous-valued memory, showcasing how they maintain key characteristics even within altered topological landscapes caused by perturbations. Thus, the work emphasizes the practical robustness of continuous attractors as a valuable model for analog memory.",
+    "strengths": [
+        "The visualizations in Fig. 1 are very helpful to understand the overall message",
+        "Apart from the theory, the authors also carry out numerical experiments on a working memory task, characterized by a 1-D ring attractor. Through their analyses they validate their theory.",
+        "The authors provide a superb theoretical motivation, which convinced me of their results correctness, and the connection to Fenichel’s theorem is very nice.",
+        "The bound on error in figure 5A was cool (if true).",
+        "The main idea of the paper is interesting and can have an important takeaway, as mentioned in \"Summary\", but the figures and presentation could be improved, particularly in section 5, which becomes unclear and too dense, and the authors may want to expand on this section significantly.",
+        "The exposition was clear on the micro-scale, especially for individual ideas, with Figures 1 and 3 being well-explained. However, a more detailed discussion of Section 5 is desired, and the authors may want to explain in simpler terms the evidence presented in Fig. 5 to evaluate the validity of the claims.",
+        "The authors theoretically demonstrate the existence of a persistent attractive manifold in various bifurcations of a continuous attractor, and study the systems' finite time behaviors to show that they are functionally equivalent. This is a novel contribution and an important result to bolster the continuous attractor hypothesis. The study of continuous attractors in the finite time limit, opposite of what is usually studied with attractor landscapes, is a fresh look, novel, original, and interesting.",
+        "The authors study the generalization properties of the approximate attractors and could evaluate generalization performance by the nature/type of the approximate attractor as well.",
+        "The main thrust of the paper was very interesting and very novel, resolving a classic problem in theoretical neuroscience using a clever proof technique. However, the rest of the paper was somewhat confusing, and the presentation could be improved with better signposting and clearer figure explanations."
+    ],
+    "weaknesses": [
+        "Some more control experiments need to be added for proving the generality (See below).",
+        "In S4, the sentence \"All such perturbations leave at least a part of the continuous attractor intact and preserve the invariant manifold, i.e. the parts where the fixed points disappear a slow flow appears.\" needs more clarification. Could you explain the mathematical reasoning behind this assertion?",
+        "Fig. 4C, caption should indicate the nature of the solution found.",
+        "Fig. 5B, y-axis label is missing.",
+        "Fig. 5D, could also show the mean $\\pm$ std for classes of networks.",
+        "Figure 2 caption line 1, missing 'of' and pluralisation of 'implementation' So all in all, I think the exposition, despite, as I said, often being very clear when describing a single idea, is, on a macro scale, a mess. I had a very hard time following, and the figures were quite tough-going. I think this paper should probably get in, but I think it should be given a good clean up first, at least for a humble neuro-theorist, rather than a dynamical systems guru, to understand.",
+        "The theoretical investigation and results are limited to simple systems, making it difficult to determine their generalizability to more complex cases. However, the presentation is complicated and the title is not representative of the paper's conclusions.",
+        "The experiments and associated analyses focus solely on networks that approximate 1D ring attractors, which is quite simplistic; considering tasks like navigation where a planar 2D attractor is approximated by the networks could be beneficial.",
+        "The fast-slow decomposition does not seem to be specific to vanilla RNNs; therefore, please include experiments with LSTMs and GRUs to support the claims on generality.",
+        "Fig. 5E is missing a y-axis label, and it would be better to use the normalized MSE on the axis, following the convention used in Fig. 5A instead of using dB.",
+        "The writing could be improved in several places to improve clarity, particularly in the conclusions of the generalization analysis and their implications, and how this connects to the various types of approximate attractors.",
+        "The paper's clarity and presentation are a major issue. The reviewer got confused by what most of the paper was trying to show, and the figures were often unclear or misleading. The paper would be improved by removing the confusing sections and providing clearer explanations.",
+        "The paper's theoretical contribution is significant, but the presentation and clarity need improvement. The reviewer suggests removing the confusing sections and providing clearer explanations, and also points out specific issues with the figures and the presentation of the results."
+    ],
+    "questions": [
+        "I believe the work warrants a borderline accept as is, yet I would feel very supportive of its publication (up to a strong accept) if the authors performed the following changes: I believe the slow manifold picture the authors are introducing here is not too different from [1], specifically Fig. 7. Can the authors please clarify the differences in the main text?",
+        "How does the selection of a specific threshold value influence the identification and characterization of slow manifolds in neural networks with continuous attractors as discussed in the first lines of section 4.2? Could you elaborate on how different threshold settings impact the dynamics of network states and the emergence of persistent manifolds, and perhaps quantitatively characterize this by using Dynamical Similarity Analysis [1] on various trained networks?",
+        "Can you please show an example with other structures, such as the delayed addition/multiplication tasks discussed in [2], and list related work like [2] with an explanation of the differences in approach?",
+        "At what level of performance are all trained networks compared? Are they all trained until the same loss value and how close is this MSE to 0?",
+        "Many questions and confusions arose, which are listed in the weaknesses section.",
+        "In Sect. 3.1, the perturbation p(x) is not clear enough. Specifically, it is unclear:1) Under what conditions the perturbation function p(x) induces a bifurcation? Furthermore, what types of (generic) bifurcations can arise from the perturbation p(x)? Additionally, the functions h and g are also not clear enough. It is unclear how one can obtain/choose the functions h and g such that the two systems defined by Eq. (2) and Eqs. (3) & (4) are equivalent. Finally, what does **sufficiently smooth** mean in Theorem 1?",
+        "I have some additional questions: How do the authors identify the various kinds of approximations of the attractors? Can this be automated, perhaps by using DSA to cluster the various types?",
+        "Furthermore, the authors could comment on what network hyperparameters lead to which approximations."
+    ],
+    "divergent_perspectives": [
+        "It is unclear under what conditions RNN dynamics can be decomposed into slow-fast form to which we can apply Theorem 1, and the transformation process in Sect. 4.1 is also unclear, specifically how assuming an Euler integration with unit time step, the discrete-time RNN of (6) transforms to eq. (7), which may be independent of the function f and matrix W in eq. (6)."
+    ]
+}

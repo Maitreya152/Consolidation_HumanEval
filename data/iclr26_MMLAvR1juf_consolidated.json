@@ -1,0 +1,32 @@
+{
+    "paper_id": "MMLAvR1juf",
+    "conference": "iclr26",
+    "summary": "This paper addresses the challenge of fragment screening against undruggable proteins by introducing FragBench, a dedicated benchmark, and FragCLIP, a tri-modal contrastive learning model. FragCLIP uniquely encodes pockets, fragments, and parent molecules into a shared latent space, facilitating similarity-based ranking for efficient early enrichment.  Evaluations against established docking and machine learning methods (including Glide, Vina, DrugCLIP, and Onion-Net) reveal that FragCLIP achieves superior performance, highlighting its effectiveness in tackling complex fragment screening tasks.",
+    "strengths": [
+        "The virtual screening result seems promising",
+        "Introduce FragBench, a benchmark of curated undruggable targets with shallow or cryptic pockets, which is an important research topic.",
+        "The tackling problem is interesting and meaningful, and the model is explained clearly.",
+        "FragCLIP follows DrugCLIP’s contrastive pocket–molecule retrieval setup and mainly adds a fragment branch plus fusion, but there is no controlled, head-to-head comparison between the two model architectures. Despite the limited novelty of FragCLIP (similar to DrugCLIP), the motivation of this paper is pretty good, and I think that FragCLIP has the potential to be a useful tool for searching active fragments."
+    ],
+    "weaknesses": [
+        "In line 210, it said there are 1387 pock-ligand pairs; but in line 251, it said that there are only 54 undruggable targets. Are these numbers consistent? The 54 targets do not look like an adequate number for a benchmark.",
+        "Missing citations for several previous works, such as schema-constrained decoding, validation heuristics, and baseline choices.",
+        "Ground truth from docking poses is weak supervision, which can be biased by receptor preparation, protonation, tautomers, and grid settings, potentially adding false positives or false negatives and tying the dataset to a single docking engine rather than actual binding. Furthermore, the evaluation should include a comparison to important recent structure-based methods like EquiScore and RTMScore to understand how FragCLIP compares to methods that explicitly model 3D interactions and geometry.",
+        "The authors should open-source the data, which is essential for a benchmark. Additionally, some reference styles are not correct, e.g., line 52 \"limited by factors like protein solubility or crystal quality [Erlanson et al. (2016); Jhoti et al. (2007)].\"",
+        "In line 221, the quote marks are in wrong directions.",
+        "The 54 “undruggable” targets lack basic context, making it unclear whether success on the benchmark would transfer to programs that help patients. However, FragCLIP significantly outperforms all baseline methods on two fragment-based benchmarks (FragBench, FragBench-DUDE) and the DUD-E benchmark.",
+        "However, a more detailed discussion or analysis of the assumption that \"positive fragments are defined as substructures of known active ligands that make contact in a docked pose\" would improve the quality, as fragments may play roles beyond binding a protein in an active ligand, such as acting as a linker, influencing ADMET Properties, and influencing physicochemical properties."
+    ],
+    "questions": [
+        "Could the authors explain how they enforce factual accuracy in the agent–human curation loop?",
+        "It’s surprising that single target can be bound with so many fragments (average 183 positive fragments in line 251), and the comparison in Table 1 may not be fair if baseline methods like DrugCLIP were not finetuned on the fragment data.",
+        "Why not include Dekois 2.0 and LIT-PCBA for benchmarking, just as many other works? Datasets like Dekois 2.0 and LIT-PCBA are standard in many recent works and would make the evaluation more comprehensive.",
+        "The tri-modal contrastive learning is novel, but the motivation to use retrieval-based methods rather than generating the fragments SMILES directly is unclear, and it would be nice to compare the generation models.",
+        "The manuscript would benefit from an analysis of the sequence similarity between training and testing proteins, including stratifying test results by sequence identity, to demonstrate generalization."
+    ],
+    "divergent_perspectives": [
+        "While the condition for marking a fragment as positive is loose, specifically requiring at least one non-covalent contact, the curation process and removal of covalent ligand complexes, protein–ligand complexes within 6 Å of nucleic acids, and very small pockets (for example, <10 residues) during curation could be clarified.",
+        "Table 1 does not report standard deviations, which is a problem because early enrichment (EF), especially at very small top percentages, commonly can vary a lot across random seeds, docking seeds, and splits. Furthermore, some hyper-parameters are not explained, such as the site score <0.8 and LE > -0.15 thresholds.",
+        "The authors should benchmark FragCLIP against recent high-performing methods, such as LigUnity, which achieves an EF 1% > 50% on DUD-E, and compare FragBench to more binding datasets, as shown in Figure 1."
+    ]
+}

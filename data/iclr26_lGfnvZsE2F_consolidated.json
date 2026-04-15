@@ -1,0 +1,28 @@
+{
+    "paper_id": "lGfnvZsE2F",
+    "conference": "iclr26",
+    "summary": "This paper tackles the challenge of enhancing Multimodal Large Language Model (MLLM) performance on degraded document images by introducing DocRobust-Module (DRM). DRM, a lightweight feature restoration module, is designed to recover corrupted visual and semantic information within MLLMs using a two-stage training strategy.  Experiments, conducted on the newly created DocRobust-VQA dataset (containing paired clear-degraded images and QA annotations),  consistently show significant performance gains for MLLMs when dealing with synthetic degradations, real-world imagery, and even adversarial examples. This approach effectively addresses the practical need for robust document understanding in面对低质量文档场景, providing a scalable solution with minimal parameter overhead.",
+    "strengths": [
+        "The authors propose to focus on the problem of understanding real-world documents with quality degradation, which is of practical requirement.",
+        "The paper introduces an adapter to improve the quality of visual tokens, which is learned through a three-stage setting.",
+        "The paper has a good starting point, and the problem it aims to address—the understanding of low-quality document images—is highly meaningful. The proposed method, which focuses on reconstructing high-quality features from low-quality ones, is also logically sound.",
+        "The DRM is a lightweight, plug-and-play solution that operates efficiently at the feature level. This is a more elegant approach than computationally expensive pixel-level restoration methods.",
+        "A large-scale dataset is proposed, which consists of 189,771 images paired with 417,502 question-answer pairs, providing sufficient scale and diversity to support the training of multimodal large language models to gain robustness under degraded visual conditions. However, since VQA pairs are derived from clean images, severe corruption may render the ground-truth answers visually unverifiable, thereby introducing noisy signals during training.",
+        "Robustness to low-quality documents is practically important, and the creation of the large-scale DocRobust-VQA dataset (189K pairs, 417K QA) provides a much-needed public resource for training and benchmarking model robustness in this domain, with consistent improvements across benchmarks.",
+        "The DRM is trained using a feasible two-stage training strategy (Visual Alignment followed by Semantic/Overall Alignment) that effectively guides the model to restore low-level visual features. However, it would be interesting to explore the impact of removing the Visual Alignment stage and the Semantic Alignment stage on the performance of DRM."
+    ],
+    "weaknesses": [
+        "The technical contribution is relatively not new; the way provided for constructing the model follows a typical way. Besides, how much each stage contributes to the final model is not quite clear.",
+        "The following is more of a suggestion than a weakness: The font size of the text in Figure 1 is too small and should be enlarged for better readability.",
+        "(1) Luminance, (2) Distortion, (3) Blurriness, (4) Noise, and (5) Compression—how is each of these five types of degradation specifically implemented? For document images, Distortion can be introduced to generate camera-captured-like images. However, for scene text images, how should Distortion be incorporated?",
+        "Limited diversity in corruption types (only 5 categories). No analysis of distribution shift between synthetic and real degradations. Only evaluated on InternVL-2.5 family - generalization to other MLLM architectures unclear. Missing comparisons with other robustness approaches[1][2][3][4]. [1] UReader [2] DocKylin [3] DocOwl [4] TokenVL [5] Vary",
+        "Please refer to the weaknesses."
+    ],
+    "questions": [
+        "The authors do not provide detailed descriptions of the specific procedures for each of the five corruption methods used in generating corrupted images, nor visual examples. What are the specific implementation details of the five corruption methods used in generating corrupted images? Could excessive corruption occur, resulting in images that cannot be aligned with the Ground Truth?"
+    ],
+    "divergent_perspectives": [
+        "The paper focuses on document understanding, but surprisingly, no document images are presented throughout the manuscript, including those from the synthetic dataset and the DocVQA task. Furthermore, the application of DocRes to scene text images in Table 4 raises questions about its significance.",
+        "The comparison in Table 1 is somewhat unfair, and the better performance may mainly benefit from further data training. However, the necessity of the specific two-stage training approach is not fully justified through ablation studies, and a crucial baseline is missing: a single-stage, end-to-end fine-tuning of the MLLM with the DRM module."
+    ]
+}

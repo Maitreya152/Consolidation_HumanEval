@@ -1,0 +1,30 @@
+{
+    "paper_id": "3YKeB9R1g9",
+    "conference": "iclr26",
+    "summary": "This research demonstrates a novel finding: when optimized for data budget, the normalized training loss curves of diverse-sized LLMs converge onto a universal trajectory governed by  AdamW timescale, TPP ratio, and learning rate schedule. This 'loss collapse' signifies consistent and predictable scaling behavior.  The authors capitalize on this by developing tools for early diagnostics of training issues and accelerated hyperparameter tuning. Notably, they introduce a predictive model capable of forecasting large-scale training outcomes based on smaller-scale runs, achieving speedups akin to 10-30% of the full training time.  These principles are embodied in the proposed Celerity model family, showcasing efficient and faster training practices while extending the framework's applicability to encompass the assignment problem as a special case within the optimal transport framework.",
+    "strengths": [
+        "Significance: Predictability of large scale LLM training runs is extremely important, e.g., being able to reason about optimality, avoid wasting computational resources, or restart",
+        "The idea of using loss-curve collapse as a diagnostic tool and a guide for efficient hyperparameter tuning is valuable in large-scale training settings.",
+        "The introduced Celerity model family shows that the proposed ideas can work well in practice.",
+        "The experimental work is thorough and well-executed, with many ablation studies and comparisons provided in the main text and appendix. However, it would be helpful to include the list of benchmarks in the Fig. 2 caption, link to them, or make it clearer what is being measured. Additionally, the authors should verify experimentally how the μP transfer is suboptimal in their LR setup, as shown in Figure 15.",
+        "The work follows a continuous line of research about stable and predictable dynamics, extending the findings of Qiu et al. to LLM training, providing sound evidence of a phenomenon we previously believed to be true. The application to early stopping/hyperparameter testing is interesting and well-motivated, and the case study with the 1.8B run recovery is cool. The authors provide strong evidence that the universality of learning curves, combined with properly chosen scaling procedures, can be used to train compute-optimally with less risk than with previous methods.",
+        "Minorly, the comparison to BTLM is somewhat hard due to the refined datamix, but this is discussed and represents a general improvement of pretraining strategies.",
+        "Furthermore, carrying out partial training runs at large scale could be beneficial.",
+        "The paper addresses an important and very active research area (making large-scale model training more predictable and compute-efficient through analysis of loss-curve regularities). The authors present convincing experimental evidence that normalized training loss curves collapse across model scales when key hyperparameters are properly aligned, which is a solid piece of work.",
+        "The paper is generally well-written and easy to follow, with informative figures that communicate the main ideas well, but the main ideas are based mostly on experiments and the theoretical explanations are limited.",
+        "This paper well-integrates key recent results on scaling behavior and uses it to provide a compelling angle on how to scale large models. The experiments are generally thorough and the paper is overall well-presented. However, the utility of the model presented in section 5 is not immediately clear, and a potential procedure for improving the model could be to search over hyperparameters at small scale (e.g. 100M) and match parameters at larger scale."
+    ],
+    "weaknesses": [
+        "The paper is dense and complex to grasp for new readers due to notation and terms, and the authors have not published the code or models, which would be crucial for better study of the methods.",
+        "However, the biggest weaknesses revolve around accessibility, which can be improved by releasing the code and models, and making the presentation more readable.",
+        "The authors are already aware of the main limitations, including the fixed pretraining setup, and note that the conclusions might not hold for setups with longer training, different data curriculums, or optimizers and schedules. Specifically, they mention the importance of testing with more recent state-of-the-art optimizers, such as Muon, and exploring the point at which the method breaks down.",
+        "Maybe I am missing something, or why are the Llama3 and Qwen3 models not included in any figure comparison? The models are in the table, yet their points miss in plots."
+    ],
+    "questions": [
+        "Does the same loss collapse happen for validation loss, or only for training loss? [1] Keller Jordan, Yuchen Jin, Vlado Boza, You Jiacheng, Franz Cesista, Laker Newhouse, and Jeremy Bernstein. Muon: An optimizer for hidden layers in neural networks, 2024.",
+        "The bias-variance tradeoff is somewhat glossed over, and without spending more extensive time studying the paper, I could not grasp this discussion exactly. Could you potentially clarify directly?",
+        "More broadly, figure captions are not self-contained, which makes it hard to grasp details or what exact setup was used; instead I often needed to jump back and forth between text and figures.",
+        "Can you explain the details of the point raised in weaknesses? This is key to the underpinning of the model/fitting procedure proposed in Section 5; right now it is still unclear to me how the proposed model allows for optimization of the unnormalized loss at larger scale."
+    ],
+    "divergent_perspectives": []
+}

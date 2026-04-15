@@ -1,0 +1,22 @@
+{
+    "paper_id": "beAlX6RjsW",
+    "conference": "iclr25",
+    "summary": "This paper tackles the challenge of privacy-preserving inference in LLMs by proposing a novel framework that integrates MPC with architectural optimizations during the fine-tuning process. The core innovation lies in minimizing expensive MPC computations. This is achieved by designing a model where a smaller, privacy-critical component resides solely in the final layers, allowing for preprocessing in the clear while MPC handles only these crucial layers. Techniques like layer freezing, attention head merging, and LoRA are employed to realize this, leading to significant efficiency improvements in MPC execution with limited performance loss compared to full fine-tuning. This method directly addresses the risk of private information leakage (e.g., through prompts) during LLM inference, making it a valuable contribution to secure AI deployments.",
+    "strengths": [
+        "The ideas considered are sound, and the authors provide an implementation for reproducibility. The idea of head-merging is novel and relevant, as it boosts the efficiency of MPC noticeably. The experiments are comprehensive and thorough, enabling good reproducibility. However, the paper does not compare the accuracy of other methods that combine MPC and LLM, which is a limitation.",
+        "The paper innovatively introduces layer freezing and LoRA techniques from plaintext inference to secure inference, reducing the cost of MPC in secure inference, especially by reducing bottlenecked matmul dimensions. It well describes threat models in secure inference of LLMs and explains why each component can be optimized with considering potential attacks, as well as why some parts cannot benefit from optimization by nature of MPC, such as mixture of weights."
+    ],
+    "weaknesses": [
+        "1-The paper's innovation is limited. The proposed method does not include improvements to the MPC protocol itself but focuses on different partitioning and head merging methods in the fine-tuning network structure. Regarding the Layer Freezing method in the partitioning approach, is there any reference basis for selecting how many layers to freeze for different LLMs to achieve a balance between accuracy and timeliness?",
+        "Since only 2PC-Dealer supports GPU acceleration, the comparison to other MPC approaches with CPU only looks unfair due to the hardware difference. If we want to do apple-to-apple comparison, it is better to make 2PC-Dealer run with CPU only, too.",
+        "The authors should check the preprint reference for SIGMA at PoPETs 2024. Furthermore, in Section 5.1, the authors do not explain the criteria or threshold of the frozen fraction f."
+    ],
+    "questions": [
+        "Can you provide more information about the difference between head-pruning and proposed head-merging.",
+        "According to Weakness 1, if the faction f is too large or too small, what will it happen?",
+        "Why do you cite [73] as the SOTA for 2PC+Dealer? Earlier in the text you refer to Sigma as such SOTA (which makes sense). Furthermore, have you considered extending this work to n-PC or distributed setting, which is common in real-world enterprise-level LLMs that take millions of requests at a short time?"
+    ],
+    "divergent_perspectives": [
+        "The problem setting is unclear, and it's not well motivated. The paper cites works that study a fundamentally different problem, and the use-case considered here differs from prior works. The fine-tuning process is unclear, and the associated inefficiencies are left unspecified. Furthermore, the claimed proof in the appendix is high-level and feels like a \"checkbox\" rather than a thorough analysis. The functionality is defined over real values, but the protocols cited operate over fixed-point values, and there's no way to instantiate the functionality as written. Additionally, the probabilistic truncation used in the protocols is not provably secure."
+    ]
+}

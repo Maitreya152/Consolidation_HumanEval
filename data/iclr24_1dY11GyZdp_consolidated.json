@@ -1,0 +1,27 @@
+{
+    "paper_id": "1dY11GyZdp",
+    "conference": "iclr24",
+    "summary": "This paper introduces Signed Binarization, a quantization technique for efficient deep learning models. It achieves this through local binarization of network weights within filter regions, leading to a globally ternary quantization scheme. By strategically alternating between two quantization functions locally, the method leverages the repetition-sparsity tradeoff. This approach results in  increased efficiency during inference, with experiments revealing substantial speedups compared to standard methods, ultimately improving the accuracy-model size balance in binarized neural networks.",
+    "strengths": [
+        "The idea is relatively simple and the description regarding the pros and cons from a performance perspective is made clear in the text.",
+        "The paper has a good structure, and the use of figures (2 and 3) is great, especially the color coding and detail provided by Figure 3 to compare and contrast the current work against other approaches.",
+        "The performance results in Figure 6 clearly demonstrate the increased efficiency of the inference pass for the signed-binary networks compared to normal binary and ternary networks. However, the performance is limited as signed-binary is 1.26x and 1.75x faster than binary and ternary respectively. Furthermore, it would be interesting to know the difference between Signed Binary method without sparsity support and Binary method."
+    ],
+    "weaknesses": [
+        "Most of the text in the first paragraph of section 5.1 seems to be repeating the same idea regarding effectual and ineffectual values. It's not clear to me that a distinction between effectual and ineffectual parameters vs multiplications necessitates redundancy in the text.",
+        "The text does not flow very well in several places in the text and needs a few more passes over the text to clean up awkward sentences.",
+        "The method described in Section 4 seems to be incomplete. It uses {-1, 0} binarization for some weight tiles and {0, +1} binarization for the others. This means that on hardware, 0 and 1 will correspond to different values for different tiles. What will be the overhead when accumulating the output of those tiles? The paper needs to provide an analysis.",
+        "The proposed method requires retraining from scratch to learn the binarized filters, but it could be applied more generally to linear layers, possibly decomposed into sets by row or column or some other fixed pattern.",
+        "Though the terminology of \"effectual\" and \"ineffectual\" seem to be inherited from prior work, it's not clear to me how much value I gain denoting zeros as \"ineffectual\".",
+        "While I like the comparisons illustrated in Figure 4, it could be better if there was a way to easily associate the source for each blue dot. For now the reader has to cross-reference the dot with the referenced works to make the comparisons concrete. Aesthetically speaking, I do not care for the wrapped text around Figure 2 or the packed nature of Tables 1-5. However, the paper should be carefully proofread, with typos such as “This necessitate creating …” and “aiming to address …” needing correction, and Table 6 should be clarified as it appears to be a caption for Tables 1-5, with missing models in some tables."
+    ],
+    "questions": [
+        "Figure 4 seems unclear to me. The authors mentioned they compared against 13 prior methods, but there are less than 13 blue dots on both subfigures. Also, what are the models used in Figure 4, Figure 5, and Figure 6?",
+        "Questions are included in the weakness section above."
+    ],
+    "divergent_perspectives": [
+        "The paper claims it pushes the Pareto frontier, but it does not compare to the recent advancements in BNNs, e.g., N. Guo et al., Join the High Accuracy Club on ImageNet with A Binary Neural Network Ticket, arxiv’22, and Y. Zhang et al., PokeBNN: A Binary Pursuit of Lightweight Accuracy, CVPR’22, in Figure 4. This suggests that the contribution of this paper is limited and incremental over prior binary network research.",
+        "While the concept of a repetition-sparsity tradeoff in quantized networks is insightful and well-motivated, the goal of improving this trade-off is questionable, as repetition and sparsity do not seem to be a trade-off, e.g., a model with zero weights is extremely sparse and in the meantime has extremely repetitive filters.",
+        "While the proposed method is an extension of previous work on post-training quantization methods, it conveys confusing messages on several basic concepts, such as the efficiency of BNNs, and makes questionable claims, like the motivation of the paper being ill-posed and the claim that binary models aim for efficiency by maximizing weight repetition. Furthermore, the assignment of regions/filters to quantization functions is unclear, and this could influence the results."
+    ]
+}

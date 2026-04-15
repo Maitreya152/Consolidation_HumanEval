@@ -1,0 +1,38 @@
+{
+    "paper_id": "rEjWBDtxoK",
+    "conference": "iclr26",
+    "summary": "This paper introduces GRFs++, an improved approach for approximating diverse graph kernels, tackling the challenges of distant node modeling and walk termination inherent in previous methods like GRFs.  GRFs++ achieves this through a random walk stitching technique that combines shorter walks to effectively represent longer ones, enhancing computational efficiency without compromising representational power.  Theoretical analysis and empirical evaluations across graph classification, clustering, and 3D mesh normal prediction tasks confirm GRFs++'s superior accuracy and efficiency, demonstrating significant performance gains over GRFs and showcasing its applicability to the assignment problem as a specialized case within the broader graph kernel domain.",
+    "strengths": [
+        "The paper presents a theoretical analysis grounded in the prior g-GRF formalism.",
+        "The experiments are comprehensive, on both synthetic and real data, and with downstream applications.",
+        "The method is supported by theoretical analysis, including the interesting result that increasing the walk-stitching degree in powers of 2 leads to improved approximation, and offers a novel perspective on constructing longer random walks from shorter ones.",
+        "The technical contributions come with a theoretical analysis.",
+        "The proposed GRFs++ method is well-motivated, as it addresses certain limitations of the prior GRFs approach. Combining shorter walks to construct longer walks is an interesting and reasonable idea. However, the empirical results show that GRF++ outperforms GRF in most classification settings, and including or at least discussing scalability experiments on larger graphs and comparisons to more recent GNN-based baselines would strengthen the empirical claims.",
+        "The walk-stitching technique sounds very logical and straightforward, to the point that one may wonder why nobody has considered it before. (As an outsider to this field, I wonder if indeed nobody has.)",
+        "GRFs++ demonstrates superior empirical performance compared to GRFs, achieving lower approximation error and better results in downstream tasks such as in graph classification and node clustering. However, the experimental evaluation is limited in baseline coverage, and the practical benefits of improved computational efficiency are not convincingly demonstrated, especially considering evaluations are conducted on small graphs."
+    ],
+    "weaknesses": [
+        "standardize n vs N for sizes (page 5)",
+        "Algorithm 2 should at least be fully written in Appendix.",
+        "A large part of the references are unrelated (about graph modeling in anomaly detection, recommander system, and computational biology).",
+        "No speed comparison is provided between the proposed approximation method and the approach that computes the exact kernel. I would expect that, even for graphs with 500 nodes, computing the exact kernel is not particularly computationally intensive. Such a comparison is missing from the paper.",
+        "The paper is sometimes hard to follow due to its structure. For instance, there is no clear narrative arc in Sec. 2.2.3. Same remark for Sec 3.",
+        "Results in Appendix do not look as good as in the main paper, e.g., in Fig. 7 and 8 where the Frobenius norm error for higher degrees gets higher than for lower degrees, which seems to contradict Theorem 3.3. (cf. Q3)",
+        "In Line 107, the Eq 2 cannot be convergent for any arbitrary $(\\alpha_k)_{k=0}$, for example, for divergent $\\alpha_k$ values.",
+        "There is an undefined notation/typo \"R\" on line 039, and Fig. 6 should be a table.",
+        "References to datasets karate, dolphin, football and eurosis seem to be missing, and duplicated references (Beutel et al., 2015a and 2015b) are present.",
+        "The metric presented in Tab. 1 is not indicated in it nor in its label."
+    ],
+    "questions": [
+        "If not, why should l not be chosen as high as the expected longest path? And why was l=2 chosen in the downstream applications?",
+        "Please clarify the meaning of stitching time in Fig. 5. How do you interpret the 'crossing lines' in Fig. 7 and 8, which seem to contradict Theorem 3.3?",
+        "The evaluation currently relies on relatively small datasets and mainly compares against g-GRF variants; it would be useful to include baseline methods beyond GRF and to report standard deviation or confidence interval values over multiple runs, and the proposed method should maintain its efficiency and accuracy advantages on larger or more complex datasets.",
+        "The stitching time shown in Fig. 5 is unclear. Why does standard GRF (which does not use stitching) have a non-zero stitching time? How does the stitching time reduce while the stitching degree increases? (cf. Q2).",
+        "Please provide answers to the correctness issues I list above. Additionally, there is no discussion on how to choose the degree l, and it's unclear how increasing l affects computation time due to stitching time. Q1: Is there a point at which increasing the degree will result in less efficient computation due to stitching time? If so, how should l be chosen?"
+    ],
+    "divergent_perspectives": [
+        "The observation that walk stitching corresponds to a 2l-fold de-convolution of the kernel's coefficient series is elegant and unifies construction. However, the method is presented as applicable to a broad family of kernels, yet all experiments are diffusion-kernel only, and the kernels that are approximated by GRFs++ are not empirically strong and thus might not be useful in practice.",
+        "The proposed method approximates kernels between nodes, but its significance is questionable since these kernels are rarely used in practice, and it is not compared against other types of approaches in graph classification and node clustering tasks, nor evaluated in node classification tasks (Cora, Citeseer, etc.).",
+        "While the paper is generally well-organized and clearly written, it provides a limited novelty, extending the previously introduced g-GRF framework with a relatively incremental modification. However, the need for GRF(++) should be better motivated in the Introduction, as it is unclear to what extent GRF are needed and used in the first place, making the importance of the contribution hard to assess."
+    ]
+}

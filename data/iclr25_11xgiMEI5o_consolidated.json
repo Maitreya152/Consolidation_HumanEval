@@ -1,0 +1,26 @@
+{
+    "paper_id": "11xgiMEI5o",
+    "conference": "iclr25",
+    "summary": "OmniRe presents a novel framework for dynamic urban scene reconstruction, leveraging Gaussian Scene Graphs to model static backgrounds, moving vehicles, and realistically represented non-rigid actors like pedestrians and cyclists.  This approach, incorporating SMPL for detailed human modeling with joint-level control,  outperforms existing methods in reconstruction quality and novel view synthesis, as evidenced by evaluations on multiple driving datasets. These advancements highlight OmniRe's effectiveness in creating high-fidelity digital twins of complex urban environments for applications like autonomous driving simulations.",
+    "strengths": [
+        "Scene Graphs and Gaussian Splatting: The system uses 3D Gaussian splatting for detailed scene and object rendering, including control over each object.",
+        "The proposed method for in-the-wild human representation is straightforward yet crucial for driving scene reconstruction.",
+        "Modeling dynamic objects and simulating interactive behaviors are essential for closed-loop simulation in autonomous driving systems. This work is highly engineering-oriented and demonstrates impressive results, and the authors have committed to open-sourcing the code, which will have significant value in advancing autonomous driving simulation in the future.",
+        "The paper correctly identifies several limitations in the OmniRe approach, and both quantitative and qualitative experiments effectively support the claims made in the introduction, with OmniRe achieving state-of-the-art results across various experimental settings.",
+        "OmniRe can handle various actors in urban settings, unlike most previous methods that focus mainly on vehicles, and it accurately reconstructs human motions, even in cluttered environments, through SMPL modeling, enabling simulations of interactions between pedestrians and vehicles.",
+        "State-of-the-Art Performance: Extensive testing on datasets like Waymo and others show OmniRe significantly outperforms existing methods in terms of visual fidelity and reconstruction accuracy. However, for specialized scenarios, such as highways (with fast-moving vehicles), nighttime environments, and adverse weather conditions, does OmniRe maintain high reconstruction quality under these challenging conditions?",
+        "The paper is well-organized and easy to follow, and it is clearly written with illustrative figures that are easy to understand.",
+        "The experiments are comprehensive."
+    ],
+    "weaknesses": [
+        "OmniRe doesn’t model lighting variations explicitly, leading to visual inconsistencies when combining scene elements with differing lighting conditions, which may reduce realism in certain simulations. Additionally, the per-scene optimization approach struggles to generate satisfactory results when the camera view deviates significantly from the training trajectories, limiting the approach from achieving fully free-trajectory digital reconstruction.",
+        "While the method achieves high-quality reconstructions, it requires substantial computational resources due to the complexity of the Gaussian Scene Graph and the joint optimization of multiple parameters. This might pose scalability issues for large datasets or continuous real-time simulation needs, and the method's reliance on SMPL modeling for human actors and per-node deformation fields could introduce delays in real-time applications, particularly if scenes are highly dynamic or involve many non-rigid actors. Furthermore, the performance might be limited by severe occlusions and overlapping actors in complex urban scenes, where further refinement or integration of advanced occlusion handling techniques could enhance reconstruction fidelity."
+    ],
+    "questions": [
+        "I wonder for items like causality and new synthesis if an approach more configurable could take place now that they have separated the pedestrians from the road.",
+        "Where the data is later attached to an engine like Carla or airsim",
+        "I wonder about the computational cost of reconstructing a complete segment in the Waymo dataset, as the entire pipeline seems a bit complex. Furthermore, the reconstruction quality of NuPlan is significantly worse than that of other datasets.",
+        "GS-based methods generally perform well in scenarios with static environments or low vehicle speeds, as demonstrated by most of the demos on the project page. However, I am curious about the reconstruction performance of this approach in situations where the ego vehicle is moving at higher speeds."
+    ],
+    "divergent_perspectives": []
+}

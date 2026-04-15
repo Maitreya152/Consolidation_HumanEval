@@ -1,0 +1,30 @@
+{
+    "paper_id": "kfwKNYvjS4",
+    "conference": "iclr26",
+    "summary": "This paper explores the crucial nexus between model accuracy and computational efficiency in machine learning, specifically focusing on spatio-temporal forecasting. It investigates how integrating physics-based inductive biases into models, exemplified by approaches like Fourier Neural Operators (FNOs) and contrasting them with data-driven U-Nets,  influences the carbon footprint during both training and inference. Empirical results across simplified (oscillation) to more complex (Navier-Stokes) physical systems reveal that physics-informed methods often achieve substantial training cost reductions, although this advantage might diminish during inference. This study underscores the potential of incorporating physics priors to develop more sustainable and efficient deep learning models for real-world applications.",
+    "strengths": [
+        "It is helpful to report both training and inference footprints on the same page.",
+        "Important Topic: The paper tackles the sustainability of machine learning, a topic of growing importance and immense practical relevance to the community. It makes a strong case for shifting from a performance-only paradigm to one that balances efficacy and efficiency.",
+        "The paper explores an important subject of carbon footprint of pure data-driven methods (deep learning models).",
+        "The configs are stated clearly.",
+        "The paper presents a comprehensive empirical study with a systematic comparison across a spectrum of models with varying degrees of physics bias, providing a valuable baseline for future researchers. The detailed carbon footprint data is excellent, and the discussion section is clearly and well-written, highlighting that physics alone is not the answer to reducing carbon footprint.",
+        "The paper's sharp distinction between training and inference costs is an often-overlooked but critical detail, which is further explored through the presentation of efficacy and efficiency metrics at both training and inference times, and additional experiments on real-world datasets."
+    ],
+    "weaknesses": [
+        "Generalizability of Conclusions: The study is focused exclusively on PDE-based spatio-temporal forecasting. While an excellent testbed, the paper does not deeply explore the generalizability of its findings to other domains where inductive biases are critical (e.g., equivariance in computer vision, structural biases in NLP).",
+        "The study would be strengthened by including experimental results on real-world datasets, with examples, efficacy, and efficiency metrics.",
+        "The authors emphasize the trade-off between carbon footprint and accuracy, however, as the problem gets complex, the trade-off seems to disappear as Unet-based variants perform better at inference times with a lower carbon footprint, while FM has the highest carbon footprint at inference time."
+    ],
+    "questions": [
+        "The Flow Matching model stands out as an outlier with high inference costs. Could the authors elaborate on the fundamental algorithmic or architectural reasons for this? Is this inefficiency inherent to the method or an artifact of the specific implementation used?",
+        "More insights into why the carbon footprint landscape changes during training and inference time are needed, for example, can authors provide an insight into why FM inference cost is so high, does it solely have to do with the increase in roll-out steps?",
+        "Figure 8 a shows the predictive performance vs carbon footprint at training time; could authors include the same figure or results for inference time as well for longer rollouts?"
+    ],
+    "divergent_perspectives": [
+        "The paper's framing of PINNs within a \"forecasting\" context is misguided, as it conflates fundamentally different paradigms, and the FM setup is not matched to baselines, which confounds the 'bias vs carbon' statement.",
+        "While the benchmarks are didactic and not representative, the in-depth experiments targeting simplest physics to more complex physics phenomena are performed.",
+        "The carbon plots convey the same ranking as energy, but the metrics do not test physics, which contradicts the claim of 'trading carbon for physics'.",
+        "The lack of hyperparameter tuning is a significant limitation, as it could systematically affect the results and potentially alter the cost-performance trade-offs, e.g., a more complex architecture like a U-Net could benefit disproportionately more from tuning than an FNO.",
+        "While the paper validates and quantifies established knowledge in the Scientific ML community, it does not constitute a fundamental new discovery or method. However, it does offer a new conceptual understanding and quantitative evidence of the accuracy–carbon trade-off in introducing strong and weak physics inductive bias, which distinguishes it from the established consensus."
+    ]
+}

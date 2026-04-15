@@ -1,0 +1,33 @@
+{
+    "paper_id": "x6cOcxRnxG",
+    "conference": "nips23",
+    "summary": "This paper introduces a novel data-driven approach for LES, employing a neural SDE within a latent space to learn an effective closure term. This method captures the intricate variability and fine-scale structures typically lost during LES downsampling, mimicking the ideal LES approach.  Evaluations against Filtered DNS reference data reveal competitive performance, with the model outperforming baselines and demonstrating substantial improvements in both accuracy and computational efficiency.",
+    "strengths": [
+        "The proposed method outperforms several baselines in terms of the squared error and the accuracy of turbulent kinetic energy spectrum.",
+        "This is a good idea, and I'm not aware of an NSDE being previously used in this form, with a promising approach.",
+        "The paper is excellently motivated, presented, and embedded into the theory, and stochastic modeling for turbulence as presented in this paper is an important direction to explore, making it a valuable contribution to the field. However, a broader evaluation with substantially different scenarios, ideally including non-turbulence cases, is necessary to demonstrate the method's merit beyond turbulence, and the current results may not be sufficient for a NeurIPS paper."
+    ],
+    "weaknesses": [
+        "A figure showing the flow (and predictions) after, for example, 200, 400, etc. steps would help the reader appreciate how chaotic the flow is and how much the velocity field evolves over 800 steps.",
+        "The current evaluation protocol does not adequately assess the scalability of the model, particularly with respect to wave numbers. To address this limitation, the authors should exclude a certain range of wave numbers as test cases, enabling a more comprehensive evaluation of the model's scalability.",
+        "The method could benefit from additional cases to demonstrate its effectiveness, particularly in areas where it gives larger improvements, and including recent deep learning-based methods as baselines would be helpful. However, the gains in terms of accuracy and the differences in the TKE spectrum seem to be mild.",
+        "The model's training solely relies on a single reconstruction loss, which is atypical for stochastic latent variables. The absence of prior regularization with respect to latent space implies that the stochastic component added at each temporal step acts more like a sparsity regularization, as the model is trained to minimize the stochastic effect rather than explicitly capturing the physical dynamics. Furthermore, there is a lack of additional benchmarks to demonstrate the advantages of the stochasticity, such as prediction diversity.",
+        "However, the paper lacks a stable evaluation: multiple, differently initialized models evaluated across multiple tests to obtain a stable result are not evaluated, and the NeurIPS venue is very broad.",
+        "When comparing the proposed niLES with deterministic Neural Network-based models, it should be noted that niLES introduces additional parameters hϕ and gθ as well as more computational routes, potentially leading to an unfair comparison. The authors should showcase the model's performance while varying the magnitude of the Wiener process in Equation 15 and compare it to the scenario where the noise magnitude is zero."
+    ],
+    "questions": [
+        "Which other, specific applications and scenarios do the authors see for their method?",
+        "Is there a mix-up of hθ, hψ, hphi, gθ and gϕ happening in Eq (8), (9), (10)?",
+        "What exactly is the relationship between the SDE solver timestep and the simulation timestep? Are the temporal intervals Ti rescaled to [0,1]?",
+        "Lines 177-182 are slightly misleading as they can be understood to suggest that the model would learn possible DNS realizations as Zt instead of an opaque latent representation. However, lines 211-213 clarify this and could be moved forward/merged into the first paragraph.",
+        "The authors seem to use the term 'closure model' more loosely than usual in the introduction. Out of the citations for data-driven closure models in line 39, only [45] defines a closure model as the term is used in the context of RANS and LES. Furthermore, Eq (16): What do you mean with spatio-temporal lifting? Does w correspond to z? What is D?",
+        "The authors should continue their direction of work, but it would be beneficial to provide more context by referencing specific previous methods at NeurIPS, ICLR, and other conferences, and to clarify the potential for generalization to other cases. Additionally, the number of datasets is small.",
+        "Eq (2) is unclear: why can the pressure be eliminated? Furthermore, Line 87 asks about the boundary conditions imposed and how they are done implicitly, and Eq (14) could be defined more explicitly.",
+        "The latent space evolution implements the procedure to solve the SDE equation, which introduces the domain specific inductive bias into the model. However, it would be better if the authors could show that the stochastic property in latent space brings diverse and valid results in the LES space."
+    ],
+    "divergent_perspectives": [
+        "While the summarizing question is unclear and potentially misleading, making it difficult to directly argue for accepting the paper in its current form.",
+        "The paper targets a single, two-dimensional Kolmogorov flow scenario as the only test case, and only compares a single deterministic NN to an implicit LES solver, which seems narrow in scope. However, empirical results indicate it performs well on this specific scenario, but the conclusions are not a good fit with the rest of the paper, as it suddenly transitions to generic chaotic systems, which is not supported by the content.",
+        "The model treats the DNS as a stochastic process, instead of a deterministic process as in many previous works. However, since the work treats DNS field as stochastic, it's unclear why RMSE can be computed in the figure 3. A figure comparing the DNS and filtered data would also be helpful for the reader to understand the effect of LES filtering better."
+    ]
+}

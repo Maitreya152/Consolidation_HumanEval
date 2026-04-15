@@ -1,0 +1,30 @@
+{
+    "paper_id": "WOiOzHG2zD",
+    "conference": "iclr24",
+    "summary": "TextField3D tackles the limitations of current text-to-3D shape generation methods, particularly their struggle with open-vocabulary handling and efficiency. This novel approach introduces noisy text fields (NTFs) learned through NTFGen and NTFBind modules, enabling the model to process a wider range of text prompts and incorporate view-invariant image features for enhanced generation.  Guided by a multi-modal discrimination setup encompassing text-3D and text-2.5D discriminators, TextField3D ensures high-quality geometry and texture in generated shapes.  Experiments showcase its effectiveness, surpassing baselines like Point-E, Shap-E, and GET3D in both speed and open-vocabulary performance, while also demonstrating applicability to the assignment problem as a specialized case. This framework significantly advances real-time, open-vocabulary 3D shape generation powered by textual and visual cues.",
+    "strengths": [
+        "The results, both qualitative and quantitative, look diverse and of a relatively good quality compared to other feed-forward models.",
+        "The ablation studies are clear and comprehensive, providing detailed insights into the impacts of various modules, discriminators, and choices in noise range.",
+        "The paper is clearly written. The motivation is clear to me - design a real-time supervised method whose performance is competitive with VL-optimized methods.",
+        "The paper successfully expands the GAN-based GET3D framework to handle extensive vocabulary datasets, achieving results on par with or surpassing those of diffusion-based models like point-e and ShapE. This marks a significant step forward for large-vocabulary feed-forward generative models. GAN has clear advantages over diffusion models in terms of generation speed and smooth interpolation, making it exciting to see a GAN model surpass diffusion baselines, e.g., Shap-E and Point-E, for the open-vocabulary text-guided generation task.",
+        "The idea of learning the noisy text field is interesting, and experiments suggest the effectiveness of this method."
+    ],
+    "weaknesses": [
+        "Comparison. Though the paper compared with VL optimized methods and 3D supervised methods, it didn't directly compare with the TAPS3D, which has the same training setting as the proposed method. Both of them methods use an image captioning model to augment text prompts and work on a 3D-generated model. Though the paper provides an ablation study that replaces the major component to the TAPS3D component, I wonder if it will outperform the TAPS3D original method. [1] CLIP-NeRF: Text-and-Image Driven Manipulation of Neural Radiance Fields",
+        "The introduction of Noisy Text Fields and their corresponding modules seems reasonable, but the experiments could be improved by comparing with more baseline methods, such as SDFusion and TAPS3D, in the ablation study.",
+        "The evaluation of image-to-3D generation is limited to showcasing two visual results, which is far from enough. It would be beneficial to add more visual results, especially showing multiple viewing angles of the generated object, and some quantitative evaluation is also expected.",
+        "The NTFGen model shows that it is able, to some extent, to increase the expressiveness of a single text prompt. However, my main concern is the potential overfitting problem, as certain prompts in Figure 12 and 13 generate unusually detailed outputs, suggesting that the training dataset may contain very similar examples. I am interested in understanding how the authors have addressed and evaluated the risk of overfitting associated with their method.",
+        "The open-vocabulary capability is the major claim of this paper, but the qualitative experiment section only provides simple prompts, which may not be sufficient to prove the method's capability, especially considering the training data. I hope the authors can provide more results from complicated text prompts."
+    ],
+    "questions": [
+        "Textured Mesh Generator. Are they training from scratch, or training from the pre-trained GET3D?",
+        "The noting of L_{img} and L_{txt} looks like two different types of loss, but they are actually the same type of loss. Changing the namings to make them more consistent would be better for reading.",
+        "Sillhoutte loss. The silhouette loss in equations (4) and (5) is not introduced clearly. For a first-time reader, it might be a little confusing.",
+        "I would suggest also testing with the DreamFusion testing list, which contains over 400 prompts. For the visual results, I would like to see more prompts from the DreamField or DreamFusion test sets, which include more challenging and complex examples like concept-mixing. It would help us better evaluate the open-vocabulary ability of the proposed method. Can you provide some more examples of the 9-shot experiments?",
+        "I'm wondering how the FID score is calculated under the text-conditioned setting, and it would be interesting to see how the method performs with a non-dynamic noise, which could set σ to a static number."
+    ],
+    "divergent_perspectives": [
+        "The NTFBind model shows that it is better at aligning image features from any views, but the experiment provided is not strong enough to prove the point, as it compares features across views with features across categories, which is not as persuasive as comparing features across views with features across instances in the same category, as seen in CLIP-NeRF[1] Figure 2.",
+        "The generated shapes visually seem to have better quality and texture than the compared methods thanks to the supervision from 2.5D and 3D. However, the Shape Diversity is limited by the training dataset, and the method may not be able to generate imagined shapes as effectively as VL-optimized methods."
+    ]
+}

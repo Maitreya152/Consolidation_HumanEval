@@ -1,0 +1,34 @@
+{
+    "paper_id": "pQm66IPmeE",
+    "conference": "colm25",
+    "summary": "This paper presents an information-theoretic framework grounded in the Concept Bottleneck principle to dissect multimodal interactions within Multimodal Large Language Models (MLLMs).  The framework quantifies the influence of textual input on visual representations by separating and measuring their contributions using an InfoNCE-based contrastive mechanism. This allows for the interpretation of complex multimodal data through  interpretable latent spaces. Empirical studies showcase how visual features evolve under different textual contexts, emphasizing  performance enhancements and establishing the framework's value as a diagnostic tool for understanding  multimodal processing dynamics in LLMs. These analyses reveal crucial insights into how textual cues shape visual understanding within these models, ultimately contributing to a deeper comprehension of multimodal LLM behavior.",
+    "strengths": [
+        "Introduces a novel information‑theoretic diagnostic toolkit (F_V^{(l)}, F_T^{(l)}) enabling layer‑wise traceability in multimodal LLMs, a capability not provided by prior work.",
+        "The method is lightweight (post‑hoc, no retraining), making it a practical diagnostic for both researchers and practitioners.",
+        "The idea of utilizing the IB-based theory and concept bottleneck to analyze MLLMs is novel and sound, providing a new direction and inspiration for MLLM interpretability research.",
+        "This is a strong theoretical and novel framework that combines the Information bottleneck principle with a concept bottleneck approach, offering a systematic, quantitative way to disentangle and study the role of text in shaping visual representations, being the first method to measure visual and text tokens relationship quantitatively with the help of information theory.",
+        "This paper studies several important research questions, which is a good contribution to the community. However, some research questions may be too vague and difficult to answer, and it would be helpful to modify them into smaller questions. Furthermore, findings 7 and 8 are not clear, and it would be beneficial to elaborate on how the results support these claims.",
+        "The author did studies on a few benchmarks with different experiment settings, and the quantitative results align with human intuition for MLLM."
+    ],
+    "weaknesses": [
+        "The method is built upon previous work [1], which impacts the technical contributions to some degree.",
+        "Evaluation is limited to a single model (LLaVA‑1.5‑7B) and a concept bottleneck tied to 80 MS‑COCO classes, leaving generality to other architectures and tasks untested.",
+        "The 4 stage observed in LLaVA may not exist in other MLLMs",
+        "Because these symbols form the foundation of the method—and are reused in the proposed information-theoretic measurements—the notation must be clarified. In my review, I assumed $X_{0}^{(l)}$ refers to the last image token and $X_{T}^{(l)}$ to the last input token.",
+        "Core empirical claims rely solely on the shapes of two mutual‑information curves; without causal interventions or ablation studies, the four‑stage interpretation remains speculative.",
+        "In Line 295, the experiment setting is confusingly described as \"original POPE queries with visual prompted images\" and later as \"Only visual prompt\"; however, textual reference to image can enhance visual information injection substantially, which might be related to LLaVA instruction following training data being formatted, and this needs more investigation.",
+        "The used model is LLaVA1.5, which may not be powerful enough, and the evaluation is conducted on benchmarks that may be too simple; it would be more convincing to include other MLLMs, such as Qwen-2.5-VL, LLaMA3-V, etc., and consider more advanced benchmarks like MM-Vet 2.",
+        "The notation $X_{T}^{(l)}$ is unclear, as $T$ is not an index but the text itself; perhaps $X_{|f(V)|+|T|}^{(l)}$ (the last input token) was intended.",
+        "The proposed metric curves indicate when information from image tokens is injected into text tokens, but it is difficult to draw firm conclusions from these plots alone; more rigorous experiments, such as interventions on the model’s hidden states, are needed to corroborate the claims."
+    ],
+    "questions": [
+        "In Finding 3, the experiment setting for caption as a type of QA should be clarified. Furthermore, in Findings 4 and 5, conclusions are drawn from comparing QA task with caption task, but there may exist potential distribution shift due to the use of COCO-Cap and MS-COCO, so more detailed analysis or changing caption evaluation with other benchmarks may be helpful.",
+        "$N$ is never defined (I presume it is the number of layers in $g_\\pi$), and in Line 288, the author mentioned \"a stable F_v in Figure 1b\", please clarify what line refers to.",
+        "It remains unclear whether the proposed framework can be easily generalized across different architectures and tasks within multimodal systems, ideally across two broad categories of MLLMs, i.e. unified embeddings ones like LLAVA and cross modality attention ones like NVLM from NVIDIA. It would be interesting to see if inference/findings are consistent across different vision embedding models like CLIP, ImageBind, other unified embedding models.",
+        "The findings could help us design better multimodal architecture or training mechanisms in future, but this discussion is missing."
+    ],
+    "divergent_perspectives": [
+        "The key mathematical notation in §3.1 is ambiguous, making it difficult to reproduce results or even compute the proposed metrics correctly; however, it would be great for the audience to understand if the author can provide more detailed proof of Lemma 3.3 and 3.4.",
+        "The usage of $T$ and $I$ is inconsistent, as $T$ is introduced as raw text but used as a sequence of tokens in Eq. (1), while $I$ represents a raw image but is not the full visual representation. Furthermore, the experiments lack comparisons to simpler diagnostic tools, making the incremental benefit of the proposed toolkit unclear."
+    ]
+}

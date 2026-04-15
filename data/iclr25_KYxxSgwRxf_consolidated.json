@@ -1,0 +1,35 @@
+{
+    "paper_id": "KYxxSgwRxf",
+    "conference": "iclr25",
+    "summary": "This paper introduces a novel zero-shot video anomaly detection (ZS-VAD) approach designed to identify anomalous human actions in videos without relying on labeled anomaly data.  The framework utilizes a skeleton encoder coupled with a language-guided module to learn semantic representations of skeletal data, capturing both typical normal and abnormal behavior patterns. This departs from traditional methods that directly use skeletal point coordinates for classification, instead learning  distributions informed by language models.  Extensive experiments validate the effectiveness of this approach, highlighting its superior performance and adaptive anomaly boundary determination in diverse video scenes.",
+    "strengths": [
+        "The authors achieve state-of-the-art (SOTA) performance on the ShanghaiTech, UBnormal, NWPU, and UCF-Crime datasets without using training data.",
+        "This work is a good attempt at leveraging both typicality and uniqueness, offering a solution that utilizes large language models (LLMs) alongside test-time adaptability. The insights in test-time uniqueness analysis should be appreciated.",
+        "The analysis of skeleton snippets addresses temporal and spatial inconsistencies for cross-scene recognition. During the inference phase, the method filters results based on the proximity of spatiotemporal context graphs. The computation of two graphs, as seen in many papers, is well-executed here. One graph captures the motion relationships between adjacent individuals within the current data segment, while the other graph represents the motion state of the same individual across different data segments. This dual-graph approach provides a comprehensive understanding of human motion.",
+        "The experimental results achieve the state-of-the-art, and the experiments are comprehensive and solid.",
+        "The paper introduces the **Language-Guided Typicality Modeling module**, which maps skeleton snippets to a semantic space and computes KL divergence loss with features derived from a text encoder. Notably, during the alignment of skeletons and text, the authors innovatively incorporate a Large Language Model (LLM) for label classification (normal/abnormal), akin to how humans consider contextual factors when judging typical behavior distributions. This leads to improved performance in various tasks."
+    ],
+    "weaknesses": [
+        "The visualization results in Figure 4 and Figure 6 are ugly. The font size used to represent the anomaly score is too large.",
+        "The backbone of the method is the multi-scale CTR-GCN, while the backbone of STG-NF is ST-GCN. Therefore, it is unfair to compare the experimental results of this paper directly with those of STG-NF. I would like to know how the author's method performs on the popular setting of VAD.",
+        "The model struggles with anomaly detection, particularly when the motion trajectory becomes stable, and it's challenging to define scene-dependent anomalies without normal data, reducing the task to change detection based on shifts in motion patterns and prior knowledge.",
+        "Besides, recognizing anomalies using only skeleton data loses the interaction information with the environment, which can hinder applications in real-world surveillance settings, as noted in the limitations section of the appendix, where skeleton-based methods struggle to effectively handle single-person stable motion scenarios.",
+        "Moreover, this method depends heavily on skeleton estimation and skeleton-based action recognition methods. If we already have a well-defined action recognition method and powerful LLM, identifying anomalies or normal behavior types could be achieved directly. Without these prerequisites, however, the necessity of using this approach for anomaly detection becomes less clear. A deeper explanation is needed to clarify the rationale behind the skeleton-text alignment, the selection of typicality knowledge, and the process for learning typicality distributions.",
+        "However, I have concerns regarding the Knowledge Collection section: is it feasible to accurately classify action class texts using only a single prompt? What if the LLM considers a normal behavior in surveillance video, such as riding a bicycle, but it is classified as abnormal in the actual test set? On the other hand, by utilizing an action recognition dataset, the model can learn a wider range of behavior categories, allowing for better generalization across multiple scenarios.",
+        "This paper lacks innovation as it primarily applies a common technique in zero-shot action recognition, such as [1,2], and extends STG-NF [3] with language-guided and zero-shot capabilities.",
+        "However, the paper is not well-written, with some symbols and details not described well."
+    ],
+    "questions": [
+        "In summary, I find this paper has notable merits, including the innovative introduction of LLM for scene-related anomaly detection and the fine-tuning of the encoder. However, I remain skeptical about whether this straightforward approach can effectively address cross-scene challenges and generalize to more scenarios in a zero-shot manner.",
+        "Please refer to the Weaknesses. And the number of parameters, training and inference costs should be given.",
+        "In the training phase, the dataset used is inconsistent with the previous methods. How does the author ensure the equability with other sota methods?",
+        "The Uniqueness Analysis in the inference phase seems applicable to any skeleton-based method, which raises questions about its originality. Additionally, the Uniqueness Scores could offer insights applicable to any skeleton-based method.",
+        "However, the decompose process in line 197 should be described in detail, and the variables $g_i, g_j$ and their indices $i$ and $j$ should be clearly explained.",
+        "However, the uniqueness score is also high if the different normal actions exhibit low similarity/distance in different timesteps, so how do we ensure that high distance means anomaly accurately?",
+        "However, the association of $A_i$ with the person graph $p_i$ and timestamp $t_i$ in line 281 is unclear and should be introduced clearly. The symbols in Eqa (8) and Eqa (9) are also unclear, with the subscripts for the person and timestep indexes being the same."
+    ],
+    "divergent_perspectives": [
+        "[1] Generative Action Description Prompts for Skeleton-based Action Recognition. ICCV, 2023.",
+        "[2] Zero-shot Skeleton-based Action Recognition via Mutual Information Estimation and Maximization. ACM MM, 2023."
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "paper_id": "7gLfQT52Nn",
+    "conference": "iclr24",
+    "summary": "This paper introduces a novel method for approximating graph Laplacian eigenvectors in discrete state spaces.  It addresses limitations of existing approaches like GDO and generalized GDO by formulating an unconstrained max-min optimization problem solved with gradient descent. This method, free from hyperparameter sensitivities, is theoretically grounded (with a stability guarantee provided in Theorem 1) and experimentally validated, demonstrating enhanced efficiency compared to previous techniques.",
+    "strengths": [
+        "Having carefully checked the exponential family derivations, the parameterization, as well as the derived ELBOs, I feel that likely they are correct and well-founded on previous related work. The use of exponential families in this context, and particularly to build the factorization into markovian conditionals is definitely a strenght.",
+        "The technical part of the paper seems to be solid and reasonable, and both the theoretical results and the experiments support the claims.",
+        "The paper is relatively well written, clear, and concise on the details, also mentioning limitations and reasoning on why certain decisions are taken.",
+        "This is a very mathematically clear and concise paper. The objective of the paper is clear and well-presented, the solution is clearly presented, and the theory is both mathematically sound and interpretable. Furthermore, the framework has the potential to be extendible into continuous state and action spaces, although the limitations in extending this theory to continuous settings are unclear.",
+        "This is an interesting and novel approach to the challenging problem of unsupervised representation learning. However, the primary limitation is the lack of justification in the practical context, and there is a need for more thorough discussion on the stability of the now-induced minimax game.",
+        "While the proposed solution appears 'simple' on paper, the theory and justification behind the method is both theoretically rich and clever, combining both a nice environment for theoreticians and a direct benefit for practitioners (less hyperparameters to tune alongside the rest of the system). However, I find Corollary 1 and the paragraph above a bit unclear, and further information should be provided for the actual formulation/solution of this problem."
+    ],
+    "weaknesses": [
+        "I think that the proofs could have been in appendix and instead use the space for more examples, demonstrations, and clarifications, but the evaluation of the model is somewhat short, focusing on learning of two synthetic systems (pendulum and chaotic scenario) plus analysis on convergence.",
+        "Some parts of the paper (e.g., Section 1 and 2) are hard to follow, and the paper loses quite a lot of space, and story on the general smoothing idea that authors want to solve (and in which way they want to solve it).",
+        "Additionally, the paper has a second weakness: the limited results, which are not proportional to the technical development."
+    ],
+    "questions": [
+        "Not technical questions",
+        "* * After the rebuttal: I appreciate the authors for their response. They fully addressed my question and I decided to keep my acceptance score.",
+        "The proposed formulation and solution are interesting, but how do you compare the complexity of the proposed objective function optimization problem with previous cases?",
+        "Why does an optimum of (2) and (4) imply that the constraint must be violated? Perhaps, an experiment to test the stability of the equilibrium with respect to permutations. Why rotated eigenvectors do not provide a good representation?"
+    ],
+    "divergent_perspectives": []
+}

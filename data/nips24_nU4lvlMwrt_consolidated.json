@@ -1,0 +1,35 @@
+{
+    "paper_id": "nU4lvlMwrt",
+    "conference": "nips24",
+    "summary": "SGNet, a novel framework for ultra-image segmentation, tackles the issues of generalization and architectural limitations by incorporating a surrounding context module to refine local patch segmentation. This approach enhances compatibility with diverse segmentation models, leading to improved performance and accuracy on high-resolution images.  Evaluations across five datasets validate these improvements, showcasing significant gains in both segmentation accuracy and computational efficiency compared to existing methods.",
+    "strengths": [
+        "The analysis of problems in the previous work is clear and logical, which is easy to follow.",
+        "The proposed SGNet leverages surrounding context information to enhance the segmentation results obtained from analyzing image patches.",
+        "This method proposes SGNet to address two intrinsic problems in UIS.",
+        "The paper is well-written and the figures and tables are well-organized and clear, but the computational cost is expensive.",
+        "The proposed method is simple and effective, showing advantages on various datasets with various general segmentation models. The authors address ultra image segmentation from the perspective of general segmentation models, identifying two specific issues (generalization and architectural issues) and proposing a novel solution (SGNet) that can be used alone with any segmentation model to improve the quality of the results.",
+        "This framework can be integrated with various general segmentation models and achieves competitive performance across different general segmentation models on five publicly available datasets. However, the results in Table 1 show significant performance fluctuations across different datasets, particularly on the Cityscapes dataset, which questions the generalization capabilities of general segmentation models.",
+        "The method is evaluated on a wide range of datasets, including Cityscapes, DeepGlobe, Inria Aerial, Five-Billion-Pixels, and Gleason, showcasing its effectiveness across various scenarios, including medical and remote sensing applications. However, there is a citation error for the Five-Billion-Pixels dataset, which should be referenced as [3].",
+        "The proposed method has been validated on a variety of datasets, which helps build confidence in the method, and consistently outperforms previous methods. However, in equation 7 for the loss function, the paper uses 3 parameters, where we could only do with 2 after normalization, and it is typical to represent L1 loss with a subscript for clarity, so I would add it in equation 6."
+    ],
+    "weaknesses": [
+        "The authors attribute their performance superiority to the generalizability or architecture. However, they overlook the impact of different inference modes. Based on the description provided in the paper, all general segmentation methods employ sliding inference. However, this is not consistent across existing methods. This discrepancy precludes a direct conclusion that \"general segmentation algorithms have better generalization.\"",
+        "The validation of the proposed component's efficacy is not rigorous. Since the component is pluggable, the performance evaluation should compare two variants: 1) removing the proposed component directly as shown in Table 1, and 2) replacing it with a trivial operation of similar function, such as some simple convolutional layers with the same number of parameters, or components with analogous functions from existing methods. The latter was overlooked by the authors.",
+        "The design of the surrounding context integration module appears strikingly similar to that in [2]. The authors should provide a detailed comparison.",
+        "For some reason, there seems to be no evaluation done on human subjects specifically. I would have liked to see some segmentation results on human subjects, especially around fingers, ear etc.",
+        "The description of the surrounding branch is unclear, and it is unclear what kind of backbone network is used, whether it is the same as in the local branch, and whether it resizes its input.",
+        "There is a typo at the last of the caption of Figure 1, and the order of experiments in Table 2 is illogical; it would be natural to integrate the alignment operation into the model before introducing SCI.",
+        "The evaluation of speed was insufficient (only included one of the lightest versions, i.e., ISDNet-Style), and it is unclear what device the method was evaluated on. Furthermore, to verify that SGNet is plug-and-play, the author should compare it with other plug-and-play methods rather than compare it with other task-specific strategies.",
+        "The challenges in Contribution 1 have been proposed in many segmentation tasks, making it weak."
+    ],
+    "questions": [
+        "The paper uses the word performance in several instances to discuss quality. It is an important distinction, as the usage of performance should be limited to quantify speed, and quality should be used for discuss the improvements in segmentation mask quality.",
+        "According to Figure 1, the surrounding branch’s output is discarded during inference. Is it possible to further improve the performance by combining it with the result of the local branch?",
+        "What is the specific architecture of the first model variant listed in Table 3? The discussion on limitations is extremely limited.",
+        "Given the diversity of inference modes, the authors should supplement Table 1 with specific inference settings for each method to identify more critical factors. Additionally, it is unclear how the memory footprint in Table 6 is measured or what it represents, is it peak memory usage or average memory usage during inference?"
+    ],
+    "divergent_perspectives": [
+        "The method can handle images of any scale, but this is only partially true as it is still restricted by compute resources and needs to be clarified.",
+        "The authors mention in line 489 that due to the inaccessibility of the data partition details from [1], they conducted their own dataset division. Yet, in Table 1, only ISDNet [4] presents results for Gleason. This is logically inconsistent. Did the authors retrain ISDNet using your own data split? The boundary consistency loss yields a limited performance gain, and the contribution of the SGNet is incremental, including the consistency loss and the local and global branches."
+    ]
+}

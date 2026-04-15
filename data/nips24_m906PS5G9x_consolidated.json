@@ -1,0 +1,31 @@
+{
+    "paper_id": "m906PS5G9x",
+    "conference": "nips24",
+    "summary": "This paper introduces BACON, a novel Bayesian calibration method for expensive simulation models, tackling the challenge of aligning simulated outputs with real observations through an active learning approach. BACON posits calibration as an optimization problem in the joint space of design and calibration parameters, guided by the expected information gain (EIG) principle. A Gaussian process model jointly represents observations, calibration parameters, and simulator outcomes, enabling efficient selection of informative data points. This iterative, data-efficient process accelerates calibration and demonstrates effectiveness in both synthetic and real-world scenarios, showcasing BACON's capability to handle simulations with design inputs and unknown physical parameters.",
+    "strengths": [
+        "The problem setting is interesting and is indeed important in engineering and physical sciences as computer simulators are often used in those areas.",
+        "Many good papers seem obvious once you read them, and I feel like this paper belongs in that category. Despite being a notation heavy paper, the authors did a good job of making the writing clear and concise.",
+        "Clarity * The paper is well articulated. * The problem is clearly introduced, and the intuition behind the proposed solution is provided early on. * Figures are clean.",
+        "The paper is well-written, offering comprehensive background information and a thorough review of the literature. It focuses on a well-motivated and challenging problem, and the method is rigorously compared with other related approaches across multiple metrics on both synthetic and real-data datasets.",
+        "This is a technically solid and well-written paper which I really enjoyed reading. The idea of using the EIG criterion over the joint space of $\theta$ and $x$ may sound simple and straightforward once you see it written down that it is almost surprising that no one has done this before.",
+        "This piece of work is new to me, and the method is sound with no identified flaws, supported by experiments that address the discussed related works and claims."
+    ],
+    "weaknesses": [
+        "Originality * I have no concerns regarding originality. Quality * I have no concerns regarding the quality.",
+        "The paper lacks clarity in specifying its contributions and novelty. However, it would be valuable to compare the proposed method with other state-of-the-art alternatives, such as Bayesian optimal design methods that incorporate variational inference (e.g., Variational Bayesian Optimal Experimental Design).",
+        "MMD is not mentioned in the text despite being plotted in Figure 1(d). Furthermore, please include up/down arrows in the tables next to the columns so that it is easy to read them.",
+        "The approach of using a single GP to model calibration parameters and design parameters jointly is novel, but optimizing them jointly may make the problem harder due to the increased dimension of the search space, which may limit its applicability to real-world problems. However, it may be helpful to include a discussion about choosing appropriate methods when the number of calibration parameters is bigger or the number of design parameters is bigger, or both.",
+        "The paper can be improved in the following ways: My biggest concern for this paper is its novelty: replacing EIG by a variational lower bound has been explored and well studied by many literature. (e.g. [18], [29])",
+        "While the reviewers have no concerns regarding significance, it's challenging to ascertain if stability has been achieved in Figure 1(a), affecting the credibility of the conclusion that BACON achieves rapid convergence in terms of MAP estimates. Furthermore, it's difficult to determine if EIG statistically outperforms others in terms of RMSE. Additionally, a discussion of the hyperparameters/settings of the proposed method would be nice to have, in terms of how to set them and how sensitive the performance of BACON is to their values.",
+        "Table 3 is not referenced in Section 6.4, and Appendix B seems incomplete."
+    ],
+    "questions": [
+        "The error function $\\varepsilon$ is modeled as a GP, and it is unclear how BACON's performance would be affected if this assumption does not hold (i.e., when the error model is misspecified). Reporting the KL divergence between the prior and the posterior after T iterations tells us how much the posterior has changed, but that does not necessarily mean we are converging to the true posterior; the KL divergence between $p_T$ and $p^*$ might be a better indicator for accuracy.",
+        "I do not have any major concerns, but some minor comments can help improve the paper: Clarity issues include referring to calibration parameters as simulation parameters, and there is a typo in equation 6 (missing parenthesis). In algorithm 1, the update posterior line should be $\\mathcal{D}_t$. Table 3 is not referred to in section 6.4.",
+        "Can you say something about the tightness of the bound in Section 5.1? What does it depend on? (I suppose these would have been discussed in ref [13] but it would be nice if mentioned here as well)",
+        "Can you explain a bit more why VBMC performs better in the synthetic experiments but fares poorly in the other experiments? Does it have anything to do with the dimensionality of the problem?"
+    ],
+    "divergent_perspectives": [
+        "While the paper presents results on small datasets with low-dimensional parameter spaces, which makes the variational inference less convincing, there are numerous instances where VI can fail and produce poor approximations of the target posterior distribution, such as when dealing with highly correlated coordinates or multimodal targets, and it would be beneficial to investigate the performance of BACON in these scenarios."
+    ]
+}

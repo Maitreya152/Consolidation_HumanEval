@@ -1,0 +1,30 @@
+{
+    "paper_id": "js74ZCddxG",
+    "conference": "nips24",
+    "summary": "This paper tackles the critical challenges of privacy leakage and poisoning attacks in federated learning by introducing RFLPA, a robust framework. RFLPA leverages cosine similarity for secure and reliable model aggregation, fortified with verifiable packed Shamir secret sharing to ensure privacy preservation without compromising robustness.  A novel dot-product aggregation method is integrated to minimize information leakage during cosine similarity calculations, directly addressing a weakness in traditional secure aggregation against poisoning. Empirical analysis showcases substantial reductions in communication and computation costs while maintaining competitive accuracy compared to existing approaches.",
+    "strengths": [
+        "+ Extensive experimental validations and very detailed comparison with existing frameworks, especially for various aggregation methods",
+        "Experiments show that RFLPA reduces communication and computation costs by 75% while maintaining the same accuracy compared to the previous work BREA.",
+        "The paper is well-written and well-structured, addressing a very important problem in the security of federated learning systems, and thorough experimentation and analysis are undertaken to evaluate the proposed method. However, its applicability to other federated learning models, such as those involving more dynamic and heterogeneous client populations, is not explored.",
+        "The use of packed Shamir secret sharing with the proposed dot-product aggregation sounds novel and reliable. The structure of the paper is clear, providing a comprehensive and detailed explanation of how RFLPA deploys FLTrust's cosine similarity detection scheme on SecAgg and reduces SecAgg's overhead through packed Shamir secret sharing and dot-product aggregation. However, could the authors provide more insights into the practical implementation challenges of integrating verifiable packed Shamir secret sharing into existing FL systems?",
+        "The paper provides a systematic theoretical analysis and proof of RFLPA's convergence and the cryptographic protocols used, and the attempt to reduce the communication overhead caused by secret sharing is valuable.",
+        "The problem of addressing poisoning attacks in FL is timely and challenging, especially with provable security guarantee. The framework largely reduces the overhead of previous works and maintains good accuracy even when no poisoning attack is considered, making deployment more practical."
+    ],
+    "weaknesses": [
+        "The experiments conducted use standard datasets like MNIST, F-MNIST, and CIFAR-10. These datasets, while commonly used, do not fully represent the complexity and diversity of real-world data. The effectiveness of RFLPA in more diverse and complex datasets remains to be tested.",
+        "The paper seems to achieve practical improvements over BREA mainly by reducing communication costs, but the phase of computing cosine similarity among clients introduces additional communication costs. The advantages over other state-of-the-art MPC-based solution ELSA[1], HE & ZKP-based solution RoFL[2], and Blockchain-based solution PBFL[3] are not explained in detail in the paper.",
+        "The notations and formulations should be more clear, specifically addressing issues with $D$ being undefined and $\tilde{\\mathbf{g}}_i$ being misspelled as $\bar{\\mathbf{g}_i}$.",
+        "The security and efficiency of the framework is well supported by theoretical analysis and experiments, but the robustness testing of BREA lacks strong experiments to demonstrate its performance under more subtle attacks like Krum-attack and Badnet.",
+        "However, the communication overhead of RFLPA could be significant because all clients are involved in the computation of consin similarity $s^j_k$ of any user pair (i,j), and the author should provide detailed results.",
+        "However, the paper's Byzantine robustness assumption, which adopts the FLTrust approach assuming the server holds clean root dataset, is impractical in real-world scenarios as it requires a substantial number of clean public samples of all labels, which conflicts with the goal of a practical PPFL solution.",
+        "The presentation could be improved; there are too many concepts introduced, making it hard to distinguish between what is new and what is from existing literature. However, the performance comparison against other state-of-the-art methods might not be exhaustive, and there might be other emerging methods or variations of existing ones that were not considered in the evaluation."
+    ],
+    "questions": [
+        "How does the framework scale with the number of clients and the dimensionality of models, and are there potential bottlenecks for large-scale deployments? Furthermore, how realistic is the assumption of the server having a clean root dataset in different FL application domains, and can the framework be adapted for scenarios without such a dataset?",
+        "In section 4.2 normalization, should the gradients with norm smaller than $||g_0||$ also be normalized? If so, how to verify that they are normalized?"
+    ],
+    "divergent_perspectives": [
+        "While the experiments only examine malicious users, it's unclear if active inference attacks are included. Furthermore, the RFLPA framework seems questionable, as the server can recover the secret shares, which raises questions about its security.",
+        "The assumption that the server has a clean root dataset and trusted secure communication may not be realistic, and if the clean dataset is not available, it's possible to adjust the proposed protocol to deal with this situation."
+    ]
+}

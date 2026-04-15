@@ -1,0 +1,32 @@
+{
+    "paper_id": "0x8wWloW2O",
+    "conference": "iclr25",
+    "summary": "OracleMamba, a novel stock prediction framework, integrates short-term and long-term market dynamics using a dynamic market-guided module blending market sentiment and objective indicators with a SelectiveMamba module adept at extracting key signals from temporal and spectral features within financial data. This approach enhances prediction accuracy while mitigating noise inherent in market data. Experiments on Chinese stock markets showcase OracleMamba's effectiveness, outperforming existing models and highlighting its ability to incorporate subjective factors like market sentiment.  Despite demonstrating strong performance, the paper recognizes a need for a more extensive literature review and transparent data sourcing practices, particularly regarding the utilized analyst reports, to further strengthen its methodological rigor.",
+    "strengths": [
+        "The integration of a market-guided module for short-term forecasting and a SelectiveMamba module for long-term stability represents an novel hybrid approach to stock prediction.",
+        "The problem to be solved is well formulated",
+        "The method proposed in the article performs well in experiments.",
+        "The authors proposed a novel 3D scanning mechanism for analyzing financial market information, and it captures interactions across the dimensions of time, stock, and market state. However, the design of DTE and DSE lacks explanation, and it is unclear how they reflect the benefits claimed by the authors in the relevant section. Furthermore, the setup for the comparison methods in the experiment section is unclear, and it is not specified whether these methods use the same data as the proposed model or only stock price data."
+    ],
+    "weaknesses": [
+        "Furthermore, the fact that testing was limited to the Chinese market decreases the reliability of the experimental results, and the lack of detailed information on the analyst reports, which are crucial data, also presents serious issues with the study’s credibility and reproducibility.",
+        "The exact data point length in CSI300 and CSI800 for model training is not specified. Is the data daily-based or hourly-based? Given that Mamba-based methods are used, a longer financial data sequence might provide an advantage.",
+        "Many SOTA time series forecasting models are not included in the comparison, such as DLinear, NLinear, Autoformer, Fedformer, PatchTST, etc. Furthermore, the article does not provide the code, and it would be beneficial to include more Transformer-based models specifically designed for time series tasks, such as Numhtml, FOCAL, and attribute-driven graph attention networks.",
+        "It is crucial to evaluate the computational cost, including memory usage and runtime efficiency, of the Mamba-based solution. Comparisons between the proposed model and Mamba-based models (or Mamba itself) are also needed. However, the method section does not clearly indicate where the Mamba model is used for those unfamiliar with the Mamba model, nor does it explain how the Mamba model contributes to stock prediction."
+    ],
+    "questions": [
+        "The authors should more clearly specify the role of the experts. Do they mean that the experts are the ones who wrote the documents, or are they directly involved in the analysis?",
+        "What is $s$ in the calculation of DSE?",
+        "Please see the weakness for details."
+    ],
+    "divergent_perspectives": [
+        "The market state encoding section lacks sufficient details to justify the use of market state information, and the approach of combining short- and long-term contexts has been widely studied before, so it is unclear what advantages this study has compared to prior works.",
+        "The authors claim that incorporating sentiment analysis into stock price forecasting is novel, but many studies have already pursued this approach, combining short- and long-term contexts, and the lack of a comprehensive search and mention of previous studies is a significant oversight.",
+        "The article claims that the model can handle noisy data, but I do not see how or why noisy data can be addressed, or what improvements have been made compared to previous methods. Furthermore, noise in stock data is often caused by random Brownian motion, which the article does not analyze or explain theoretically. However, the baselines are relatively weak, with only two methods specifically tailored for stock data.",
+        "While the paper is written with good clarity and is easy to follow, the data used in the paper is not clearly specified.",
+        "The experiment lacks comparisons with some important baselines, and it is unclear how much the additional information used to enhance OracleMamba contributes to its performance, making the comparison with baselines potentially unfair.",
+        "The motivation behind the SSM design is unclear, and the TSSS structure has several issues, including input-independence and comparison to Mamba, which is designed to be an improvement on such structures.",
+        "This paper studies the first work that introduces Mamba into stock price forecasting, which could be promising for the development of this subdomain, although the authors' claim of being the first to apply Mamba to stock price forecasting is questionable due to the lack of a detailed literature review.",
+        "While the article lacks novelty and sufficient discussion on related work, it is unclear how the GPT-O1 model is used to convert textual data into sentiment, and the prompts used are not described; the authors did not specify what the sentiment results look like, which are they presented as sentiment scores, sentiment labels, etc."
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "paper_id": "UkiGZBRZmg",
+    "conference": "iclr26",
+    "summary": "This paper challenges the conventional wisdom favoring centralized optimization by demonstrating that decentralized methods, especially in scenarios with heterogeneous data distributions, can accelerate convergence.  The authors propose a novel algorithm for distributed optimization that  tailors local step-sizes to individual data smoothness parameters (L_i), capitalizing on data heterogeneity. This adaptive approach, potentially incorporating a transition to a global smoothness-based step-size, is validated through experiments on W8A, MNIST, and CIFAR-10 datasets, showcasing  superior convergence rates compared to centralized counterparts.",
+    "strengths": [
+        "The paper is well-written and studies an important problem since data heterogeneity is an important bottleneck for distributed/federated learning which can slow down the GD's convergence. The paper also presents experiments on real-world data to show its claims.",
+        "The paper's primary strength is its core finding: decentralized optimization can, under certain conditions, outperform its centralized algorithms in convergence speed (i.e., iteration count). This result is very impressive and challenges the conventional wisdom that decentralization is merely a necessary compromise for privacy or communication constraints. However, the related work section appears to be missing several highly relevant citations that also discuss the benefits of decentralization, which is essential to position the paper's contribution correctly.",
+        "The paper is well written."
+    ],
+    "weaknesses": [
+        "Line 241: not sure what does \".... are interpolated for each local function class\" mean.",
+        "The idea of using local smoothness and adaptive step-sizes based on these local smoothness parameters for each client is not new, for example see the reference [*] which studies a similar idea with several local SGD step-sizes (i.e., the federated learning setup) and also includes a method for approximating the local smoothness. Can the authors please clarify how their algorithm improves upon the previous algorithms in literature?",
+        "In Algorithm 1, S,F,T are used without definition and not explained. The F seems to be defined in Section 3.2 but is already far away from the algorithm.",
+        "Line 242: \"... are generated recursively by algorithm 1\" yet algorithm has no $x_i^k$.",
+        "Claims are not properly reference, e.g. line 107 \"it is well known...\"",
+        "Adopting PEP from literature to analyze the worst case analysis looks interesting, but the contribution is weak, and an alternative approach with different stepsizes, such as a warm-up phase followed by resetting to $\\gamma=1/L$, might be more effective.",
+        "The practical implementation of setting local learning rates could be clarified, particularly the strategy for estimating the local smoothness constant $L_i$. A more detailed discussion on the estimation procedure, including the computational overhead and sensitivity to estimation error, would be beneficial.",
+        "The empirical validation is weak, as it is limited to logistic regression and simple CNNs on MNIST and CIFAR-10, and the proposed algorithm is only compared against standard Gradient Descent (GD), in both full-batch and mini-batch settings. A more convincing validation would require comparison against other modern optimizers.",
+        "The idea of client-level or local learning rates has been explored in related Federated Learning literature (e.g., FedSPS [1]), though not in direct comparison to centralized methods. However, the paper would be strengthened by a more thorough discussion of relevant works on FL with local learning rates to better contextualize its own contribution.",
+        "The idea of using different stepsizes is not novel. One way to correct the incurred deviation is to take a weighted average at the server, see for instance the method i-Scaffnew in Yi et al. \"Explicit Personalization and Local Training: Double Communication Acceleration in Federated Learning\", 2025. In case of partial participation or sampling, one can do importance sampling by choosing probabilities proportional to $L_i$.",
+        "The paper is not ready for publication due to messy notations, and to name a few.",
+        "Please see the comments above.",
+        "The vectors are traditionally annotated in bold, but there are notation issues, such as the use of \\mathcal in algorithm 1 and the abuse of notation in line 238, where $x^*$ is denoted as a list of vector in line 221, and it is also defined twice in line 221."
+    ],
+    "questions": [
+        "The authors estimate the smoothness constant using 1,000 data entries, following its formal definition. However, the precise details of this estimation procedure and the sensitivity of the algorithm's performance to the accuracy of this estimation are unclear.",
+        "The paper does not provide substantial theoretical evidence to back its main claim i.e., that their proposed algorithm can provably lead to speedups compared to ordinary GD. Can the authors clarify whether their approach provably leads to better convergence results and/or superior test error performance? [*] Adaptive federated learning with auto-tuned clients, Kim et al, ICLR 2024."
+    ],
+    "divergent_perspectives": [
+        "The statement that the algorithm converges to an exact optimal solution as confirmed by theoretical evaluations (Line 180) is questionable, as Fig. 1 appears to be an empirical evaluation on a simple problem. Furthermore, the paper fails to compare the convergence rates and empirical performances of existing decentralized optimization methods, including those with and without heterogeneity. Additionally, the use of the term 'server-assisted decentralized gradient methods' is misleading, as it is an oxymoron and should be referred to as 'distributed optimization' in the client-server model.",
+        "While the notation for $g_i^k$ is ambiguous, as it is used to denote both gradient computed on local copies and shared copies, adapting to local datasets by choosing different stepsizes can be implemented by using even better matrix stepsizes, see for instance Safaryan et al. 'Smoothness matrices beat smoothness constants: Better communication compression techniques for distributed optimization'."
+    ]
+}

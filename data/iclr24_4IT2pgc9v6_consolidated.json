@@ -1,0 +1,28 @@
+{
+    "paper_id": "4IT2pgc9v6",
+    "conference": "iclr24",
+    "summary": "The paper presents 'One for All' (OFA), a groundbreaking framework designed to unify various graph tasks and diverse graph data within a single, adaptable graph model. OFA achieves this by utilizing text-attributed graphs, allowing for natural language representation of nodes and edges, and introduces a novel graph prompting method enabling versatile task handling without task-specific fine-tuning.  Evaluations across multiple domains and real-world datasets highlight OFA's effectiveness and efficiency, demonstrating significant performance gains and speedups compared to existing approaches. Notably, OFA's architecture extends to encompass the assignment problem as a special case, solidifying its position as a pioneering multi-purpose graph classification model.",
+    "strengths": [
+        "The framework proposed by the author is very interesting, and the idea of prompted nodes naturally unifying the three major tasks in one simple but powerful problem formulation is convincing and well-motivated, making this paper well-articulated.",
+        "A unified graph model is designed for various tasks and different domains of graph data, and exploring non-meta-learning scenarios like GraphPrompt could be a valuable direction.",
+        "The motivation of this paper is well-delivered and interesting. The proposed method is novel and seems to be good according to their experimental report. Furthermore, I highly recommend the authors to make the code public for readers to follow the work.",
+        "The presentation of the result is clear with both quantitative and qualitative results."
+    ],
+    "weaknesses": [
+        "It seems that NOI prompt nodes can be treated as a special case of the prompt graph mentioned in the paper \"All in One\" (Sun et al., 2023), what's the differences between them? and why the authors use only one NOI prompt node instead of multiple NOI prompt nodes.",
+        "The design of prompt nodes and utilizing NOI-subgraph to unify different tasks seem to be similar to several previous works. For example, [1] introduced a learnable prompt vector to unify tasks, and [2-3] proposed to utilize super nodes to perform pooling readout. The proposed NOI prompt node appears to be a combination of these two lines of works. Could you include more in-depth discussions and comparisons with these related works.",
+        "Comparison with methodologies that integrate LLMs and graph models, such as [4-7], is necessary.",
+        "The Few-shot and Zero-shot results, especially for TLP-SURGL and TLP-BGRL, do not outperform baseline models; could you include further discussions and analysis of these underwhelming performance results?",
+        "The modeling of link-level task lacks details, such as whether two or one class node is used. It is unclear how to use NOI prompt nodes and class nodes with GNN to predict the downstream tasks, and it is not clear if the downstream tasks (node, edge, graph classifications) are treated as predicting links between NOI prompt and class nodes."
+    ],
+    "questions": [
+        "The article introduces a method to employ LLMs to generate inputs for GNNs, and it seems that this approach can better utilize LLMs' significant capabilities in addressing various problems on vast data. However, I wonder whether the GNN model is also pre-trained and frozen, and what are the results compared with using LLM as a predictor instead of an enhancer? Additionally, I'm curious about the difference between this approach and using GNNs to generate inputs for LLMs, and can you provide some explanations and compare the performance of these two pipelines.",
+        "The authors use sentence transformer instead of other LLMs like ChatGPT API or LLAMA, but this choice may be influenced by the fact that sentence transformer is not sensitive to the order of the prompt. However, re-ordering the prompt for ChatGPT could lead to unpredictable performance due to the potential for different sentences to be generated.",
+        "Additional ablation studies can be conducted to see whether the constructed graph structure is helpful, for example, directly using the unified node features (produced by LLMs) as the input feature of some backbone GNN models like GIN, GCN, GAT.",
+        "Please refer to the weakness for questions, and I would like to see a concise and clear rebuttal to the questions mentioned in the above section “Paper Weakness”."
+    ],
+    "divergent_perspectives": [
+        "While extensive experiments are conducted on various settings and datasets from different domains, the soundness of the experiments seems lacking, particularly in the choice and comparison of LLMs, which is a key component for cross-task and cross-domain generalization.",
+        "The introduced model can encode features of different graphs into the same embedding space, which is very interesting. However, translating graph data with text feature sequences might lose some key information from graphs."
+    ]
+}

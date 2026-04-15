@@ -1,0 +1,29 @@
+{
+    "paper_id": "ODSgo2m8aE",
+    "conference": "iclr24",
+    "summary": "This paper addresses individual fairness in GNNs by proposing a novel method leveraging the Lipschitz constant. It introduces a Jacobian-based approach for efficient estimation of the GNN's Lipschitz constant, incorporating this estimation as a regularization term during training to limit output perturbations induced by input biases. Empirical results on real-world datasets showcase the effectiveness of this technique in enhancing fairness while preserving competitive accuracy.  The study further analyzes the impact of Lipschitz constraint on training processes and elucidates the balance between achieving fairness and maintaining high accuracy.",
+    "strengths": [
+        "This paper is generally well-organized and easy to follow. Plus, a comprehensive theoretical analysis is provided.",
+        "The use of Lipschitz constants to control the stability of GNN outputs provides a provable method for examining output stability without additional computational costs, which can be estimated via the Jacobian matrix.",
+        "Characterizing fairness in terms of the Lipschitz constant and optimizing this constant is an interesting approach to achieving individual fairness in GNNs. The paper addresses an important and timely problem of fairness in GNNs, which has gained significant attention in recent years.",
+        "The theoretical analysis and formulation of the Lipschitz constant for GNNs operating on graph data is well-structured, and comprehensive experiments on GNNs for the bias are provided.",
+        "The proposed approach, JacoLip, outperforms other fair learning methods --- it achieves a better fairness score while having the best or close to the best utility. However, the lack of manual annotation of sensitive attributes may compromise the guarantee of ensuring fairness, and discussions on the drawback compared to other fairness methods that explicitly use sensitive attributes should be included.",
+        "Extensive experiments are performed and presented, and the superiority exhibited by the experimental results in most cases seems promising."
+    ],
+    "weaknesses": [
+        "This paper lacks a motivating example to deliver the significance of the proposed approach in applications.",
+        "The experimental results are not organized clearly. For example, in Table 1 JacoLip isn’t always achieving the best performance, but best results are not in bold or otherwise marked, making it difficult to compare across methods and datasets.",
+        "However, since I’m not familiar with GNN and fairness, it appears difficult to evaluate the contribution. Furthermore, the approach for the estimation of the Lipschitz constant is based on the Jacobian matrix, which is loose, and there are several advanced and promising approaches for the Lipschitz constant estimation on DNNs.",
+        "The proposed approach involves computing norms of the Jacobian matrix in the loss function, which could lead to computing gradient of gradient during backpropagation (implicitly by PyTorch), potentially being memory and compute-intensive. However, the efficient computation of the Lipschitz constant via the Jacobian matrix makes the proposed approach scalable."
+    ],
+    "questions": [
+        "In the introduction, the authors mention, \"... computational approach utilizes intermediate tensors extracted...\" What intermediate tensors are being referred to here?",
+        "While experiments validate the effectiveness of the proposed approach, more analysis could be provided on the sensitivity of the method to different hyperparameters, including the value of $u$ in Algorithm 1.",
+        "I’m wondering how this can be extended to the GNN setting, and what’s the difficulty issue behind this?",
+        "What is the motivation of the proposed approach? The practical value would be much clearer if any motivating example could be provided.",
+        "Eq 7 describes the jacobian of the i-th node. Shouldn't it be a 3D tensor? $Y_{jk}$ (output of node-j) depends on $X_i$ (node i) due to message passing. Are $\frac{dY_{j1}}{dX_{i1}}$ $i\neq j$ and such terms ignored? I think the discussion about the computation of the Lipschitz constant could be more elaborate, with a clear indication of the dimension of the tensors."
+    ],
+    "divergent_perspectives": [
+        "The authors claim that their method has no computational overhead, but no empirical evidence is provided to support this argument, such as a comparison of training time and memory usage of different approaches. Furthermore, no time complexity / running time comparison is provided, which undermines the claimed advantage in efficiency. What is the time complexity of the proposed approach?"
+    ]
+}

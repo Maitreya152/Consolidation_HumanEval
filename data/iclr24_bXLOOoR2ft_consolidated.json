@@ -1,0 +1,29 @@
+{
+    "paper_id": "bXLOOoR2ft",
+    "conference": "iclr24",
+    "summary": "DoraemonGPT, a novel LLM-driven system designed for video understanding and question-answering, tackles dynamic video tasks by constructing a symbolic memory encompassing both spatial and temporal aspects of video content. This memory, accessible to the LLM, facilitates effective spatial-temporal reasoning.  The system leverages a set of subtask tools and an MCTS planner to decompose complex queries into smaller, manageable subquestions, exploring optimal solution strategies within a vast planning space.  Evaluations on the NExT-QA dataset highlight DoraemonGPT's superiority over existing LLM-based approaches like ViperGPT and VideoChat, demonstrating significant improvements in efficiency and accuracy for video question-answering.",
+    "strengths": [
+        "Novel idea that MCTS is used to explore the large planning space for scheduling various tools.",
+        "The authors provide detailed information about prompts, experiments conducted, and analysis results, which are useful in assessing the DoraeGPT's potential. However, the small size of the evaluation might suggest that the method is expensive, and the paper should include a discussion about how many tokens the system consumes and how much it costs to answer a question on average.",
+        "The topic studied here is important, and augmenting the powerful LLMs with better tools and smarter planning skills is crucial to unleash their full potential and also open up new applications in, for example, multimodal domains. The method is technically sound, building a symbolic knowledge base first, and then invoking an LLM-based system to query it makes sense especially when it comes to complicated multimodal data like videos, which could drive interest to a broad range of audiences from canonical multimodal learning and LLM communities.",
+        "The proposed symbolic memory system and the MCTS planner on video tasks are new, and combining a symbolic memory database with an MCTS planner using LLMs is very novel. However, the evaluation can be more convincing if more datasets are used, such as Generative Agents: Interactive Simulacra of Human Behavior, TPTU: Task Planning and Tool Usage of Large Language Model-based AI Agents, Reflexion: Language Agents with Verbal Reinforcement Learning, and Tool Learning with Foundation Models.",
+        "Decomposing the original query into sub-questions also looks like a promising approach upon to canonical LLM tool-use, where the tools are limited to search, SQL query, etc. The results on the challenging NExT-QA data are impressive.",
+        "The proposed approach has good performance on the evaluated benchmarks with strong baselines. However, a more fair comparison should also take the time cost of building the spatial temporal symbolic database into consideration, including the average time to build the database and how it compares to the overall inference time of the baselines."
+    ],
+    "weaknesses": [
+        "Works like Yu et al. achieved better performance on NEXT-QA (zero-shot) than DoraemonGPT. [1] Yu, Shoubin, Jaemin Cho, Prateek Yadav, and Mohit Bansal. \"Self-Chained Image-Language Model for Video Localization and Question Answering.\" NeurIPS (2023).",
+        "These are the questions that will help with a better understanding on the proposed method. As a side note, can the proposed method still work without a pre-built database? I think some of the queries can be done directly by invoking the right tool, ex.",
+        "The motivation is not clear, as the authors ignore a large number of LLM-driven agents that are not related to image/video tasks, such as [1,2,3,4].",
+        "However, the evaluation set is small, and the paper only conducted experiments on a subset of the original NExT QA dataset. Furthermore, for the ablation study, the system was evaluated on 3 question types, each with 10 questions only.",
+        "The paper is easy to understand, but there are many overclaims and no sufficient related works, and the motivation is not clear. It is clearly below the bar of ICLR. The reviewer encourages the authors to reformulate their paper writing, although they like the concrete ideas proposed in this paper.",
+        "The authors have claimed that their approach is an intuitive yet versatile system driven by LLMs that is compatible with various foundation models and real-world video applications. However, it was only evaluated on one dataset, which might raise concern on the generality of the proposed approach."
+    ],
+    "questions": [
+        "The authors should consider additional datasets for evaluation, such as TVQA+ and CATER, and also include references to LLM + planning (and tool use, memory) in the related works section, e.g., DEPS, Plan4MC, and GITM.",
+        "It is also important to know how long the inference takes to answer a question on average, given the complexity of the methodology.",
+        "It is not clear how shortcomings of models like BLIP, YOLOv8, PaddleOCR affect DoraemonGPT, and it would be interesting to explore whether a model like BLIP can be used in conjunction with a model that takes a query and features of the frames from BLIP to determine which frames are relevant to the query, and why TSM is required."
+    ],
+    "divergent_perspectives": [
+        "While the model can outperform other LLM-based systems like ViperGPT, the authors' claim of 'toward Solving Real-world Tasks' may be an overclaim, as real-world tasks encompass a broader range of challenges, such as dynamic video tasks."
+    ]
+}

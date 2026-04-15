@@ -1,0 +1,34 @@
+{
+    "paper_id": "JBXO05r4AV",
+    "conference": "iclr25",
+    "summary": "This research focuses on enhancing many-shot in-context learning (ICL) by highlighting the significance of selecting a subset of highly influential examples rather than relying solely on the quantity of data. The authors demonstrate that  carefully chosen examples, combined with refined model-generated reasoning, can dramatically outperform using the entire dataset in many-shot ICL. Their proposed method, BRIDGE, iteratively identifies and refines these critical examples, boosting reasoning capabilities.  Evaluations across various NLP tasks, especially on BigBenchHard (BBH) and its challenging subsets, reveal substantial performance improvements over existing baselines. BRIDGE achieves significant speedups and accuracy gains, showcasing its effectiveness in tackling reasoning-intensive NLP problems and optimizing the  ICL process through strategic example selection and enhanced reasoning.",
+    "strengths": [
+        "Many-shot ICL is an important problem from both the capability and safety angles.",
+        "The proposed method is a natural extension of the STaR framework to ICL. Given the hardness of optimizing ICL example selection, the proposed optimizer looks like a good contribution.",
+        "Paper studies many-shot in-context learning, the important novel prompting technique that is used to significantly improve LLMs' predictions. Given that, this technique was made available only recently with the rise of long-context LLMs, studying its behaviour is important topic that can be relevant to broad community.",
+        "The proposed framework integrates example selection with LLM-generated examples to better align with real-world applications.",
+        "The paper validates this approach through extensive experiments conducted across a wide range of tasks, which shows decent performance compared to the baseline on various challenging datasets.",
+        "This paper shows that even for many-shot ICL, good examples are still necessary. The proposed method is well-motivated through experiment results (Figure 1 and Figure 2), and the observation that many-shot ICL could be driven by few high-performing examples is interesting.",
+        "Experimental results on BBH look strong, and small but non-trivial improvements are shown on math (MATH and GSM8K) and text-to-sql (BIRD) datasets. However, variance is not reported for MATH, GSM8K, and BIRD, making it unclear if the gain is significant."
+    ],
+    "weaknesses": [
+        "The definition of importance score function is well-justified. In section 2 Line 153, the importance of each example is estimated by the averate performance of randomly sampled demonstrations on the validation set. The variance would be huge considering different choices of subsets and orders. Have the author performed analysis on the varaince of importance score?",
+        "The description of \"optimzie\" step is not clear (Line 261). The text in page 6 is generally unclear to me. For example, what does \"TCM\" stand for in algorithm 2 step 6? How does the problem become a \"bi-objective\" problem and how the optimize step is connected to \"Bayes optmization\"? Minor issue: \")\" is missing in Line 149",
+        "Lack of the analysis on the computation cost. What's the computational cost of optimize and generate step of BRIDGE, respectively?",
+        "The validation of the findings appears overly simplistic, and the authors should reconsider their conclusions by re-evaluating their results on less advanced LLMs, providing a more comprehensive understanding of the interplay between long-context utilization and demonstration selection. Furthermore, the lack of baselines in the experiments is a concern, as the authors did not compare their approach with existing learning-based strategies and learn-free ones for demonstration selection.",
+        "In the experiments, the authors did not compare their approach with existing learning-based strategies and learn-free ones for demonstration selection."
+    ],
+    "questions": [
+        "The experiments are done only with Gemini models on text tasks; it would be interesting to see the performance on GPT-4o / o1 models and multimodal tasks, and including similar analysis for other LLMs, such as on a subset of the considered tasks, to see whether the conclusions generalize to other models.",
+        "The proposed approach is simple and algorithmically applicable to both close-source and open-source models. However, the experiments are only evaluated with Gemini, and it would be interesting to see the performance of the proposed method on open-source methods like Llama-3.1. Additionally, for open-source models, there may exist a better way of importance attribution, and for base models with limited reasoning ability, the proposed method may not be helpful.",
+        "Can you please provide the baseline when a model conditions on all available examples but with all examples using model-generated reasoning? This baseline can decouple the importance of subselecting a subset of examples and influence of having model-generated reasoning, and strengthen your claims if, indeed, you need both rather than only model-generated reasoning. The recent works [1, 2] can be used to ensure that a model is constrained to generate reasoning given the input and the ground truth answer.",
+        "The analysis is limited to reinforced ICL setting that only considers reasoning-heavy tasks. It's not clear what many-shot ICL would perform on simpler tasks that do not heavily rely on reasoning. Also, could BRIDGE anyway be helpful on simpler tasks?",
+        "In reference to Figure 1, does bottom_k refer to selecting examples that are less similar to the test case? Why does bottom_k achieve performance comparable to top_k as the number of demonstrations increases? Additionally, why does bottom_k outperform the all-examples approach?",
+        "However, I don't fully understand the claim that BRIDGE is tailored to many-shot ICL; it also seems to apply to few-shot ICL.",
+        "It would be interesting to see the performance under distributional shifts, for example, does the gain on GSM8K transfer to GSM-symbolic?"
+    ],
+    "divergent_perspectives": [
+        "However, the importance attribution is not well justified, and it's unclear how the importance score is estimated and why it would make sense, which might undermine the strength of the claims, as the important baseline might be missing.",
+        "While the paper is well-written and clear to follow, sections 3 and 4 are challenging to read and follow, and the description of the different variants could be more appropriately placed in the Experimental Setting section for better clarity."
+    ]
+}

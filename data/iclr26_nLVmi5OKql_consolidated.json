@@ -1,0 +1,26 @@
+{
+    "paper_id": "nLVmi5OKql",
+    "conference": "iclr26",
+    "summary": "TiMi, a novel time-series Transformer model, leverages a Multimodal Mixture-of-Experts (MMoE) framework to integrate exogenous text data for enhanced forecasting accuracy.  Instead of traditional feature fusion, TiMi employs frozen LLMs to extract structured textual insights, guiding specialized Transformer experts through TMoE and SMoE modules. This causal guidance approach demonstrates superior performance on real-world multimodal forecasting benchmarks, surpassing both unimodal and existing multimodal methods while exhibiting adaptability and interpretability. By effectively addressing the alignment challenge between textual and time-series data, TiMi showcases a powerful paradigm for incorporating contextual knowledge in predictive modeling.",
+    "strengths": [
+        "The proposed approach embeds an MoE modules for both the series and the text instead of explicitly aligning both modalities. This design is well-motivated for semantically misaligned series–text pairs common in practice, and is a clean, modular idea that fits common TS Transformers. To the best of my knowledge, this is novel.",
+        "The model helps solve an important problem in time+text forecasting, but it's unclear if it can adapt to varying degrees of textual information, particularly in situations where text data is sparse and not well-aligned, and whether it can handle such situations by adapting to use more temporal MoEs when necessary.",
+        "The modular approach allows authors to plug in the MMoE into other transformer-based methods (PatchTST, autoformer, etc.), and in all cases, the MMoE improves predictive performance, which clearly shows the advantage of the methods. However, how sensitive is the TMoE routing to noisy or irrelevant text?",
+        "The methodology is well motivated, but the explanation for Figure 6 is not sufficiently clear and should be revised.",
+        "The model architecture demonstrates a certain degree of innovation, specifically through the introduction of TMoE and SMoE modules for adaptive representation learning. However, it would be interesting to explore how the performance degrades with an increase in horizon length and how different MoEs are used at longer horizons.",
+        "The ablation on LLMs suggests that stronger/larger LLMs improve the model performance, making the method general. However, the submission could be strengthened by providing code for both the method and baselines, including details on data processing and experiment settings.",
+        "Results are promising across a wide range of benchmarks from past datasets."
+    ],
+    "weaknesses": [
+        "The selected baselines do not cover the latest SOTA models, particularly in multimodal time-series forecasting, and it is recommended to include more recent SOTA models for comparison. However, the proposed TiMi method consistently achieves superior forecasting performance on multiple datasets than baselines, with notable error reductions.",
+        "Using large language models to extract information may involve potential data leakage issues and result in extracted information that is irrelevant or misleading to the time series data, which are partly due to the inherent noise in textual data and hallucination problems in large language models."
+    ],
+    "questions": [
+        "I am curious about how the TiMi framework addresses the issues of inherent noise in textual data and hallucination problems in large language models.",
+        "I am unable to find figure 4.3 as mentioned in L446, and regarding the data leakage problem, how can we ensure that no information leakage exists, and how do we evaluate whether the model's performance improvement stems from its architecture or from leaked future information?"
+    ],
+    "divergent_perspectives": [
+        "The work misses providing finer details of the exogenous text data, and how the LLM is prompted for guiding the time-series prediction. The “causal knowledge” claim hinges on how text is curated, and aggregated; beyond average pooling of LLM embeddings, key preprocessing choices and robustness to noisy/off-topic text are not thoroughly stress-tested. However, the proposed TiMi presumes that available text causally informs future series, but this might misguide the forecaster when text is noisy, off-topic, or adversarial, and the proposed method does not thoroughly stress-test this with ablation on text quality, noise level, or contradictory narratives. Furthermore, it would be interesting to compare the model against other integrated solutions such as using both time and text inputs as part of single embedding representations (like OpenTSLM https://arxiv.org/abs/2510.02410).",
+        "The Mann-Kendall trend test to detect monotonic trends adds a layer of interpretability to the model, but there is a lack of error bar analysis and the experiments don’t include causal identification/diagnostics, which makes the current case studies suggestive but do not disentangle correlation from causation."
+    ]
+}

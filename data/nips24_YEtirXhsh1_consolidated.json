@@ -1,0 +1,27 @@
+{
+    "paper_id": "YEtirXhsh1",
+    "conference": "nips24",
+    "summary": "This paper presents a novel grouping-exploration framework designed to overcome inter-domain gaps in 3D object detection from point clouds. Recognizing the limitations of previous methods focusing on single domain shift factors, the framework clusters labels into groups, ensuring balanced learning attention through group-equivariant spatial features and mitigating false negatives via an explorative group update strategy. This dynamic label redistribution enhances performance, particularly in scenarios with imbalanced or biased label datasets.  Experiments on NuScenes, Waymo, and KITTI demonstrate significant performance gains and speedups compared to existing approaches, solidifying its effectiveness in domain adaptive 3D object detection and extending its applicability to encompass the assignment problem as a special case.",
+    "strengths": [
+        "Experiment results are good.",
+        "The proposed grouping module and group-region correlation module are intuitive and technically sound, and the author provides extensive ablation studies for the proposed group-extraction method.",
+        "The presentation is commendable, with well-executed figures (1-4) and clear writing. A notable observation from Figure 1 is that the baseline adaptation method mainly detects objects near the mean of the distributions, indicated by red circles, and the proposed explorative update aims to cover a broader range in the target domain.",
+        "The paper is generally easy to follow and understand, but there are concerns about the generality of the proposed method, particularly its ability to generalize to other categories beyond cars, such as pedestrians and cyclists.",
+        "The idea is generally reasonable, but there is a weakness that needs to be addressed and a minor issue with the References section (the authors of [39] are missing)."
+    ],
+    "weaknesses": [
+        "It is better to summarize the training process into an Algorithm table to help the reader better understand the details and pipeline of proposed framework.",
+        "The proposed method enhances point representations by combining group features, but it may introduce bias in self-training, which the authors should address.",
+        "The paper lacks implementation details and code, including model parameters, hyperparameters, voxel size, model size, and runtime. This makes it difficult to compare the performance gain and ensure an apple-to-apple comparison with previous methods.",
+        "However, the paper lacks variety in object categories, focusing mainly on cars, and the qualitative results could benefit from more diverse visualizations."
+    ],
+    "questions": [
+        "Please refer to the weakness part.",
+        "Have you tried different 3D detectors like CenterPoint and other recent SOTA 3D detectors? Is the performance gain of the proposed method still significant when the baseline is high? If it is, and even achieves SOTA, it will be helpful to prove the significance and the contribution of the proposed method.",
+        "What is the effect of $\\lambda_1$, $\\lambda_2$ and $\\lambda_3$ in Eq. (11)? How to choose them in practice? Lack hyper-parameter study.",
+        "Some technical details are not clear enough, such as whether $\\mu$ is directly updated by gradient back-propagation or calculated based on current features and updated using moving average, and what the \"closed gap\" in Table 1 means. Furthermore, additional experiments under a multi-class setting are necessary to compare the proposed GroupExp-DA with REDB, validating the effectiveness of GroupExp-DA in more realistic scenarios, and the results for different adaptation tasks under the multi-class adaptation setting are also required."
+    ],
+    "divergent_perspectives": [
+        "While the work provides a novel approach to domain adaptation for 3D object detection using GMM-based grouping, the reporting of REDB's performance in Table 1 is inappropriate as it focuses only on a single category, whereas REDB addresses more realistic scenarios with all object categories. However, the originality of applying GMM in this context is a significant contribution, and the quality of the work is good, with good ablation studies and clear images."
+    ]
+}

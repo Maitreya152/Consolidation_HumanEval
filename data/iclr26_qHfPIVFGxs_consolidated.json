@@ -1,0 +1,34 @@
+{
+    "paper_id": "qHfPIVFGxs",
+    "conference": "iclr26",
+    "summary": "FDEDiff, a novel two-stage diffusion-based framework, addresses the challenge of generating accurate and structurally consistent time series by decoupling the modeling of low- and high-frequency components. Utilizing Fourier Transform for decomposition, FDEDiff trains separate diffusion models for each frequency band, ultimately synthesizing time series with enhanced fidelity. Empirical results  highlight its effectiveness compared to existing methods on metrics like C-FID, ACD, and CCD. However, the authors transparently outline practical limitations including fixed-length generation, difficulties with high dimensionality, and the lack of explicit conditioning in the current implementation.",
+    "strengths": [
+        "The paper is **well-written, structured**, and easy to follow; methods are mathematically sound and derivations are correct.",
+        "The paper is well written, easy to follow.",
+        "Tests on four diverse datasets on different sequence lengths and compared with both diffusion and GAN-based recent models.",
+        "Ablation study is present.",
+        "The paper addresses a significant limitation of existing diffusion-based time-series models by implementing an explicit frequency decomposition strategy, and it explores the two-stage methods, which are less commonly seen in the time series generation problem.",
+        "The two-stage diffusion design is clear and well-motivated, tackling a known weakness of diffusion models, but the absence of a direct comparison with FIDE undermines the fairness and objective interpretability of the reported performance gains.",
+        "Experimental results demonstrate modest gains on a few public benchmarks (e.g., ETTh, Stocks) in terms of C-FID and correlation metrics, suggesting partial effectiveness of the core decomposition idea. However, the experiment sections seem to be lightweight, where some of the most challenging datasets are commonly used (energy)."
+    ],
+    "weaknesses": [
+        "The choice of baseline is relatively simple, with only 3 models. Some of the newer and similar models could also be included.",
+        "Table 1 shows FDEDiff uses 128 hidden size with 8 heads while Diffusion-TS uses 96 hidden with 4 heads. This means different parameter counts and computational costs. The paper claims these are \"aligned for fairness\" but provides no actual parameter count, or training time comparisons. The two-stage training and inference likely adds significant overhead that's completely ignored in the evaluation.",
+        "FDEDiff mainly integrates these two ideas, resulting in an incremental but well-executed extension, primarily combining existing concepts from models like FIDE and Diffusion-TS into a sequential two-stage pipeline rather than presenting a fundamentally new generative or theoretical paradigm.",
+        "The choice of evaluation metrics deviates from those commonly used, such as Discriminative Score, Predictive Score, TimeGAN, TimeVAE, and Diffusion TS. It would be beneficial to include them for better interpretation of the generation quality.",
+        "The author mentioned privacy in the abstract and conclusion, but the model has not been evaluated on the basis of privacy, and no analysis is provided to check if generated samples are authentic versus memorized copies from training data. Have you checked for memorization, and how do you verify generated samples aren't just copies of training data?",
+        "[2] **Lack of analysis on why it works well**",
+        "Ablation analysis effectively validates how α and λ influence performance, showing clear trends, but performance heavily depends on window size and dataset periodicity, and there is a lack of datasets used for the experiments."
+    ],
+    "questions": [
+        "What are the actual parameter counts for FDEDiff vs Diffusion-TS? What's the training time and inference speed comparison? The experiment section compared multiple length choices to demonstrate the strong performance of FDEDiff.",
+        "How should users set $\\alpha$ and $\\lambda$ for new datasets?"
+    ],
+    "divergent_perspectives": [
+        "The proposed framework is clearly structured and intuitively motivated, which enhances interpretability by separating the modeling of low- and high-frequency components; however, the paper attributes improvements to “frequency decomposition” and “high-frequency enhancement” without analyzing what the model learns in each frequency band or how this improves sample realism.",
+        "The approach fails to scale to complex tasks such as high-dimensional multivariate or conditional generation, a limitation acknowledged by the authors, and the lack of explicit modeling for multivariate dependencies significantly constrains the model’s generality and practical utility in real-world scenarios; however, the presentation of results in Table 2 is also problematic, as it lacks error bars.",
+        "The main idea of frequency decomposition followed by hierarchical diffusion is conceptually similar to existing works like mr-Diff (Shen et al., 2024) and FIDE (Galib et al., 2024), which handle coarse-to-fine or frequency-aware generation. Furthermore, the work has several limitations, including not supporting arbitrary length generation, performing poorly on high-dimensional generation tasks, and lacking conditional generation support.",
+        "FDEDiff underperforms or matches baselines on short windows (e.g., 24-length Electricity, Stocks) where periodic patterns are absent, but its strength appears specific to periodic or structured time series, raising concerns about generalization to irregular, non-repetitive domains, and it performs poorly on high-dimensional datasets like fMRI (50 dims) or Electricity (30 PCA-reduced dims), suggesting limited scalability to complex multivariate dynamics.",
+        "The method relies on heuristic, fixed parameters ($\\alpha$ and $\\lambda$) to define the frequency split boundary and the degree of spectral enhancement, respectively, severely limiting the robustness and generalizability of the proposed approach across diverse time series. However, the novelty of this work is limited, combining existing techniques without significant innovations, and the paper doesn't clearly explain what's fundamentally new here beyond engineering existing components together."
+    ]
+}

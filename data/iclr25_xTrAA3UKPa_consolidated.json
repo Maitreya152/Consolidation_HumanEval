@@ -1,0 +1,37 @@
+{
+    "paper_id": "xTrAA3UKPa",
+    "conference": "iclr25",
+    "summary": "This paper introduces SWGA, a novel hyperparameter optimization method tailored for time series prediction models, directly tackling the issue of changing data distributions inherent in such datasets. SWGA employs a sliding window technique within its design to combat overfitting stemming from these distribution shifts. This method enhances efficiency by utilizing matrix operations and distributed computing paradigms, leading to substantial reductions in hyperparameter search time through parallelization. The effectiveness and speed improvements of SWGA are showcased through its application to multiple time-series prediction tasks and diverse model architectures.",
+    "strengths": [
+        "The authors have provided detailed computational procedures by providing multiple algorithm boxes and demonstrated their impact on real-world applications.",
+        "It shows some potential for the sliding window strategy.",
+        "Evaluation is conducted on a sufficient number of widely known real-life datasets, and the method is applied on multiple datasets and on a variety of different models.",
+        "The paper is clear and concise, though it presents some nits reported below."
+    ],
+    "weaknesses": [
+        "In the experiment section, there is also a lack of comparison with other hyperparameter optimization methods specifically designed for time series data.",
+        "line 178, TPE is criticized for its ability to scale badly with dimensionality, though the paper uses it to initialize the population, inheriting its downside",
+        "The equation on line 140 is not numbered, and it contains 2 “i” indexes. Please use different letters to avoid confusion",
+        "The proposed algorithm combines variations of three widely used search techniques from the literature with minimal modifications. The novelty does not seem satisfying.",
+        "The models evaluated in the experiments lack diversity, consisting of 3 tree-based models (CatBoost, LightGBM, XGBoost), 1 recurrent model (LSTM), and 1 attention-based model (Transformer). Furthermore, the justification for using these models in the experiments is unclear, and it would be beneficial to include at least one statistical model such as SARIMAX or ETS in the experiments.",
+        "Please check notation on line 141 and correct the misusages, and also correct the phrase on line 161 to 'domain adaptation is to'.",
+        "The results are not reported with confidence intervals, making it impossible to verify if the results are due to variance, and the lack of reproducibility of the results is a concern.",
+        "The narrow comparison with other approaches is a concern. Additionally, there are writing concerns, such as line breaks in the pseudocode (e.g., line 258-263) and citation style (e.g., line 39-40), and personal opinions that contribution 2 and 3 are not contributions but positive aspects of the method.",
+        "The paper writing has too much redundancy that can be simplified or moved to the appendix, but the algorithm is parallelizable, significantly decreasing the computation time required to find the optimal set of hyperparameters.",
+        "In the experiments, the proposed algorithm is only compared with the traditional genetic algorithm. It would be beneficial to evaluate other hyperparameter search techniques, such as the classic sliding window search and k-fold validation technique.",
+        "However, the contributions are strictly practical, and it is of fundamental importance that the method is accessible to researchers and reproducible. Unfortunately, the paper is missing a “Reproducibility Statement” and no code is provided as supplementary material, making the results hard to reproduce and inaccessible.",
+        "See the weakness section."
+    ],
+    "questions": [
+        "The authors mention high computational costs and inefficient exploration of large hyperparameter search spaces as disadvantages of commonly used techniques, but the experiments only involve accuracy comparisons; wouldn’t it be beneficial to demonstrate that the proposed hyperparameter search technique converges more quickly?"
+    ],
+    "divergent_perspectives": [
+        "However, the 4th contribution point is pointless, given that no code is provided as supplementary material, and search spaces for the DLinear and PatchTST models are missing in the experiments.",
+        "The experiments, especially Table 3, do not support the contribution of the paper, as it only shows the benefits of HPO, but not the effectiveness of the sliding window or warm-up strategies. Furthermore, the part on scalability does not fit into the current story. The focus is not on distributed training or scheduling, but rather on the sliding window and warm-up strategies, which are the claimed contributions of the paper.",
+        "The terminology and notations are not precise and conventional, but the explanation of K-fold cross-validation as a method to reduce overfitting is unclear.",
+        "While table 1 shows that the TPE addition outperforms the other method, it is unclear if the proposed method is better than just TPE because TPE is never defined (line 68), although it will be defined later.",
+        "The proposed approach introduces a combination of genetic algorithms with a sliding window approach tailored for time series forecasting, addressing the distribution shift and non-stationarity challenges. However, the paper fails to investigate the distribution shift and does not address other options apart from SWGA, which might fall short in time series predictions.",
+        "The SWGA algorithm’s performance might be sensitive to parameters like window size, population size, and mutation rates, but the paper lacks an exploration of how these parameters impact outcomes. Furthermore, the contribution is minor, and it is unclear if the sliding window is a better HPO strategy due to a lack of proper baseline implementation and comparison with other HPO methods.",
+        "The technical correctness is hard to assess given the current state, and many important details are missing, such as the training procedure of the GA counterpart and the specific GA algorithm used. Furthermore, the first two paragraphs in 4.1 are repetitive, and the explanation on how the GA works should be part of the background section."
+    ]
+}

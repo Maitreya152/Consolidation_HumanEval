@@ -1,0 +1,32 @@
+{
+    "paper_id": "540Bsw9Yu8",
+    "conference": "iclr26",
+    "summary": "This paper presents Rectified EMA Guidance (REG), a method designed to mitigate the drawbacks of excessive guidance scales in classifier-free guidance (CFG) used within diffusion models. REG achieves this by employing an exponential moving average (EMA) of both conditional and unconditional model predictions to refine the guidance signal. This EMA-based approach, implemented efficiently on GPUs,  acts as a smoother alternative to explicit weak guidance models, enhancing both sampling quality and diversity without necessitating extra model training or storage.  Experiments across text-to-image and class-conditional tasks validate REG's effectiveness, showcasing superior quality-diversity trade-offs compared to standard CFG while remaining compatible with prevalent diffusion models like SDXL and SD3.",
+    "strengths": [
+        "The method addresses an important aspect of current generative models — the diversity-quality tradeoff. Since CFG is widely used across diffusion models, improving this aspect could have a significant impact on many applications.",
+        "The method is intuitive and the experimental results show some significant improvements, with the experiments and analysis seeming comprehensive.",
+        "The method is simple to implement and can be integrated into existing models with minimal overhead.",
+        "The paper is generally well-written and easy to understand for the most part.",
+        "The approach is well-justified through a frequency analysis of the diffusion process and the filtering behavior of the EMA operator, and the use of EMA to improve the quality of diffusion model sampling is an interesting research direction. However, have you encountered any instability issues when computing the norm, particularly toward the end of the sampling process?",
+        "The paper proposes REG, which leverages EMA over model predictions during sampling, and provides an analysis of how EMA acts as a low-pass filter in sampling. This is novel and interesting. However, the motivation to replace AG based on the availability of “weak” models feels forced, as there is no obvious obstacle preventing future releases from supporting AG if maintainers choose to do so."
+    ],
+    "weaknesses": [
+        "**Data Presentation:** **Tables 1 and 2 would be much easier to interpret if presented as plots**. For the ImageNet results, an FID vs. IS curve would be a more informative way to show the trade-offs.",
+        "**Text-to-Image Metrics:** The authors evaluate T2I generation **using only FID on the COCO dataset**. It is widely known that **FID on COCO is not a reliable metric for T2I**, as improvements in user preference or text alignment do not necessarily correlate with FID improvements. The **evaluation would be much stronger with a more comprehensive set of metrics**, such as GenEval, DPG-Bench, and human-preference-based aesthetic scores (e.g., ImageReward, HPSv2, PickScore) evaluated on standard benchmarks like PartiPrompts or DrawBench.",
+        "The paper is written in a rush with a lot of grammatical errors and typos, and it suffers from numerous unprofessional issues, including a line-break problem, placeholders, disordered figure/table numbering, and low-resolution, pixelated figures.",
+        "The visualization of the whole paper does not look very good; the authors should provide vector graphics or higher-resolution figures for Figure 2, Figure 3, Table 1, and Table 2.",
+        "The paper would benefit from an analysis of the sensitivity to the EMA parameters ($\tau_c$ and $\tau_u$). Furthermore, it's worth exploring whether the same EMA parameter is optimal for all timesteps. The formulation of guidance seems counter-intuitive, as increasing $\\omega$ (weight of the full model's guidance) simultaneously decreases the weight of the EMA model's guidance. An exploration of alternative, independent parameterizations could be valuable, such as Option 1: $\tilde{\\epsilon}_t(x) = \\epsilon(x) + \\omega_1 (\\epsilon^m(x|y) - \\epsilon^m(x)) + \\omega_2(\\epsilon(x| y) - \\epsilon(x))$ or Option 2: $\tilde{\\epsilon}_t(x) = \\epsilon_t(x) + \\omega_1 (\\epsilon^m(x|y) - \\epsilon(x)) + \\omega_2(\\epsilon(x| y) - \\epsilon^m(x))$.",
+        "The paper misses a key citation: 'Don't drop your samples! Coherence-aware training benefits Conditional diffusion' (Dufour et al., CVPR 2024). A discussion of this prior work is needed. Some of the quantitative results are somewhat confusing, and for a more robust and fair comparison, it would be helpful to adopt a more standardized setup—comparing the proposed method and several baselines across a range of guidance scales and with more practical hyperparameters. Additionally, the colorful notations appear unnecessary and should be avoided unless they convey essential information."
+    ],
+    "questions": [
+        "The authors should provide qualitative comparisons following [1], or quantitative comparisons such as precision–recall or an FID–IS diagram, following Figure 5 in [2], to support their claim.",
+        "Please see the weaknesses.",
+        "Do you have an explanation for why the best CFG result outperforms REG in Table 6?"
+    ],
+    "divergent_perspectives": [
+        "The method introduces additional complexity at test time by requiring the tuning of four parameters ($\tau_c$, $\tau_u$, $\\omega$, and $\\gamma_c$), but it also provides an effective knob ($w$) to align predictions with user preferences and control the quality-diversity trade-off.",
+        "The perspective of achieving weak guidance without training auxiliary models is compelling, but the results presented seem to contradict this, as the reported FID is on par with naive guidance and significantly worse than the auto-guidance method it claims to replace. It is unclear what the advantage of this more complex pipeline is.",
+        "The figures in the paper are of poor quality, heavily compressed, and too small to properly assess the visual results. Higher-resolution images are essential. However, the method is only evaluated on SD3, and it would strengthen the paper to include results on a wider variety of models (e.g., SD 1.5, SD 2.1, SDXL, PixArt-alpha, SANA, FLUX etc.).",
+        "The methodology is not well motivated, and the expansion of REG may not be effective as the EMA component may even harm generation quality, as shown by the comparison with CFG."
+    ]
+}

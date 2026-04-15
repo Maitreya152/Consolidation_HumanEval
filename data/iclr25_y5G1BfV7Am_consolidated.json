@@ -1,0 +1,28 @@
+{
+    "paper_id": "y5G1BfV7Am",
+    "conference": "iclr25",
+    "summary": "X-VILA, a groundbreaking omni-modal model, extends the capabilities of LLMs by seamlessly integrating image, video, and audio modalities. This integration enables cross-modality understanding, reasoning, and generation within a unified framework. X-VILA achieves this through strategically aligned modality-specific encoders and decoders, optimized for GPU efficiency using matrix operations.  Crucially, it addresses the issue of visual information loss with a novel 'Visual Embedding Highway' mechanism, ensuring robust visual-textual alignment.  The model's performance is evaluated on comprehensive multimodal benchmarks, including generation and standard visual/audio QA/caption tasks, demonstrating significant advancements and emergent cross-modal abilities even in scenarios with limited similar training data.",
+    "strengths": [
+        "This paper represents a commendable attempt in the field of multimodal integration. The proposed Vehicle for Enhancing Harmony (VEH) offers valuable insights into facilitating the interaction between perception modality encoding and decoding. Overall, the manuscript is well-written and provides a thorough performance evaluation.",
+        "1.The instructional tuning dataset may be helpful for multi-modality generation research. Proposed method surpasses Next-GPT on compared benchmarks",
+        "The introduction of the Visual Embedding Highway (VEH) to preserve and enhance visual features represents a significant advancement over existing methods in visual alignment, and it is an original contribution that enhances the model's performance in visual tasks.",
+        "The paper provides a large X-to-X dataset for multi-modal instruction, which is a valuable resource for advancing research in multi-modal modeling. The authors plan to open-source X-VILA and the dataset, promoting academic and engineering research in multi-modal foundation models. Furthermore, the method in this paper utilizes a larger instruction tuning dataset compared to Next-GPT, and it would be beneficial to provide experimental results demonstrating the impact of scaling up the instruction data.",
+        "The paper is of high quality, as evidenced by its thorough methodology, comprehensive experiments, and rigorous evaluation. It is also well-structured and clearly written."
+    ],
+    "weaknesses": [
+        "Performances on visual QA or audio caption benchmarks are too weak.",
+        "The architecture that employs modality-independent encoding and decoding, integrated through a LLM, has been extensively explored in prior works (e.g., Next-GPT [1]), and it does not seem to demonstrate clear novelty. However, I appreciate the architecture that supports multimodal perception and generation, but it appears that the current architecture lacks sufficient scalability for additional modalities, which may not be conducive to building a truly Any-to-Any architecture.",
+        "The example in Figure 1 lacks the \"video\" input component, which disrupts the clarity and completeness of the illustration, and the additional module VEH is implemented solely in the visual component; therefore, it would be helpful to clarify the reasoning behind this implementation.",
+        "The model's training process is resource-intensive, potentially limiting accessibility and reproducibility, particularly for smaller research teams. However, there is a planned timeline for releasing the training code and datasets for X-VILA, and the authors ensure the data quality of the proposed X-to-X dataset through a specific process for its creation."
+    ],
+    "questions": [
+        "Why use Imagebind as all modality encoders? It seems all tasks performs bad, If we change \"unbind encoders\", such as clip for vision, whisper/beats for audio, the performance could definitely be better. Imagebind only sounds better instead of performance better.",
+        "I would like to understand the nature of the interactions between modalities. For instance, how does modeling and learning within the audio modality affect that of the image modality?",
+        "Number of compared methods are too small. Only NextGPT?",
+        "The first stage training, so-called \"encoder-LLM-Decoder alignment training\" utilizes the \"X-text pairs\" from academic datasets as in prior work, so what does the decoder train? It is so confused."
+    ],
+    "divergent_perspectives": [
+        "The architecture design is a common way for unifying multimodal understanding and generation, but the Embedding Highway design is only applied to the visual modality, which contradicts the authors' objective of constructing a truly Any-to-Any multimodal model.",
+        "While the paper seems to provide some performance increments, it may not offer new insights, as unifying text and visual generation, adding audio modality, and long-context cross-modality generation have been studied before. However, the model exhibits an impressive capacity for comprehending and combining diverse concepts from multiple iterations of input, producing natural and coherent output, as suggested by the users, but the context in the example of Figure 4 may not be long enough to be called \"long-context\"."
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "paper_id": "MSEUVDHwL7",
+    "conference": "iclr26",
+    "summary": "BiHDTrans, a novel binary hyper-dimensional transformer, addresses the challenges of multivariate time series classification by introducing HD computing into the transformer architecture. This approach involves converting real-valued features into binary HD vectors and adapting transformer computations, especially attention, to operate efficiently in this HD domain. Theoretical analysis highlights the benefits of binarizing within the holographic space, minimizing information loss compared to direct binarization.  Empirical results, showcasing  significant latency reductions and competitive or improved accuracy on FPGA implementations and standard MTS datasets, validate the effectiveness of BiHDTrans in achieving both efficiency and performance gains.",
+    "strengths": [
+        "Several theoretical results showing why the proposed idea makes sense and should work reasonably in practice",
+        "An interesting exploration of applying HD computing to the transformer architecture with application to MTSC, however, the authors could better motivate the need for using HD computing by showing the same findings with a larger model like MOMENT foundation model, which would demonstrate its usefulness.",
+        "The unification of hyperdimensional computing and Transformer-style attention is conceptually elegant and technically novel, offering a neurosymbolic route to full binary inference. However, ablation studies and sensitivity analysis are limited, with only one sensitivity analysis on the vector dimension, and the replacement of softmax with a hard binary mask can make transformer training brittle or overly sparse/dense depending on scale.",
+        "The paper demonstrates a practical path to fully binary, low-latency MTS classification with measured FPGA speedups (40×) while retaining accuracy competitive with full-precision one-block Transformers on these tasks. This directly targets IoT/edge deployment constraints. Hardware results substantiate the efficiency claim, with real FPGA measurements showing major latency and energy gains."
+    ],
+    "weaknesses": [
+        "Evaluation is limited to classification; forecasting or anomaly detection would strengthen generality.",
+        "Finite-dimensional behavior is not explored; empirical distortion plots could help quantify theory–experiment alignment.",
+        "Performance evaluation: While the experiment is run on several datasets, most of them are small. Additional datasets of a larger scale are recommended to stress-test the model, such as PTB-XL and Sleep-EDF.",
+        "The proposed method has limited compatibility. It looks very difficult to add any additional transformers features, such as rope or alibi to the proposed transformer.",
+        "The paper provides strong theoretical support for the validity of binarization in BiHDTrans, which is further validated by empirical results; however, the training details (learning rates, temperature parameters, or binarization schemes) are somewhat under-specified for reproducibility.",
+        "An experimental evaluation from both the accuracy and computational efficiency perspectives is recommended, however, the selected tasks and datasets in the paper are quite simple, which may be the reason for the small performance gap between full precision and the proposed method.",
+        "Using a different font for (or italicizing) the accuracies of full-precision model in Table $1$ is recommended, because the bolded results seem to be the best model performance excluding those of the full-precision model."
+    ],
+    "questions": [
+        "Theoretical analysis, while asymptotic, provides an intuitive justification for why HD binarization preserves representational fidelity, but the quantization level used for each dataset and the quantization method employed are unclear, and the performance sensitivity with respect to quantization parameters is also unknown.",
+        "Can the authors provide an empirical plot of distortion versus dimensionality to substantiate the concentration-based theory? How sensitive is model accuracy to the number of attention heads and HD dimension? Could a small forecasting or anomaly detection task be included to demonstrate broader applicability? Furthermore, to the best of the reviewer's knowledge, this is the first work that fully integrates an attention mechanism within the HDC paradigm, improving the paper's originality."
+    ],
+    "divergent_perspectives": [
+        "The literature review is outdated, omitting most of the recent advances in time series foundation models, including those proposed in the last year or so, which achieve strong performance in TSC. It seems that TSFMs are the most important use-case for the author's contribution, yet most references stop at 2023. Furthermore, deploying a LLM using the proposed method has much more potential than multi-variate time series classification, but it's unclear what prevents this from happening.",
+        "The evaluation is limited, and there is no clear motivation for using involved techniques like HD computing in this setup, as SOTA TSFMs for classification are small and can be used on edge devices; only 7 datasets from the UEA repository were chosen without explanation, and there are many other MTSC datasets available, such as the WOODS benchmark."
+    ]
+}

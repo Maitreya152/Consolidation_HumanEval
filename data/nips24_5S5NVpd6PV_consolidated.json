@@ -1,0 +1,36 @@
+{
+    "paper_id": "5S5NVpd6PV",
+    "conference": "nips24",
+    "summary": "This paper tackles the challenge of understanding treatment effect heterogeneity and identifying subgroups with distinct responses by extending causal k-means clustering.  It introduces hierarchical and density-based clustering approaches, offering advantages in handling complex data structures and noise. These methods,  along with novel estimators, are rigorously analyzed, providing convergence guarantees and error bounds  demonstrated through experiments on both synthetic and real-world datasets. This extended framework encompasses  discrete treatments, continuous effects, and  addresses the assignment problem as a special case,  effectively  enhancing our ability to analyze and interpret treatment effect variations across subgroups.",
+    "strengths": [
+        "The work provides theorems to rigorously derive a bound on the error of the resulting outcome.",
+        "The natural algorithms and problems are well-motivated, and it would be helpful to provide examples of subsequent learning tasks (line 338).",
+        "The topic of causal clustering has already been addressed from various perspectives in previous work, but this work finds an original approach (hierarchical/density-based clustering for treatment effect heterogeneity) that is clearly motivated, has high-quality theoretical justifications, and should be significant in the (theoretical and applied) causal inference community.",
+        "The paper exhibits several strengths across originality, quality, clarity, and significance: The introduction of simple plug-in estimators, implementable with off-the-shelf algorithms, is notable, opening new avenues for clustering with generic pseudo-outcomes and contributing to identifying homogeneous subgroups in treatment response. The paper thoroughly explores finite sample properties via simulation, with a setup similar to prior studies, presenting the rate of convergence and including standard error bars in the graphs to add to the reliability of the results. The experiments are straightforward and concise, with all necessary details provided, and the graphs are clear and effectively convey the results. The paper significantly contributes to the progression of methodologies for identifying homogeneous subgroups in treatment response.",
+        "The assumptions make sense and are well studied.",
+        "The research area of causal inference and mechanism clustering of a mixture of additive noise models is important and has been explored in several works, including Hu et al. (2018), Huang et al. (2019), and Saeed et al. (2020)."
+    ],
+    "weaknesses": [
+        "-presentation can be improved. As of now, it is a bit cryptic, as the main tasks/problems are not well-defined and rather are to be implied from the context. I would have loved to see a clean definition of the problem that is being solved, the challenges and the novel approach. As of now, I believe the results are a plug-in approach based on two well-studied algorithms.",
+        "lines 18--20: mostly copied verbatim from abstract of [36]",
+        "210: arbitrarily sized The legend and labels in Figure 4 are too small to be legible when printed on paper.",
+        "The method borrows from two key works, but the extensions and modifications are contributions that can be unclear at times.",
+        "The kernel density estimate can be criticised due to its weaknesses, such as susceptibility to the curse of dimensionality and need for hyperparameter tuning. The method's dependence on the choice of kernel, aside from its Lipschitz constant, is also unclear.",
+        "The presentation could be improved by breaking down the definition of $\nu$-strict and $\\alpha$-good, similar to the Balcan et al. work, and using standard notation instead of $\\equiv$ for equality.",
+        "The figures are too small to be legible on standard paper sizes, making it harder to understand or corroborate the results described in the text. Furthermore, the unreasonably small figures save up to a page of space, allowing more text to be squeezed into the page limit, which seems unfair considering the submission guidelines."
+    ],
+    "questions": [
+        "-To improve the results, I was wondering if there are other notions of error, for which your results can be extended? What if we measure error for example on the hierarchy that is being found? There are various notions for comparing hierarchies in the literature and I believe this could be interesting and novel extension of your work.",
+        "Could you comment on my understanding of the hyperparameter need (see limitations)?",
+        "The analysis for robust hierarchical clustering and density-based methods seems interesting, and the work mentions several other methods related to the task at hand. However, the case for the authors' approach could be strengthened by comparing it with other methods, such as those extracting causal rules or using hierarchical DBSCAN [1].",
+        "The use of CATE as a clustering domain seems to have its merits, but the conditioning set is completely ignored in the estimation of these vectors. This could lead to clustering two very different patients with similar CATE profiles together, which might not be well aligned with the variables of the underlying SCM, making downstream structural causal learning tasks harder. Could you comment on this?",
+        "Is $d$ a distance function (which by definition is positive when evaluated on distinct objects) or some weaker notion with image $[-1, 1]$? Furthermore, the Housdorff distance definition provided (ln. 247) seems to be oblivious to the distribution of the sample points $(X,Y)$, only sensitive to the envelope of these points. Could you comment on this?",
+        "Are there any methods the authors can recommend to help identify important covariates that modify the treatment effect?",
+        "See questions on presentation above and you may comment on comparisons section, above.",
+        "You may comment on the plug-in estimator as mentioned above. Among the case studies, the number of covariates is very small, and it would be interesting to analyze how the convergence rate of \\hat{\\mu}_a changes as the dimension of the covariate space increases, specifically how slow it gets in practice as the number of covariates grows. Additionally, do the authors have suggestions on the optimal number of covariates to limit to before applying this method in practice?"
+    ],
+    "divergent_perspectives": [
+        "The main weakness is the inappropriate verbatim copying from reference [36] (Kwangho Kim, Jisu Kim, and Edward H Kennedy. Causal k-means clustering. arXiv preprint arXiv:2405.03083, 2024), including lines 7,8: \"We present...\". However, the authors can elaborate on why \"the true target hierarchy... is an infinite set of clusters\".",
+        "While the paper has a well-motivated setting, it lacks novelty as the algorithms are already from previous works and most of the approaches are what was expected; however, the paper also fails to demonstrate if the new method captures the underlying structure more accurately than other existing methods through comparative analysis, which would strengthen the paper and make its contributions more convincing."
+    ]
+}

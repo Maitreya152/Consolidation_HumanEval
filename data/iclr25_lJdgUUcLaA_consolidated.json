@@ -1,0 +1,44 @@
+{
+    "paper_id": "lJdgUUcLaA",
+    "conference": "iclr25",
+    "summary": "AlphaIntegrator, a novel learning-based system, tackles the challenge of step-by-step mathematical integration. This hybrid approach integrates a transformer-based policy, pretrained on a synthetic dataset, with a symbolic engine for correctness checks and predefined symbolic actions. This combination allows AlphaIntegrator to learn integration patterns while maintaining rigorous symbolic grounding.  Evaluated against SymPy and GPT-4o-mini on a dedicated dataset, AlphaIntegrator demonstrates superior performance and efficiency. Notably, the paper also contributes a valuable dataset  facilitating the generation of rigorous step-by-step derivation proofs for indefinite integration, broadening the system's applicability in mathematical proof construction.",
+    "strengths": [
+        "AlphaIntegrator is shown to perform better that GPT-4o-mini and SymPy. Additionally, it is demonstrated that AlphaIntegrator is less \"symbolically brittle\" than the approach by Lample and Charton (2019) computing antiderivatives directly.",
+        "The paper introduces a new approach to integrating LLMs with symbolic reasoning engines for mathematical integration.",
+        "As a byproduct of the project, the authors contributed a few fixes to SymPy's integration algorithm.",
+        "The authors provide the code for reproducing the experiments (the code looks runnable, although I didn't test it.).",
+        "The paper implements a learning approach to perform step-by-step integration.",
+        "Although the high-level insight is inspired by AlphaGeometry and AlphaProof, the application task and designed framework are very interesting and innovative.",
+        "The authors provide the implementation of the proposed methods, offering valuable resources to the research community, and the experimental results are promising, demonstrating that the proposed method significantly outperforms the baseline approaches.",
+        "The paper is very clearly written, providing enough background and helpful examples, making it easy to follow."
+    ],
+    "weaknesses": [
+        "There is no comparison of AlphaIntegrator with the approach by Lample and Charton (2019). I find it a serious omission.",
+        "The authors instantiate the learning component of AlphaIntegrator with a transformer model, and do not test any other ML approaches.",
+        "Please see the questions below.",
+        "The paper lacks comparisons with additional baselines. Although the proposed method is open-sourced, it would be helpful to include comparisons with proprietary systems, such as Wolfram's integral calculator, to serve as a point of reference.",
+        "The model's ability for generalization could be limited, since the operators, variables, and actions are all represented as special tokens, and it doesn't seem like new operators, variables, or actions can be easily introduced without re-training the model. Furthermore, the model currently only includes 7 symbols to represent variables, which suggests that it cannot generalize to harder problems from the same distribution with more variables.",
+        "The authors did not release the test dataset, which makes it more difficult to compare with AlphaIntegrator in the future. You write 'We run SymPy and our own model with timeouts of 120 and 10 seconds, respectively.' Why different timeouts? Is that correct that SymPy got more time than AlphaIntegrator? The authors mention that SymPy's *manualintegrate* is slow and prone to failure. Could this be more of an implementation issue rather than an algorithmic one?",
+        "There is no comparison of AlphaIntegrator with the integration algorithm in Mathematica, which is stronger than the one implemented in SymPy. Furthermore, it would be interesting to know how and to what other math problems AlphaIntegrator can be adapted, and are there specific types of integrals or mathematical expressions where AlphaIntegrator excels or falls short compared to these tools?",
+        "The achieved improvement is rather small compared to SymPy's performance, and it would be interesting to experiment with other types of tree search, such as breadth-first search instead of best-first search induced by the log-probs, and to report the average runtime for SymPy and the fine-tuned model on the test set, as well as the model inference method (e.g., CPUs).",
+        "The experiments are limited, using only the synthetic dataset and comparing with only 2 other methods, and the proposed method's improvement is not substantial (83.3% -> 87.3% accuracy)."
+    ],
+    "questions": [
+        "[1] Pan, Liangming, et al. \"Logic-lm: Empowering large language models with symbolic solvers for faithful logical reasoning.”",
+        "To what extent the set of solutions by AlphaIntegrator overlaps with the solutions by SymPy?",
+        "The data synthesis results in 4.9 expressions. What is the diversity of the synthetic expressions? Are there specific types of expressions that are underrepresented in the training data, and how might this affect the model's performance?",
+        "The representation of mathematical expressions and theorems are trees consisting of operands/functions with fixed arities. For example, addition and multiplication only have two children. Therefore, the proposed method seems challenging to extend to general situations.",
+        "While the paper compares AlphaIntegrator with SymPy and GPT-4o-mini, it would be informative to see a comparison with other state-of-the-art symbolic solvers or theorem provers, and the differentiation analysis between the symbolic solvers and the proposed system could be useful for identifying bugs or limitations in existing heuristics.",
+        "What were the design decisions behind including 7 symbols for variables? How easy is it for the model to handle more complex integration problems? Additionally, the model is required to generate subexpressions for integration, is the subexpression generated always valid? Is it being enforced?",
+        "How did you split the data into training and testing parts? Could you release both datasets for inspection, and discuss the potential data contamination problem, including the risk of overlap between training and testing datasets, and how these risks can be mitigated during data generation?",
+        "It would be interesting to experiment with different sets of actions and to consider using TreeNN architectures or simpler ML approaches or heuristics, such as k-NN, as the learning component of AlphaIntegrator.",
+        "You input the expressions to the transformer using prefix Polish notation, but it's unclear why this notation was preferred over the standard one. Did you run an experiment justifying this choice? Additionally, did you consider other methods for representing the expression, such as directly inputting mathematical expressions like INT+ 3 + x, and did you handle this in the transformer model?"
+    ],
+    "divergent_perspectives": [
+        "While the proposed approach is not super novel, as there is already a large body of research dealing with ML-based formal theorem proving, it would be interesting to see how it relates to existing work such as [1] combining symbolic solvers and LLMs.",
+        "The target problem -- integration -- seems somewhat not very well suited for the approach, and the practical motivation behind the research problem is unclear, especially considering the inefficiency of SymPy compared with other symbolic tools and the small model size.",
+        "While the authors claim that their approach can be adapted to other kinds of math problems, I find this claim unjustified, and it would be interesting to see how AlphaIntegrator performs on open-source math datasets.",
+        "The paper tackles an important and interesting problem of synergizing learning-based and formal/symbolic methods, but the listed references are not formal, and the motivation for this method is unclear.",
+        "You mention generating the synthetic dataset in line 193, but the provided code downloads the data from Lample and Charton (2019). Can you clarify the origin of the dataset?"
+    ]
+}

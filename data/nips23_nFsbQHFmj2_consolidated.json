@@ -1,0 +1,29 @@
+{
+    "paper_id": "nFsbQHFmj2",
+    "conference": "nips23",
+    "summary": "This paper introduces a novel model-free algorithm for discounted infinite-horizon tabular MDPs, achieving optimal regret with compelling theoretical guarantees.  The key innovation lies in attaining this optimality while exhibiting significantly reduced space complexity (SA) and a notably shorter burn-in time (O(SA/(1−γ)13)) compared to previous methods. This efficiency stems from  variance reduction techniques employed within the algorithm, leading to faster convergence to the optimal regret regime.  Furthermore, the proposed approach extends its applicability to encompass the assignment problem as a special case within the MDP framework, solidifying its broad utility.",
+    "strengths": [
+        "I must say the author should be an expert on the related techniques and proof arguments. To achieve a tighter burn-in time, it seems vital to update the reference advantage at an appropriate frequency and learn the Q-value of the current policy more accurately. To tackle the issue, the author proposes two new components.",
+        "The paper proposes a new approach to learning infinite horizon MDPs, which advances the state of the art in online learning infinite horizon tabular MDPs and presents a valuable contribution to the theory of model-free algorithms for solving MDPs with finite state-action spaces. The suggested idea of incorporating Berstein style bonuses with the UCB-advantage type of control variates is appealing and novel in the discounted MDP setting.",
+        "However, an alternative argument can be used to eliminate the need for the crude bound in Lemma 7, which may also enhance the dependence of (1−γ)−1 on the burn-in time.",
+        "The major novelty of this work lies in the solution to achieve optimal regret using model-free algorithm for discounted tabular MDP. The paper is well motivated, trying to shorten the burn-in time and obtain a more sample-efficient model-free tabular MDP algorithm. The writing is awesome, and the detailed comparison with previous algorithms is highly appreciated. The proof seems correct with many previous techniques organically integrated together.",
+        "The property of the low burn-in cost seems interesting and I believe that the low computation cost and low space complexity could be good contributions, enhancing the feasibility of implementing reinforcement learning in real-world scenarios. The design of a slow, adaptive execution policy-switching technique is novel, and both the lazy update for the Q-value function and the adaptive low-switching mechanism to determine the time to perform such an update might inspire future works."
+    ],
+    "weaknesses": [
+        "The improvement is rather incremental, shaving off a factor of O(SA) (at the cost of an extra (1−γ)4) from the lower order (non T dependent) term. In addition, the algorithm is complicated and presentation does not make it particularly easy to understand.",
+        "I think it is important that all brackets are appropriately included for clarity and correctness. I have some questions about the results and the theoretical analysis.",
+        "I would also suggest removing \"outstanding\" in line 108: it is clearly a matter of taste;",
+        "While the lack of numerical illustration is not a major issue, some numerical experiments in the main body would be great.",
+        "The paper should make explicit and crystal clear assumptions on the probability distribution for the algorithm to achieve optimal regret and finite-sample performance guarantees.",
+        "However, the paper lacks a lower bound for the minimum burn-in time, although it does match the well-known lower bound on the dominant term (or variance term). It would be valuable for the author to address this gap and provide insights into the possible smallest burn-in time."
+    ],
+    "questions": [
+        "It is notable that the regret of UCBVI-γ exhibits a more favorable dependence on (1−γ)−1 compared to the algorithm proposed in this work. It would greatly enhance the paper if the author could provide a discussion on the reasons behind this superiority. Understanding the factors contributing to better dependence would provide valuable insights into the comparative performance of the two algorithms and contribute to a deeper understanding of their respective strengths and weaknesses.",
+        "The authors are asked to consider submitting to a journal due to the massive proof appendix, which cannot be thoroughly checked within the limited reviewing period. Additionally, the reviewer suggests adding explicit comments on why the current technique is not suitable for obtaining the second-order term, which would improve the paper's score."
+    ],
+    "divergent_perspectives": [
+        "While it is unclear if the work directly improves [14] due to differing objectives, and the presentation of results in the table is misleading, the proof contains too many instances where the author didn’t include brackets when utilizing the summation symbol ∑, such as in (46)-(48), making it difficult to enumerate them here.",
+        "The approach seems to borrow from the finite horizon case, employing a slow switching strategy to reduce the infinite horizon problem, but this may not be an actual improvement, and the contribution is questionable. The presentation does not make this clear, and the treatment of regret definitions is not formalized.",
+        "The paper lacks empirical evidence to substantiate the theoretical claims and the efficacy of the proposed algorithm, especially for the 'low' burn-in cost. Furthermore, the reason why the proposed algorithm can reduce the burn-in cost is not clear, and the authors could elaborate on the methodology used to achieve this reduction, which might be through refined theoretical analysis, novel algorithm design, or a combination of both."
+    ]
+}

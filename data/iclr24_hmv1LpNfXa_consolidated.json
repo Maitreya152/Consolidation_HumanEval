@@ -1,0 +1,22 @@
+{
+    "paper_id": "hmv1LpNfXa",
+    "conference": "iclr24",
+    "summary": "Polynormer, a novel graph transformer model for node classification, leverages a polynomial-based attention mechanism to achieve high expressivity while maintaining linear complexity. This unique approach captures intricate node interactions through polynomials, incorporating both local and global graph structures for equivariant learning.  Evaluated on 13 diverse datasets encompassing homophilic and heterophilic scenarios, including large-scale graphs, Polynormer demonstrably outperforms existing GNN and GT methods, highlighting its effectiveness and scalability in tackling real-world graph analysis challenges.",
+    "strengths": [
+        "Strengths: Provides theoretical analysis of polynomial expressivity, though restricted to scalar features. It goes beyond the WL expressivity as common in graph learning literature.",
+        "The experiments are convincing, showing that Polynormer can outperform sota GNNs and GTs on a wide range of datasets.",
+        "The proposed model demonstrates its performance on 13 datasets, outperforming baselines on 11 of them. The ablation study on a smaller dataset group also shows the benefits of global attention and local-to-global scheme, and the experiments are sufficient, covering many important baselines and datasets of various sizes."
+    ],
+    "weaknesses": [
+        "I find that the proposed approach (global) may also work in transformers in other fields, e.g. NLP. Could you provide such experiments to show its capacity in dealing with different types of data?",
+        "While complexity is analyzed, runtime and memory usage are not empirically compared to baselines in Section 4.2 to demonstrate scalability, which is a weakness of the paper."
+    ],
+    "questions": [
+        "The idea to adopt attention model in the polynomial feature mapping is novel and interesting, but the degree of polynomial is unclear.",
+        "The resulting Polynormer model is powerful, efficient, and theoretically expressive, but it's unclear how polynomial expressivity improves model performance, and the relationship between WL-test expressivity and polynomial expressivity is also unclear, e.g., is the proposed Polynormer strictly more powerful than 1-WL-GNNs?"
+    ],
+    "divergent_perspectives": [
+        "However, it is unclear whether GTs and GNNs have limited polynomial expressivity, as shown in [1] and [2] respectively, and the O(N+E) complexity claim should be supported by more experiments, such as a training time (VRAM) – graph size plot on synthetic random graphs with different sizes.",
+        "The idea of designing a polynomial-expressive graph Transformer model is novel and interesting, but the theoretical expressivity claims in Section 3.1 may be overclaiming capabilities, as proofs make simplifying assumptions about scalar features that differ from real graph data (Section 4). Furthermore, the definition of polynomial expressivity is completely ignorant of graph structure, comparing to WL-test expressivity, and should be used to model expressivity on sets, not graphs. What is the motivation of modeling the polynomial expressivity of graph models?"
+    ]
+}

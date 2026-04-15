@@ -1,0 +1,31 @@
+{
+    "paper_id": "N0Wh7ND71X",
+    "conference": "iclr26",
+    "summary": "This research introduces a novel theoretical framework for understanding and enhancing learning-based cryptanalysis of symmetric primitives, particularly focusing on neural distinguishers.  The framework centers around the Coin-Tossing (CoTo) model, which formalizes the data generation process in cryptanalysis, and the Conjunctive Parity Form (CPF), a unified algebraic representation for distinguishers. This combination allows for analyzing distinguisher success independent of specific neural architectures.  Crucially, the authors prove the sub-exponential (and sometimes polynomial) learnability of CPF concepts, directly impacting practical applications.  Demonstrations with SPECK cipher highlight how this framework leads to improved neural distinguisher design, extending existing attacks to novel round counts and solidifying the potential of CoTo and CPF in advancing real-world neural cryptanalysis.",
+    "strengths": [
+        "The definitions, theorems, and proofs are well-presented. The authors also provide enough background for readers who may not be familiar with the field.",
+        "The accuracy improvement on the 8-round Speck is impressive, but there is a minor remark: in the definition of Oracle_CT in line 197 the operator I_1 appears unnecessarily.",
+        "This theoretical framework is novel with respect to cryptanalysis, addressing a gap in the literature, and may also inform or enhance current NN-based cryptanalytic methods.",
+        "The generality of the coin-tossing model to unify various cryptanalysis approaches is nice, but evaluating its applicability to other ciphers, such as Simon, and using it to construct output-generating functions in a more principled manner would help in evaluating the generality of insights.",
+        "The connection to the LPN problem and the analysis of learning complexities are interesting, and the learning theory and LPN problem are well-connected.",
+        "The output generating functions improve the performance of neural distinguishers on SPECK32/64, and the complexity results are interesting and directly lead to practical impact for designing better neural distinguishers."
+    ],
+    "weaknesses": [
+        "The contribution centers on formalizing a generalized attack framework for SPNs and analyzing properties of distinguishers, but it remains unclear how these abstractions translate into improved or novel neural-network–based attacks in practice.",
+        "For the 9-round results, the paper does not include a comparison that incorporates the differential-linear results used to determine the input generation function, so the effectiveness of the proposed method remains unclear.",
+        "Some minor typos (e.g., missing space in line 28 and “Boolen” in line 234) exist, but the paper's main strength lies in its theoretical unification and conceptual rigor, bringing a much-needed empirical approach to the area.",
+        "However, the theoretical results only demonstrate the existence of a learning algorithm, without providing any concrete construction or procedure.",
+        "The paper presents a rigorous theoretical model of learning-based cryptanalysis, but its focus appears primarily cryptographic rather than machine-learning-oriented, and the existence of a learning algorithm is established without showing how to construct it, which may limit its practical value."
+    ],
+    "questions": [
+        "How would the practical results generalize to other ciphers with different structural properties? Are there certain cipher structures where this technique would perform better (or worse)?",
+        "Table 2: Nerual Distinguisher L912: \"and Transformer\" there are no Transformers in the figure, also the citation should maybe be for the published version if included.",
+        "The improved performance in Table 2 over Gohr(2019) has much more imbalanced TPR vs TNR. Does this affect key recovery?",
+        "There are some ambiguities in the notation and definitions used in the paper. Specifically, the definition of the function class $\\Theta_\\lambda$ is somewhat ambiguous and appears to deviate from standard set-roster notation. Additionally, there is some ambiguity in the notation for $\\mathcal{Y}$ and $\\mathcal{R}$, which are initially used to denote finite subsets of the training dataset but later seem to refer to the underlying distributions from which the samples are drawn. Furthermore, it is unclear whether the original output difference from Gohr was considered in the performance of ND^1_comp. Minor/Typos: I_0 and I_1 are used in appendix B.2 as input generating functions over \\alpha_0 and \\alpha_1, and there is also an I_1 left in Definition 2."
+    ],
+    "divergent_perspectives": [
+        "While the proposed compression function is not novel, having been explored by other works, it is unclear whether models trained with this function require less training data/epochs compared to models trained on the standard output differences.",
+        "The performance improvement in the 8/9 round Speck case is impressive, but it may not be a new capability of the neural model, as the corresponding differential-linear results are not reported, and the neural distinguisher might simply be re-learning what classical distinguishers already capture.",
+        "The compression technique reduces problem complexity but also would eliminate some features; however, the paper introduces the CPF, which unifies a wide range of existing distinguishers and theoretically proves its learnability, but the approach might ultimately only cover the scope of existing conventional distinguishers."
+    ]
+}

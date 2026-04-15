@@ -1,0 +1,42 @@
+{
+    "paper_id": "UTGv8CayNt",
+    "conference": "iclr24",
+    "summary": "CoTPC, a novel hierarchical imitation learning approach, leverages Chain-of-Thought (CoT) principles within a transformer architecture to learn policies from demonstrations.  The method introduces learnable CoT prompt tokens to guide low-level action learning while simultaneously discovering high-level prompts (subgoals) unsupervisedly as temporal changepoints. This unsupervised discovery process, aided by cosine similarity and Pruned Exact Linear Time methods, enhances semantic abstraction in policy representation.  Evaluated on challenging tasks spanning from simulated environments like Moving Maze, Franka Kitchen, and ManiSkill2 to preliminary real-world applications, CoTPC outperforms existing baselines and ablation studies, demonstrating significant gains in policy learning efficiency.  Moreover, its framework extends to handle the decomposition of demonstrations into crucial observations, facilitating generalization from larger, more scalable datasets.",
+    "strengths": [
+        "Simplistic and effective approach that outperforms similar methods",
+        "The paper has a set of extensive experiments, as well as some preliminary study using realistic visual inputs and real-world experiments. In addition, i was a reviewer reviewing this paper during its previous round of submission, back then one of my major concern is lacking of a automated machanisim for extracting key states from the demo.",
+        "Nice to see their approach applied to complex dynamic settings, and generalizing favorably",
+        "The dataset chosen for experiments is relevant, and the results are quite convincing, with the CoT model clearly performing better than the baselines. The exposition of the experiments section is clear and easy to follow, and the choice of baselines is fair.",
+        "The method as a whole is novel, with specific design decisions and the use of learned embeddings that are trained using an auxiliary loss with targets generated using an unsupervised subgoal discovery process. However, the ablation study has limited value and could be improved by providing more intuition on what is learned by CoT embeddings, such as in the maze environment.",
+        "The proposed work is clearly motivated and properly positioned in the literature. The supplementary video is a positive aspect, but it can be improved by combining it with a presentation video that reveals comparisons between the proposed approach and previous works.",
+        "This has been addressed to some extent in this version, and the paper is reasonably well written.",
+        "The numerical results are good and the improvement looks significant, but the variance should be shown for each method and the learning curves are required.",
+        "The general direction of learning policy with demonstrations is good, and the hierarchical RL formulation for this task is sound and important. However, these ideas are not very novel.",
+        "The author's environment looks cool and real, providing a good test environment for policy learning methods, which is very important in the policy learning domain and in the robotic domain."
+    ],
+    "weaknesses": [
+        "I am still not fully convinced by using the term 'Chain-of-Thought'...",
+        "Results are lacking confidence intervals (how many runs/model seeds) [1] - Salter, Sasha, et al. \"Mo2: Model-based offline options.\" Conference on Lifelong Learning Agents. PMLR, 2022. [2] - Saatçi, Yunus, Ryan D. Turner, and Carl E. Rasmussen. \"Gaussian process change point models.\" Proceedings of the 27th International Conference on Machine Learning (ICML-10). 2010.",
+        "The function of the model is not discussed and section 4.2 looks confusing as a result. I think the function and signature of the model should be discussed prior to the model details.",
+        "However, the real-world evaluation is a bit too simple.",
+        "The writing of section 4 needs improvements, particularly in Section 4.2.2, which is hard to parse and easy to get lost in. I would encourage the authors to re-write this section and redo Figure 1 to make things clearer. Additionally, BeT should have been explained in section 3 as the method seems to be heavily based on it, and presenting it in the appendix could potentially ease the exposition.",
+        "The method's motivation for sub-task decomposition is unclear, as the cosine similarity metric seems heuristical and not well-motivated. The results are promising, but it is unclear whether more principled decompositions would lead to better results, e.g., obtained via bottleneck options or gaussian processes. The paper would benefit from a greater discussion/comparison on this front. Additionally, the decomposition approach may favor different tasks with distinct action-space statistics. Furthermore, there are presentation limitations, including citations not in the correct ICLR format (surname and year).",
+        "The details of the CoT algorithm are unclear, particularly the group algorithm and the PELT method with cosine similarity as the cost metric. The authors should discuss these in detail.",
+        "The authors assume the readers know the decision transformer and detection transformer in advance, which is not very good.",
+        "However, using transformers in policy learning is not novel, and the authors should consider other architectures to claim novelty, as transformers are now common."
+    ],
+    "questions": [
+        "In the last paragraph of section 5.4 named \"Shared tokens for CoT and action predictions\", I think the different variants should be shown as a three part diagram two help the reader understand the differences in inputs. As of right now, I am not entirely sure what the differences are.",
+        "There seems to be T CoT features, but that seems confusing as these are suppose to represent subgoals and are trained using the auxiliary LCoT. I thought PELT was minimizing the number of goals. How do you ensure alignment between the learned tokens and the output of PELT?",
+        "I'm confused by what the inputs of gCoT are, and it's unclear why actions aren't used as inputs to gx(.) functions.",
+        "What is the CoT predictor? It appears once in the last paragraph of section 4.2.2. Furthermore, what exactly are the contents of S...CoT? Do they change with time? What is the (...) subscript?",
+        "How well does this approach to sub-task decomposition scale to larger action-spaces?",
+        "I would be curious to see what the effect of setting the component of the auxiliary loss term to 0, but keeping learnable prompt tokens, which is basically equivalent to BC but with added learnable tokens, maintaining the same capacity as the CoTPC architecture. If the transformer's weights are tuned, why the CoT can accurately serve as a target signal? Furthermore, how efficient is the transformer architecture?",
+        "For instance, is it always possible to assume that actions that are similar or close temporally belong to the same subskill? Can the author's comment on what the action groupings correspond to intuitively for these examples?",
+        "How sensitive is their approach to the beta parameter that controls the number of detected changepoints?",
+        "Additionally, it would be helpful to understand how the number of CoT affects the policy learning results."
+    ],
+    "divergent_perspectives": [
+        "The proposed approach is not novel in this context and does not relate to CoT, as it involves a demonstration split methodology or subgoal discovery mechanism in hierarchical RL without language involvement. Furthermore, the paper is not well-positioned in the context of hierarchical RL + demonstration, and the authors should discuss or compare with works [1-5]."
+    ]
+}

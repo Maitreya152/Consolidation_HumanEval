@@ -1,0 +1,32 @@
+{
+    "paper_id": "wUkAwglpzD",
+    "conference": "iclr26",
+    "summary": "FG-CLEP, a novel framework for ECG–text alignment, leverages fine-grained contrastive learning between ECG patches and report tags to establish precise links between waveform segments and textual descriptions.  This approach employs a coarse-to-fine training process aided by LLMs to recover missing waveform features and incorporates a semantic similarity matrix for refining alignment and mitigating false negatives.  Experimental results highlight FG-CLEP's superior performance, achieving notable advancements in ECG–text alignment accuracy compared to prior techniques.",
+    "strengths": [
+        "The problem of ECG–language pretraining is important and has clear clinical relevance.",
+        "The proposed framework is well-motivated and technically sound; the LLM-enriched waveform features are novel. However, it would be interesting to isolate the effects of the false-negative technique on the original reports (without LLM enrichment) to quantify each component’s contribution.",
+        "Experiments across multiple tasks show competitive or superior performance.",
+        "Extensive experiments across six datasets show consistent performance gains in both zero-shot and linear probing tasks, validating the model’s robustness and generalizability. The ablation study shows that the work highly relies on additional LLM usage and used tricks like ensemble, as w/o Fine-Grained Alignment performance is very close (<1%) with the proposed model (default) while the w/o Fine-Grained Report performance is clearer."
+    ],
+    "weaknesses": [
+        "Figure 5 is difficult to interpret and adds limited insight. An ECG retrieval analysis (e.g., text→ECG or ECG→text or ECG→ECG retrieval with qualitative examples and recall@k) would be more informative for assessing alignment quality.",
+        "Lack comparisions with recent ECG-text modeling works.",
+        "The training efficiency and computational cost of multi-stage fine-tuning and LLM querying are not clearly quantified, raising concerns about scalability in clinical deployment. Furthermore, the model’s reliance on tag-level alignment assumes structured report formats, which may not generalize across healthcare systems or languages. However, how does FG-CLEP perform on free-text clinical reports rather than tag-based structured ones?",
+        "The tag sampling strategy in the “Fine-Grained Contrastive Learning Objective” plausibly aligns better with zero-shot text prompts, but the improvements on linear probing are small, suggesting the proposed fine-grained objective may not meaningfully strengthen the learned ECG representation. A targeted ablation contrasting zero-shot and linear-probe gains would help.",
+        "However, this work has limited technical novelty, as it depends on LLM usage instead of core modeling, and the LLM-generated GF reports are clinically unverifiable, risking noise or bias, and especially label leakage when doing zero-shot experiments.",
+        "The work introduces a cross-attention patch-tag alignment and LLM-based fine-grained training pipeline for ECG-text pretraining, but it seems to be unable to access the code provided.",
+        "Please compare the work with recent advances on ECG-Text pretraining works [1,2]. In many evaluation settings, the performance is poorer than them, whether the work uses “FG-” or not."
+    ],
+    "questions": [
+        "What are the computational and time costs of the coarse-to-fine training pipeline when scaling to larger datasets?",
+        "How are labels for “false negative” tags identified or constructed in training? Furthermore, please provide additional experiments to compare the detection heuristic and thresholds used in this work with those in [2], which also point out the close problem with false negative samples (report level).",
+        "Are the results in Table 3 from linear probing or zero-shot classification, and on which dataset(s)? Briefly state the evaluation protocol to make the comparison interpretable. However, statistical significance testing is not reported, and there are several writing issues, including an incomplete legend in Fig.2 (line 230) and incomplete ref information (line 286).",
+        "Please highlight the best results (e.g., boldface) to improve readability, and Figure 4 is not mentioned in any text.",
+        "It’s unclear how ECG patches are defined (temporal windows, lead-wise splits, or both), and what $N_{lead}$ denotes precisely. If patches are fixed windows, how do you ensure complete morphology is captured (e.g., P–QRS–T cycles) rather than fragmented? Additionally, have you evaluated the clinical interpretability of tag-specific ECG activations with cardiologists?",
+        "The paper presents FG-CLEP, an innovative framework that advances ECG–text alignment by introducing fine-grained contrastive learning between ECG patches and report tags, but it's unclear how to ensure ECG patches with specific patch length align to any of clinical report tags.",
+        "Please add linear probing experiment with METS model and compare with the work. Furthermore, looking at linear probing results (table 2), where only ECG encoder is used, the gap between with “FG-“ and without “FG-” is minor, which may indicate that the “FG-” just slightly boosts the ECG encoder (which is the core component in real-world deployment)."
+    ],
+    "divergent_perspectives": [
+        "The coarse-to-fine training pipeline demonstrates strong methodological creativity and practical relevance, but its dependence on LLMs for generating waveform features may introduce bias or inconsistency, even with CLEP-based validation, and the evaluation lacks human expert assessment of fine-grained alignment quality beyond AUC metrics, limiting interpretability claims."
+    ]
+}

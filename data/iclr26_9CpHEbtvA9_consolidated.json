@@ -1,0 +1,33 @@
+{
+    "paper_id": "9CpHEbtvA9",
+    "conference": "iclr26",
+    "summary": "This paper tackles the critical challenge of 'generator-tokenizer inconsistency' in visual autoregressive (AR) models, where generated token sequences often struggle to be accurately decoded by the tokenizer.  The proposed reAR framework introduces two key regularization techniques:  *Noisy Context Regularization* simulates imperfect input contexts during training, mitigating exposure bias, and *Codebook Embedding Regularization* aligns the generator's hidden states with the tokenizer's embedding space.  These techniques, applied as a plug-and-play solution without altering core model architecture or inference pipelines, demonstrably enhance image generation quality. Experiments, conducted across diverse tokenizers, confirm that improving this consistency leads to significant performance gains, achieving state-of-the-art results with fewer parameters compared to leading diffusion models. This highlights reAR's effectiveness and broad applicability in addressing a fundamental bottleneck within visual AR.",
+    "strengths": [
+        "The idea of aligning the embeddings of the generator and the tokenizer is original. The paper clearly defines the \"generator-tokenizer inconsistency\" problem and uses well-designed comparison experiments (e.g., \"perfect context\" vs. \"imperfect context\" and \"error token embedding replacement\") to convincingly validate that \"exposure bias amplification\" and \"embedding-unawareness\" are indeed critical bottlenecks.",
+        "The inconsistency between the embeddings of generator and tokenizer and its solution are important because they are the fundamental components of AR models. The proposed regularizations are straightforward, computationally light, and compatible with existing AR models and different tokenizers.",
+        "The problem statement, logical development, solution, and empirical supports are clear as described in Summary, but it would be clearer to define the term 'context'.",
+        "Experiments are conducted only on ImageNet, and extensive experiments demonstrate that reAR significantly enhances class-conditional image generation, yielding notable improvements in FID on ImageNet.",
+        "The paper clearly identifies a fundamental issue in visual autoregressive models — the inconsistency between the generator and tokenizer — and presents a well-motivated solution, which is a genuine and underexplored problem.",
+        "Resolving the identified weaknesses will raise my rating regarding originality.",
+        "The study only investigates reAR’s generalization across different VQ tokenizers, but it is highly versatile and works well with multiple tokenizers (e.g., TiTok, AliTok) and model sizes, and narrows the gap with diffusion-based methods."
+    ],
+    "weaknesses": [
+        "Perturbing something is a common practice for robustness. Why is the proposed perturbation non-obvious compared to the literature?",
+        "The method introduces additional MLP projection layers and an extra loss term, which inevitably increases training complexity and memory consumption. The paper doesn't explicitly quantify the additional training time overhead introduced by the reAR strategy.",
+        "While reAR demonstrates improvements across different tokenizers (e.g., TiTok, AliTok), the paper does not provide any analysis of how the proposed embedding regularization interacts with the underlying codebook geometry, and it is unclear how it interacts with tokenizers of different codebook geometries.",
+        "The paper does not tackle other autoregressive models such as Visual Autoregressive Modeling: Scalable Image Generation via Next-Scale Prediction, and the scope should be specified in more detail, such as raster-order autoregressive modeling. However, reAR delivers excellent results, significantly improving model performance without requiring architectural changes, and appears to be a general-purpose strategy for vision AR models.",
+        "The experiments thoroughly compare many competitors in Table 1, but there are other weaknesses that need to be addressed.",
+        "reAR innovatively regularizes both the current token embedding (shallow layers) and the next token embedding (deep layers), but this feels somewhat like \"alchemy\" or fine-tuning, lacking an adaptive or theoretically-driven mechanism to automatically determine the optimal layers for feature alignment. Is there a potential conflict between these two objectives (e.g., could the shallow layers lose information needed to predict the next token in their effort to align with the current token?)"
+    ],
+    "questions": [
+        "Figure 1 should be explained in more detail. What is wrong in the image of orange cat? Why are the top and bottom images similar although the token indices are different?",
+        "Resolving weakness 2 will raise my rating regarding soundness.",
+        "Resolving weakness 3 will raise my rating regarding clarity. If the proposed method is applicable to VAR, please help me find the statement in the paper.",
+        "How sensitive is reAR to the noise schedule or regularization strength λ across different datasets and architectures?"
+    ],
+    "divergent_perspectives": [
+        "The proposed generator–tokenizer consistency regularization is simple, plug-and-play, and does not require changes to the tokenizer, inference pipeline, or generation order, making it broadly applicable; however, the actual solutions (noise injection and embedding regularization) look similar to existing techniques in language modeling.",
+        "While the paper positions itself as “plug-and-play” and intended to generalize across tokenizers and datasets, the decision to apply embedding alignment regularization to specific layers appears empirical and lacks analysis; an ablation study comparing the effectiveness of regularizing the 'next' token's embedding would be beneficial.",
+        "While the method improves generation quality, the novelty is somewhat limited, as the approach mainly introduces a regularization term rather than a fundamentally new architecture, leaving the broader utility of the method unclear."
+    ]
+}

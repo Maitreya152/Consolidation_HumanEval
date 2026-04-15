@@ -1,0 +1,32 @@
+{
+    "paper_id": "7gLNA6nT5d",
+    "conference": "iclr26",
+    "summary": "This paper proposes integrating n-gram attention heads into transformer models for in-context reinforcement learning (ICRL), directly addressing the data efficiency and hyperparameter sensitivity challenges inherent in Algorithm Distillation. By incorporating explicit n-gram attention patterns, the method achieves comparable performance to Algorithm Distillation while requiring significantly less training data (up to 27x reduction). This improvement in data efficiency extends to visual-based scenarios, demonstrating performance gains and robustness against hyperparameter variations. Moreover, the approach is adaptable to handle image state representations, expanding its applicability to richer environments.",
+    "strengths": [
+        "S3: Clear presentation with intuitive figures.",
+        "This paper proposes a very useful improvements to AD by integrating n-gram heads to transformer. This architectural improvement significantly mitigates the disadvantage of AD of data overhead, hyperparameter tuning, and training instability",
+        "The paper addresses a real practical problem in ICRL: Algorithm Distillation's demand for large datasets, and sometimes slow convergence or getting stuck. Furthermore, I would expect theoretical analysis for why explicit n-gram heads can help improve data efficiency and training stability in Algorithm Distillation, as n-gram has been studied for decades.",
+        "The VQ technique provides a feasible approach to image-based environments which extends the n-gram heads architecture to broader application scenarios, including visual environment settings.",
+        "The authors give detailed description on how to sweep and choose the hyperparameters, which is rather important to such empirical papers for reproduction, and can improve the data efficiency and reduce the hyperparameter sensitivity.",
+        "The paper tests their method on different setups, including ones with more grid-based states and another with RGB 64x64 pixel, and a diverse set of tasks reinforces the findings. However, it would be beneficial to analyze the training cost sensitivity for VQ and ResNet modules, which are important for proving adaptation and efficiency in pixel-based environments.",
+        "This paper demonstrates the benefits of n-gram heads by experiments in two environments and their variants in Miniworld; however, these environments are relatively simple, and it would be beneficial to test n-gram heads in more complicated continuous control tasks (e.g., MuJoCo, Meta world) to show generalization.",
+        "The paper is easy to follow, and the figure is well-situated and clear, but the figure positions mismatch the text, so it would be nice to rearrange the paper so that the figures are right in the place where they are referred."
+    ],
+    "weaknesses": [
+        "Section 2.2: the description of the whole model structure is unclear. The formula in line152 needs more detailed explanation, like how the attention score of n-gram head is normalized, what if there are no n-grams in the history, if there is only one head in each NG layer. The authors should better provide a pseudo-code or the architecture figure.",
+        "The title in the PDF file (\"FORMATTING INSTRUCTIONS FOR ICLR 2026 CONFERENCE SUBMISSIONS\") should be corrected. Additionally, could the authors compare with other baselines, for example, Noise Distillation [1] mentioned in the paper, to clarify whether the observed data-efficiency and stability gains stem specifically from the proposed n-gram inductive bias, or whether similar improvements could be achieved through alternative data-centric approaches?",
+        "The title is missing in the paper.",
+        "This work seems to not disentangle three questions: 1) how does n-gram heads general help the training of transformers 2) why this is especially important (or not) in ICRL tasks 3) is the gain via n-gram heads really not achievable by other hyperparameter tuning or different architectural tricks. However, the empirical study is very comprehensive that answers all my concerns towards the n-gram heads architecture application in AD, strengthening my confidence in applying this technique to ICRL research.",
+        "The work lacks formal analysis explaining why N-gram heads yield stability gains and reduced data requirement; maybe the authors should provide some theoretical perspective to elaborate this."
+    ],
+    "questions": [
+        "Q: What is the positional encoding used in the transformer?",
+        "Typos: The title of the paper is wrong.",
+        "The idea of introducing n-gram induction head is simple and easy to implement, but it is hard to takeaway generalizable insights on why it helps.",
+        "Could the authors add more experiments on some diverse visual tasks to further showcase the superiority?"
+    ],
+    "divergent_perspectives": [
+        "The authors should test the method in high-dimensional continuous control environments, e.g., MuJoCo and Meta world, to demonstrate its generalization and scalability. However, the 2-gram induction head may be limited in its generalizability, as it may become redundant with the emergence of more complex learning algorithms and large transformers.",
+        "The method is only compared against vanilla AD, and it is unclear whether the findings generalize beyond this specific approach, given the limited experimental scale and narrow scope of the work, which focuses solely on improving Algorithm Distillation [17]. Furthermore, the architecture of the base transformer model, the number of layers, and the total size of the model are unclear, and it is unclear whether using a powerful pre-trained model would still benefit from the 2-gram information."
+    ]
+}

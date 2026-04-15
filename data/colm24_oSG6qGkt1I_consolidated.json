@@ -1,0 +1,27 @@
+{
+    "paper_id": "oSG6qGkt1I",
+    "conference": "colm24",
+    "summary": "This paper examines the crucial aspect of conceptual knowledge consistency in Large Language Models (LLMs). It utilizes ontologies to extract Is-A relations and develop methods, including automatically generated test cases from knowledge graphs, to evaluate LLMs' ability to reason with concepts and handle logical inconsistencies.  Empirical results reveal that while LLMs demonstrate vast knowledge, they often display inconsistencies in applying this knowledge.  However,  the study showcases significant performance improvements through KB-based prompting strategies, enhancing conceptual consistency and coverage. These findings and methodologies directly address real-world applications requiring accurate and reliable conceptual understanding.",
+    "strengths": [
+        "The paper is well written and easy to understand. The experimental design and evaluation setting is decently thorough.",
+        "The paper is well-crafted, featuring lucid clarity and a straightforward logical flow that is effortless to follow, making it suitable for the conference audience.",
+        "This paper presents an interesting approach to assess the consistency and coverage of conceptualization in LLMs by automatically creating test cases based leveraging ontologies and knowledge graphs. The authors demonstrate that several publicly available LLMs show inconsistent domain knowledge, and simple prompting approaches allow the LLMs to respond with better understanding of certain medical domain concepts.",
+        "The paper is well written and illustrated by figures, and the experiments and use case show the potential of the proposed approach, which seems to work and show meaningful improvements, and it seems scalable.",
+        "A more detailed analysis of the hierarchical confusion across multiple large language models has been conducted; however, the analysis of the results in Table 2 and Table 3 is relatively rough, listing results without carefully analyzing causes and influencing factors.",
+        "The paper is clearly written and might help introduce some of the ontology-based thinking to the LLM audience in a helpful way, with useful literature reviews for understanding the place in the literature."
+    ],
+    "weaknesses": [
+        "However, domain understanding requires us to deal with more complex relationships including part-of, cause/effect, inference, entailment, etc., which are not addressed in this approach."
+    ],
+    "questions": [
+        "Would it be possible to consider reducing inconsistency and improving the coverage of domain concepts as NLI tasks and fine-tune an LLM accordingly?",
+        "Missing comparison with approaches of ontology completion (instead of adding plausible rules, removing plausible inconsistency)",
+        "Is there a connection between the inconsistency of conceptual hierarchy and the parameter size of large language models? In other words, the larger the model parameter size, the lower the possibility of inconsistency in the conceptual hierarchy will be significantly reduced?",
+        "I take it cafe racer and naked bike are real examples? I wasn’t familiar with them and so was unsure if they were supposed to be “novel concepts”.",
+        "I was briefly thrown by the term “field of occupation”, which doesn’t seem idiomatic to me."
+    ],
+    "divergent_perspectives": [
+        "While the author focuses solely on hierarchical confusion, it would be beneficial to discuss more comprehensive issues such as mixing of domains, inaccurate Generalizations, and contradictory information; however, this is not a reason to reject the paper, and more detail on the prompting method would be appreciated.",
+        "This tackles an important topic in a clear way: making LLMs more trustworthy and consistent in the way that KBs are while retaining strengths of LMs. However, the counting of hedged LLM answers as inconsistent makes me wonder if the inconsistency is overstated."
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "paper_id": "BcxM6dZiXc",
+    "conference": "iclr26",
+    "summary": "Falconer presents a groundbreaking framework for scalable knowledge mining that addresses the efficiency-performance trade-off inherent in traditional approaches. It ingeniously employs powerful LLMs as both planners, breaking down user instructions into actionable steps, and annotators, generating high-quality training data for a lightweight proxy model (Cuckoo). This framework streamlines diverse tasks like classification and extraction into two fundamental operations, 'get_label' and 'get_span', enabling efficient execution.  Extensive evaluations, including novel benchmarks, reveal that Falconer matches or surpasses the performance of leading LLMs like GPT-4 while drastically reducing inference costs (up to 90% reduction) and accelerating processing speed (over 20x). Notably, its design encompasses the assignment problem as a specialized case, highlighting its adaptability and broader applicability in knowledge mining tasks.",
+    "strengths": [
+        "Demonstrates that the proxy can sequentially adapt to diverse tasks with minimal degradation.",
+        "The paper seems to address a critical, real-world bottleneck in applied AI: the prohibitive cost and latency of using flagship LLMs for large-scale data processing.",
+        "The paper achieves substantial reductions in inference cost and deployment overhead, but please provide complete hyperparameter settings, training/inference resource usage, and dataset splits in the main text, or concisely summarize them with explicit pointers to the appendices to enable reproducibility and fair comparison.",
+        "Falconer is a multi-agent implementation on text mining tasks, built upon two atomic primitives: get_label and get_span, making it a highly optimized solution for extractive and classification-based knowledge mining.",
+        "The paper presents a new paradigm that merges LLM planning/annotation with lightweight proxies, unifying extraction and classification under a single, instruction-aware model. This is further supported by the strong experimental validation, which tests the system across a wide variety of datasets and task types, using both ground-truth labels and LLM-as-a-judge setups, and investigates the \"arising ability\" where the proxy model can correct or surpass noisy LLM annotations.",
+        "The work goes beyond prior work by automating both supervision (via LLM) and modular pipeline construction, and is well-articulated with a clear motivation illustrating limitations of existing pipelines and LLM approaches, as well as easy-to-understand scenario illustrations.",
+        "The approach shows feasibility of training on as little as 5% of the data and extensive benchmarks comparing to strong baselines (RoBERTa, MetaIE, Cuckoo, state-of-the-art LLMs) across labeled/unlabeled data, sample size, continual learning, efficiency, and diverse task types."
+    ],
+    "weaknesses": [
+        "No confidence intervals, variance, or significance tests are reported alongside experimental results, which limits the assessment of empirical claims.",
+        "Generalizability beyond cuckoo: The success of the proxy model, particularly the fascinating \"arising abilities\" phenomenon, is strongly linked to the Cuckoo model and its specific pre-training paradigm. This raises the question of how generalizable the Falconer framework is. Would the framework be as effective with other open-source small language models (e.g., Phi-3, Gemma, Qwen3-0.6B)?",
+        "However, this design inherently restricts its use for other important NLP tasks, particularly generative ones like text summarization, translation, or complex reasoning QA that cannot be decomposed into simple span extractions. The paper should perhaps more explicitly frame Falconer as a specialized framework for its target domain, rather than a general-purpose alternative to LLM agents.",
+        "However, the main text lacks a deeper discussion of where Falconer or its proxy underperforms (relative to LLMs or modular pipelines), how performance trades off with task complexity, or concrete examples of failure cases.",
+        "New instruction-following benchmarks and tasks could become a community resource, but they need more explicit differentiation and empirical comparison with closely related recent instruction-IE baselines (e.g., MetaIE, Cuckoo).",
+        "The process for validating LLM-generated supervision, mitigating hallucinations or label errors, and aligning with human annotation is unclear. There is little statistical evidence or qualitative error analysis surrounding annotation reliability. However, highlighting limitations will help the community better understand the boundaries of Falconer’s practicality, and understanding annotation reliability and any mitigation steps is necessary for assessing practical effectiveness.",
+        "The new benchmarks lack detailed information on construction, coverage, and difficulty, making it unclear how well they reflect real-world complexity and industrial use cases. However, the approach of utilizing frontier models with ICL examples for planner and building a meta model to do actual data mining is an interesting approach with good cost savings while maintaining the overall performance, as shown by the extensive empirical results.",
+        "However, the framework's primary strength—its efficiency—seems to stem from its highly specialized design, which may limit its broader applicability."
+    ],
+    "questions": [
+        "However, it is unclear how the approach compares to task-specific fine-tuned models, and whether the gains are significant enough to adapt this approach in practical settings.",
+        "Please check the weaknesses section.",
+        "Please see weakness.",
+        "See my comments in Summary.",
+        "To evaluate the validity and generalizability of your empirical claims, it would be helpful to elaborate more on the design and composition of your new instruction-following benchmarks—specifically task types, annotation processes, and how difficulty was determined."
+    ],
+    "divergent_perspectives": [
+        "While the paper provides a clear demonstration of performance, cost, and speed trade-offs, it lacks comprehensive reporting on compute cost, memory/latency figures, and open-source code/benchmarks."
+    ]
+}

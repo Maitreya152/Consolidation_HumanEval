@@ -1,0 +1,31 @@
+{
+    "paper_id": "5Rs6MpXD7D",
+    "conference": "iclr26",
+    "summary": "This paper presents a novel probabilistic method for 1-WL coloring, reformulating the WL test as a sequence of matrix-vector multiplications conducive to GPU acceleration and parallelization. This approach, implemented using matrix operations, enables efficient handling of large graphs and achieves substantial runtime improvements, demonstrating up to an order of magnitude speedup over multicore CPU baselines.  Moreover, the framework extends to address the coarsest equitable partition problem, highlighting its versatility and broader applicability in graph partitioning tasks.",
+    "strengths": [
+        "The guarantee of error ≤ n/r makes the method practical for real-world scenarios.",
+        "The ability to handle billons of edges is very useful, given all existing baselines are not working.",
+        "GPU-based RBBE implementation consistently outperforms classical CPU implementations, but it does not provide improvements in wall time after parallelization due to merge overhead, and it would be good to provide performance numbers beyond a single dataset (sk2005) if possible.",
+        "The speed improvement claimed by the paper is great, and the proposed methodology is sound with a well-justified trade-off for worse time complexity for practical improvements."
+    ],
+    "weaknesses": [
+        "The naive PyTorch 1-WL implementation is significantly slower than I would intuitively expect. Do the authors have an explanation for this? I quickly checked the code but could not find the code for the WL baseline.",
+        "Today there are many frameworks that run GNNs efficiently such as Pytorch Geometric and Deep Graph Library. It is also known that the Graph Neural Network of GIN [1] has an expressive power as 1-WL. Therefore, I believe a comparison between an efficient GIN and the proposed method is required, where GIN will be used to compute the coarsest refinement.",
+        "The actual implementation is not based on real random number selection. How does it affect the empirical error and theoretical guarantees? [1] Xu, Keyulu, et al. \"How Powerful are Graph Neural Networks?.\" International Conference on Learning Representations, 2019",
+        "Tables and results are very difficult to read.",
+        "Also, using random evaluations to separate equivalence classes is a standard trick (Schwartz–Zippel-style arguments underpin many Monte-Carlo tests) — again, the probabilistic splitter idea isn’t brand new, even if the exact instantiation varies.",
+        "The scope of the work is limited to 1-WL only and generalized k-WL is not discussed, however, parallelizing the inherently sequential WL algorithm is a significant and interesting contribution.",
+        "The writing is clear, but the background knowledge is too much for the main paper; it would be better to put it into the appendix.",
+        "The method can be scaled to multiple GPUs, and the implementation on GPUs is a key contribution. However, the novelty of the approach is limited, and it would be interesting to study how batching graphs compares to the current random batch to improve the merged partition's accuracy, as increasing the number of batches hurts correctness significantly."
+    ],
+    "questions": [
+        "Can you talk more on how you merge the boundary nodes and is there any better batching split method and partition merging method other than random?",
+        "The code is working on 8GPUs at most, and it would be interesting to explore a multinode version."
+    ],
+    "divergent_perspectives": [
+        "The evaluation is a bit confusing at times, and it's unclear why the CPU baseline fails due to OOM, as the batched implementation might also run on CPU.",
+        "Each designed algorithm has error analysis and theoretical support for finding coarsest equitable partition, but the metric for the gap to oracle equitable partition is unclear, and it is important to show that empirically the real-world error is matching the theorem, while the trade-off of the reformulation is negligible.",
+        "The central idea of using power iteration to find equitable partition / 1-WL color refinement is not new, as established by Power-Iterated Color Refinement (AAAI’14). However, the connection between 1-WL and matrix vector production is well known in the community. Furthermore, the paper could be clearer about the applications of parallelizing WL, which is mainly used as a mathematical tool for proofs rather than as a practical algorithm. Additionally, the paper is difficult to follow, particularly in the explanation of the connection to backward equivalence (BE) in dynamical systems, and the P-completeness of stable coloring. The formalization is also incomplete or difficult to follow, making it challenging to evaluate the correctness. Finally, the experimental results raise questions about the practical usefulness of batching WL, and the graph definition should state that it is a weighted graph.",
+        "While efficiently scaling WL to billions of nodes is impressive, with a significant speed-up over classical WL, the massive graph experiments (Table 3) lack CPU baselines that completed, making it impossible to quantify speedups at this scale."
+    ]
+}

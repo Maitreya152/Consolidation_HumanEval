@@ -1,0 +1,49 @@
+{
+    "paper_id": "uDmxJ6133n",
+    "conference": "iclr26",
+    "summary": "This paper addresses the critical challenge of long-horizon spatial consistency in world models by introducing LOOPNAV, a novel Minecraft-based benchmark. LOOPNAV evaluates models' ability to retain memory of past observations and reproduce consistent scene layouts when revisiting locations over extended navigation paths. Utilizing loop trajectories and metrics like FVD, LPIPS, and SSIM, the benchmark reveals that current world models, while progressing, still exhibit weaknesses in maintaining accurate spatial coherence over long sequences. This highlights a significant area for future research and development in enhancing world model memory and contextual understanding for robust long-horizon navigation.",
+    "strengths": [
+        "Novelty and significance.",
+        "__S2__: The tool seems easy to use with large community support, making it useful in practice.",
+        "The paper describes very clear on the data collection criteria and algorithms.",
+        "The action-conditioned data generation pipeline in Minecraft is well-designed and shows potential for scalability in both training and testing scenarios.",
+        "This paper addresses the emerging challenge of the quadratic increase in computational and memory complexity found in most Transformer-based world models, although there is a minor formatting issue on line 141 with a redundant space after “transformers”.",
+        "The paper highlights spatial consistency, which is a very important capability and also a challenge for world models. Improvements on such capability can large aid the application of world models in the field of embodied AI, but it would be strengthened by a discussion or qualitative assessment of generalization to other domains.",
+        "*WorldPrediction: A Benchmark for High-level World Modeling and Long-horizon Procedural Planning* and *IntPhys 2: Benchmarking Intuitive Physics Understanding in Complex Synthetic Environments* are well-written and provide valuable contributions to the field.",
+        "The paper contributes a large-scale dataset with diverse videos from the Minecraft platform. However, the evaluation range selection is unclear, and the diversity of the dataset is limited to the grid-world pattern and repetitive textures, which may not be sufficient to evaluate general-purpose world models.",
+        "This paper investigates a timely and relevant research question given the popularity of video generation models.",
+        "The proposed dataset seems to be quite large scale and appears to be a good test-bed for developing video generation models, which is further supported by the VBench: Comprehensive Benchmark Suite for Video Generative Models.",
+        "The motivation to evaluate memory consistency is well-founded and represents an important research direction. The experiments effectively highlight the challenges of maintaining spatial consistency in existing methods, particularly as the complexity of most Transformer models grows quadratically in both computation and memory with respect to context length.",
+        "The paper provides a reasonable level of detail and maintains decent presentation quality, with a relatively high presentation quality, clarity, and ease of following, and contains lots of details."
+    ],
+    "weaknesses": [
+        "Although the experiments highlight the challenges of this benchmark, there are no experiments comparing the performance of the same model with and without training on the dataset.",
+        "Whether the A→B trajectory is guaranteed to be linear? If not, any intermediate point in the trajectory could be regarded as a point C, making A→B and A→B→C→A effectively equivalent?",
+        "__W7__: Although the dataset may seem to include diverse scenes shown in Figure 2, *“focus solely on village environments for training and evaluation”* in Sec. 5.2 may hinder the diversity of scenes represented in the empirical results.",
+        "Therefore, I am not fully convinced by the value of Principle 1 in its current form. A more balanced approach that includes both visually discriminable and visually similar yet spatially complex trajectories could make the benchmark more meaningful and comprehensive.",
+        "__M2__: Line 011 “a crucial requirements” -> “a crucial requirement\"",
+        "Whether the A→B exploration context includes a 360° view at B? If not, the excessive amount of new observations during B→A would be highly unpredictable. Including these in the evaluation metrics could lead to biased results.",
+        "The model’s spatial consistency ability may change over time; however, the benchmark lacks spatial consistency and long-horizon metric, and inventing a new metric that captures both jointly would strengthen the benchmark.",
+        "The paper would benefit from better alignment with real-world settings, especially considering the motivation for evaluating spatial consistency in real-world exploration trajectories. However, the use of A* for shortest-path planning when going back to the start point A is rational, but traversing the same path in reverse might be more suitable for evaluating world model’s spatial consistency.",
+        "The discussions provided for each experiment are great, but unfortunately, the current content in the paper does not meet the acceptance standard.",
+        "Minor issues such as typos, grammar mistakes, and others include text in Dataset Composition in Figure 2 being too small, which might not be visible in the printed paper, and a correction in the sentence on line 016-017 to \"datasets designed\".",
+        "Minor corrections are needed, including changing “a explore-then-generate approach” to “an explore-then-generate approach” and adding a space between “increases” and ‘(‘ in “as the prediction horizon increases(Figure 3).”",
+        "There is no comparison with existing world-model benchmarks. Suggested related works include: *3DLLM-Mem: Long-Term Spatial-Temporal Memory for Embodied 3D Large Language Models* and *GRASP: A Novel Benchmark for Evaluating Language Grounding and Situated Physics Understanding in Multimodal Language Models*",
+        "Including data from other simulators like CARLA can significantly improve the diversity of the benchmark.",
+        "The metrics used (FVD, LPIPS, SSIM) primarily assess visual fidelity rather than spatial consistency, which may not penalize semantically inconsistent structures. As the authors acknowledge, a dedicated metric to evaluate spatial consistency beyond the image space would strengthen the benchmark. However, the principle of visual discriminability may inadvertently simplify the task for world models, preventing the evaluation of a model’s true ability to maintain spatial consistency when frames are visually similar but spatially distinct."
+    ],
+    "questions": [
+        "__Q1__: __Unclear “Context” meaning in Table1__. It took me a while to “guess” it refers to *“Most models operate with a context length of 32 frames,”* from Line 436. It might be better to explicitly explain it as context length in the caption.",
+        "I will raise my rating to a positive one if all my major concerns are addressed during the rebuttal period.",
+        "What are the advantages of using a Minecraft environment compared to a standard navigation simulator? This is addressed by evaluating four baseline models (Oasis, Mineworld, DIAMOND, and NWM) over a spectrum of navigation ranges.",
+        "What does the -5, -15, -30, -50 mean in Tab. 1? From Fig. 3, does it mean the context length is the same and the only difference is how the frames are downsampled temporally? If so, this design doesn't make much sense in terms of spatial memory.",
+        "The paper does not clearly define spatial consistency, which remains ambiguous and would benefit from a more concrete, operational definition. It is unclear whether this refers to the spatial coherence of trajectories in the map or latent space, the preservation of visual spatial structures in the image space, or consistent reconstruction over time."
+    ],
+    "divergent_perspectives": [
+        "The paper would be more comprehensive if it included experiments with explicit memory components, which can be readily integrated into existing models. However, the benchmark’s design principles have fundamental issues, such as the lack of structure-specific metrics and the absence of evaluations involving memory-module models.",
+        "The generated trajectories are still difficult to demonstrate as matching the real distribution, which may limit the benchmark’s overall value; however, the evaluation setup is also biased due to only 18 trajectories, potentially leading to inconsistent results.",
+        "The quality of experiments is a major weakness, as the experiment and discussion is limited, with only one main experiment and a lack of insightful discussion. Many surprising results from the experiment are not fully analyzed and explained, and the authors should use more dedicated experiments to answer the questions raised in the main experiment.",
+        "The reviewer finds the differences between ABA and ABCA unclear, however, the qualitative results only include data from one trajectory, which does not show a general performance pattern of different models.",
+        "While the work underlines the importance of memory for world models, it does not come up with a proposal for any baseline solutions that use a memory module to improve existing video world models, which significantly weakens the contribution of this work; however, the benchmark cannot accommodate non-generative world models."
+    ]
+}

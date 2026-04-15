@@ -1,0 +1,33 @@
+{
+    "paper_id": "xaqPAkJnAS",
+    "conference": "nips24",
+    "summary": "InfoMGF, a novel framework for Unsupervised Multiplex Graph Learning, tackles the crucial issue of graph structure reliability by refining graph structures to remove noise and amplify task-relevant information using mutual information maximization. This approach leads to superior node representation learning, as evidenced by experiments where InfoMGF outperforms existing methods, including some supervised ones,  demonstrating its effectiveness in enhancing UMGL performance.",
+    "strengths": [
+        "Originality: The paper addresses a critical gap in Unsupervised Multiplex Graph Learning (UMGL) by focusing on the reliability of graph structures, which is often overlooked in existing research.",
+        "Extensive Evaluation: The framework is thoroughly tested against various state-of-the-art methods on both node clustering and classification tasks, showcasing its robustness and effectiveness across different tasks. The comparison methods are representative and new.",
+        "This paper provides the code and all experimental settings for reproducing the results.",
+        "The paper pioneers the investigation of graph structure reliability in multiplex graphs, a significant advancement in the field, which enriches the representation of real-world systems and makes its analysis very difficult inherently.",
+        "The framework’s performance is validated through comprehensive experiments and it demonstrates a clear advantage over existing methods, including advanced supervised approaches, highlighting its potential for broad application.",
+        "The visualization is a strong point of this paper, with the figures of node correlation, heatmaps of the subgraph, and unique relevant edge ratio being very illustrative; however, it is possible that the proposed method cannot handle real-world large-scale graphs, which should be addressed in the future and discussed in the conclusion part.",
+        "Multiplex graph provides an efficient representation of complex systems, and this paper focuses on the non-redundancy issue, which is a new perspective and opens up a new avenue for future research. Theoretical Analysis: The several theorems are quite interesting and provide a solid foundation for the proposed method, in particular, Theorem 3 proves the necessity of fusing multiplex graphs.",
+        "The proposed method adopts an unsupervised and generalized approach, which has potential for practical applications and performs better on clustering than classification, as shown in Table 1 and 2.",
+        "This paper is well-motivated and the experimental results are promising, but how to solve the above issue?",
+        "The paper is generally clearly written and well organized, but the authors should check for the few grammatical and spelling errors that occur in the text.",
+        "The proposed InfoMGF framework effectively refines graph structures to eliminate noise and maximizes both view-shared and view-unique task-relevant information, as validated by theoretical analyses and demonstrated by extensive experiments that outperform various baselines and even sophisticated supervised approaches."
+    ],
+    "weaknesses": [
+        "Overall, this paper is well-organized. However, the writing could be improved in terms of tone and words.",
+        "There are too many notations, which are confusing.",
+        "The difference between the proposed method and DGM is unclear.",
+        "The framework involves several steps, and while the paper provides complexity analysis in the appendix for each step, it is still unclear what the overall complexity is. However, the authors share the code for reproducibility, but I didn’t see the datasets.",
+        "The proposed method is robust to structure noise, as shown in Fig.4, but more analysis is needed. However, the method depends on the assumption of optimal augmentation, and it is unclear how to guarantee that the used feature and structure augmentations are optimal. Furthermore, the authors discuss the robustness against structure noise, but it is unclear how the method performs against feature noise."
+    ],
+    "questions": [
+        "The font of k in the caption of fig.5a is not correct.",
+        "In the Appendix, the authors proof Proposition 1, however, there is no corresponding one in the main paper.",
+        "The difference between the existing non-redundancy principle and multiplex graph non-redundancy is unclear. Please clarify it."
+    ],
+    "divergent_perspectives": [
+        "The paper develops two algorithms, InfoMGF-RA and InfoMGF-LA, but it is unclear what the difference is in their objective functions. Furthermore, there are some small errors in Algorithm 1, specifically in the title and line 11, which includes the operation for InfoMGF-RA. Additionally, the proposed InfoMGF-LA runs out-of-memory on MAG data, and the reason for this should be given."
+    ]
+}
