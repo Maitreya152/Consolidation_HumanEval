@@ -10,7 +10,7 @@ A local Streamlit application for claim-level human evaluation of consolidated p
 
 ```bash
 # 1. Clone the repository
-git clone <your-repo-url>
+git clone <repo-url>
 cd Consolidation_HumanEval
 
 # 2. Install dependencies
