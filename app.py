@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 ASSIGNMENTS_CSV = os.path.join(BASE_DIR, "assignments.csv")
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
-GUIDELINES_MD = os.path.join(BASE_DIR, "human_eval_guidelines_claim_based.md")
+GUIDELINES_MD = os.path.join(BASE_DIR, "human_eval_guidelines.md")
 
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
