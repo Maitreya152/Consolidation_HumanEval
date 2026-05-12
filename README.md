@@ -53,6 +53,7 @@ For each section:
 3. **Assign a rank** to each model using the dropdowns:
    - `1` = best, `4` = worst
    - **Ties are allowed** — give two models the same rank if you think they are equally good (e.g. both get `1`, and the next best gets `2`)
+   - **Note:** The best reviews are those which cover most of the points from the original reviewer comments.
 4. Click **💾 Save** to save your ranking for that section.
 
 Repeat for all 4 sections, then move to the next paper.
