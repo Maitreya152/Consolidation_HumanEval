@@ -319,6 +319,7 @@ def render_instructions() -> None:
    - First read **all original reviewer comments** (expanded at the top).
    - Then compare the **4 anonymized model outputs** (shown as tabs).
    - **Assign a rank** to each model (1 = best). Equal ranks are allowed — use the same number to indicate a tie.
+   - **Note:** The best reviews are those which cover most of the points from the original reviewer comments.
 4. Press **Save** after ranking each section. All 4 sections must be saved per paper.
 5. Once all 5 papers are complete, press **Final Submit**.
 6. Share your result file with **Yash More or Maitreya Chitale**.
