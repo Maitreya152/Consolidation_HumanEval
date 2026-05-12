@@ -1,0 +1,21 @@
+{
+    "summary": "The paper proposes a novel light-conditioned multi-view diffusion model, MVLight, which generates 3D-consistent outputs under specified lighting conditions across multiple camera views. MVLight integrates lighting conditions directly into the generation process, enabling the model to synthesize high-quality images that faithfully reflect the specified lighting environment. The authors validate the effectiveness of MVLight through extensive experiments and a user study, demonstrating its superiority over existing relightable text-to-3D generative models in terms of geometric fidelity and relighting capabilities.",
+    "strengths": [
+        "The paper presents a novel approach to text-to-3D generation that addresses the challenge of decoupling light-independent and light-dependent components.",
+        "The proposed MVLight model integrates lighting conditions directly into the generation process, enabling the model to synthesize high-quality images that faithfully reflect the specified lighting environment.",
+        "The authors provide extensive experiments and a user study to validate the effectiveness of MVLight, demonstrating its superiority over existing relightable text-to-3D generative models.",
+        "The paper highlights the importance of considering lighting conditions in text-to-3D generation and proposes a solution to address this challenge."
+    ],
+    "weaknesses": [
+        "The paper assumes that the lighting conditions are known and provided as input, which may not be the case in real-world scenarios.",
+        "The authors do not provide a clear explanation of how the model handles cases where the lighting conditions are not provided or are ambiguous.",
+        "The paper relies heavily on the use of pre-trained models and datasets, which may limit the generalizability of the results.",
+        "The authors do not provide a thorough analysis of the potential biases and limitations of the model, which may lead to unintended outputs."
+    ],
+    "questions": [
+        "How does the model handle cases where the lighting conditions are not provided or are ambiguous?",
+        "Can the model be trained to learn the lighting conditions from the input data?",
+        "How does the model handle cases where the input data is incomplete or noisy?",
+        "What are the potential biases and limitations of the model, and how can they be addressed?"
+    ]
+}

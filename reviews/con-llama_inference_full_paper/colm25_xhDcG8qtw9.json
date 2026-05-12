@@ -1,0 +1,24 @@
+{
+    "summary": "The paper proposes a novel approach to fine-grained probability estimation in large language models (LLMs) by leveraging synthetic data and decoder-based regression. The authors introduce a new method for generating synthetic data through LLM-based pseudo-labeling, which involves multiple rounds of annotation using different models and configurations. They also propose a hybrid approach that combines coarse-grained probability estimates via textual representations with fine-grained probability refinement through expected label scoring rule aggregation. The authors conduct systematic evaluations across tasks that rely on conditional probability estimation and show that their approach consistently outperforms existing fine-tuned and prompting-based methods by a large margin.",
+    "strengths": [
+        "The paper presents a comprehensive evaluation suite that covers intrinsic alignment with labels, consistency of probability rankings, and support for structured reasoning.",
+        "The authors propose a novel approach to generating synthetic data through LLM-based pseudo-labeling, which can provide a more reliable estimate of the true conditional probability.",
+        "The hybrid approach that combines coarse-grained probability estimates with fine-grained probability refinement through expected label scoring rule aggregation is a significant contribution to the field.",
+        "The paper demonstrates the effectiveness of the proposed approach in improving local probabilistic estimation, which can significantly enhance the performance of complex probabilistic reasoning systems.",
+        "The authors provide a thorough analysis of the strengths and limitations of their approach and discuss potential future directions for research."
+    ],
+    "weaknesses": [
+        "The paper assumes that the LLMs used for pseudo-labeling are accurate and reliable, which may not always be the case.",
+        "The authors do not provide a clear explanation of how the expected label scoring rule aggregation is used to refine the probability estimates.",
+        "The paper relies heavily on the quality of the synthetic data generated through LLM-based pseudo-labeling, which may be affected by the accuracy and reliability of the LLMs used.",
+        "The authors do not provide a thorough analysis of the computational cost of the proposed approach, which may be a limitation for large-scale applications.",
+        "The paper assumes that the pairwise ranking consistency signals are available, which may not always be the case in real-world scenarios."
+    ],
+    "questions": [
+        "How does the proposed approach handle cases where the LLMs used for pseudo-labeling are not accurate or reliable?",
+        "Can the expected label scoring rule aggregation be used to refine probability estimates in other domains or tasks?",
+        "How does the quality of the synthetic data generated through LLM-based pseudo-labeling affect the performance of the proposed approach?",
+        "What are the computational costs of the proposed approach, and how can they be optimized for large-scale applications?",
+        "Can the pairwise ranking consistency signals be used to improve the performance of the proposed approach in real-world scenarios?"
+    ]
+}

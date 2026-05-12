@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes a novel approach called Typicalness-Aware Learning (TAL) to address the issue of overconfidence in deep neural networks (DNNs) and improve failure detection performance. TAL dynamically adjusts the magnitudes of logits based on the typicalness of the samples, allowing for differentiated treatments of typical and atypical samples. The approach is model-agnostic and can be applied to various architectures, including CNN and ViT. Experimental results on benchmark datasets demonstrate the superiority of TAL over existing failure detection methods.",
+    "strengths": "The paper presents a clear and concise introduction to the problem of overconfidence in DNNs and its impact on failure detection. The proposed TAL approach is well-motivated and effectively addresses the issue of overfitting on atypical samples. The experimental results are comprehensive and demonstrate the effectiveness of TAL in improving failure detection performance. The paper also provides a clear and well-structured presentation of the methodology and results.",
+    "weaknesses": "The paper assumes that the typicalness of a sample can be accurately calculated using the mean and variance of its feature representations. However, this assumption may not always hold, especially for complex datasets. Additionally, the paper does not provide a thorough analysis of the computational efficiency of the proposed approach. Furthermore, the paper does not discuss the potential limitations of the approach, such as its sensitivity to the choice of hyperparameters.",
+    "questions": [
+        "How does the paper address the issue of overfitting on atypical samples, and what are the implications of this approach for failure detection performance?",
+        "Can the proposed TAL approach be applied to other types of deep learning models, such as recurrent neural networks or transformers?",
+        "How does the paper's assumption about the typicalness of a sample being accurately calculated using the mean and variance of its feature representations hold in practice, and what are the potential limitations of this assumption?",
+        "What are the computational requirements of the proposed approach, and how does it compare to other failure detection methods in terms of efficiency?",
+        "What are the potential limitations of the proposed approach, such as its sensitivity to the choice of hyperparameters, and how can these limitations be addressed?"
+    ]
+}

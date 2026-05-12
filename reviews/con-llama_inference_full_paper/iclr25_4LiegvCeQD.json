@@ -1,0 +1,21 @@
+{
+    "summary": "This paper presents Intra-model Ensemble Learning (IEL), a method for adapting pre-trained models to new data distributions in testing time without access to labels. IEL minimizes the cross-entropy between the classifier output with the highest predicted probability and all other classifiers, allowing the group to collectively learn from each other during testing time. The authors evaluate IEL on three Test-Time Adaptation tasks and show that it can reduce generalization error significantly better than base Ensemble models. IEL is more versatile and flexible in critical domains such as medicine, finance, safety, and security where timely processing is required and reliable batch statistics are hard to acquire.",
+    "strengths": [
+        "The paper presents a novel approach to Test-Time Adaptation (TTA) that allows pre-trained models to adapt to new data distributions in testing time without access to labels.",
+        "The method, Intra-model Ensemble Learning (IEL), minimizes the cross-entropy between the classifier output with the highest predicted probability and all other classifiers, enabling the group to collectively learn from each other during testing time.",
+        "The authors provide extensive experiments on three TTA tasks, showing that IEL can reduce generalization error significantly better than base Ensemble models.",
+        "The paper highlights the versatility and flexibility of IEL in critical domains such as medicine, finance, safety, and security where timely processing is required and reliable batch statistics are hard to acquire."
+    ],
+    "weaknesses": [
+        "The paper assumes that the initial training data for all classifiers was similarly distributed, which may not always be the case in real-world scenarios.",
+        "The method requires a set of pre-trained models, which may not be available in all cases.",
+        "The authors do not provide a clear explanation of how the cross-entropy minimization objective is related to the diversity of the ensemble.",
+        "The paper does not discuss the potential risks of catastrophic forgetting in IEL, which may occur when the ensemble adapts to new data distributions."
+    ],
+    "questions": [
+        "How does the authors plan to address the assumption of similar initial training data for all classifiers in real-world scenarios?",
+        "Can the authors provide more details on how the cross-entropy minimization objective is related to the diversity of the ensemble?",
+        "How does IEL handle catastrophic forgetting, and what techniques can be employed to mitigate this issue?",
+        "Can the authors provide more information on the computational cost of IEL compared to other TTA methods?"
+    ]
+}

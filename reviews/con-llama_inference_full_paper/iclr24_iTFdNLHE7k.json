@@ -1,0 +1,12 @@
+{
+    "summary": "The paper introduces Ferumal flows, a novel approach to integrate kernels into flow-based generative models. The authors propose a kernelised normalising flow paradigm that replaces neural networks with kernels, achieving competitive or superior results compared to neural network-based flows while maintaining parameter efficiency. The method is demonstrated on synthetic and real-world datasets, showcasing its ability to outperform or match the performance of neural network-based flows in terms of likelihood estimation. The authors also investigate efficient training strategies for larger-scale datasets and show that kernelising the flows works especially well on small datasets.",
+    "strengths": "The paper presents a novel approach to flow-based generative models, introducing kernelised normalising flows that can achieve competitive or superior results compared to neural network-based flows. The method is demonstrated on both synthetic and real-world datasets, showcasing its ability to outperform or match the performance of neural network-based flows. The authors also investigate efficient training strategies for larger-scale datasets and show that kernelising the flows works especially well on small datasets. The paper provides a comprehensive analysis of the method's performance and its advantages over existing approaches.",
+    "weaknesses": "The paper assumes that the kernel length scale is a sensitive hyperparameter, which may require careful tuning. The authors also mention that the method may not be suitable for ResFlow-like architectures, which require explicit control of Lipschitz properties of the residual blocks. Additionally, the paper does not provide a comprehensive analysis of the method's performance on large-scale datasets, which may be a limitation of the current implementation.",
+    "questions": [
+        "How does the choice of kernel length scale affect the performance of the method?",
+        "Can the method be extended to ResFlow-like architectures, and if so, how?",
+        "What are the computational requirements for training the method on large-scale datasets, and how can they be optimized?",
+        "How does the method compare to other kernel-based methods, such as deep kernel learning and kernel transport operators?",
+        "Can the method be used for other types of data, such as images or sequences, and if so, how?"
+    ]
+}

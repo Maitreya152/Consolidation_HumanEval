@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes HAMLET, a scalable framework to adapt Vision-Language-Action models (VLAs) to attend to historical context during action prediction. HAMLET introduces moment tokens that compactly encode perceptual information at each timestep, initialized with time-contrastive learning. A lightweight memory module integrates the moment tokens across past timesteps into memory features, which are then leveraged for action prediction. Empirical evaluation shows that HAMLET successfully transforms a state-of-the-art VLA into a history-aware policy, especially demonstrating significant improvements on long-horizon tasks that require historical context.",
+    "strengths": "The paper has several strengths, including: (1) the introduction of a novel framework, HAMLET, that enables pre-trained VLAs to leverage historical context without costly retraining; (2) the use of moment tokens and a lightweight memory module to integrate historical context; (3) the demonstration of significant improvements on long-horizon tasks that require historical context; (4) the evaluation of HAMLET on both real-world and simulation environments; and (5) the provision of a clear and concise writing style.",
+    "weaknesses": "The paper has several weaknesses, including: (1) the lack of a clear explanation of the time-contrastive learning objective; (2) the limited evaluation of HAMLET on a wide range of tasks and environments; (3) the use of a relatively simple memory module; (4) the lack of a detailed analysis of the computational overhead of HAMLET; and (5) the use of a relatively small number of hyperparameters.",
+    "questions": [
+        "How does the time-contrastive learning objective work, and why is it effective for initializing the moment tokens?",
+        "Can HAMLET be applied to a wider range of tasks and environments, and what are the potential challenges and limitations?",
+        "How does the memory module work, and what are the advantages and disadvantages of using a lightweight memory module?",
+        "What is the computational overhead of HAMLET, and how does it compare to other methods?",
+        "Can HAMLET be used in conjunction with other methods, such as reinforcement learning or imitation learning, to improve performance?"
+    ]
+}

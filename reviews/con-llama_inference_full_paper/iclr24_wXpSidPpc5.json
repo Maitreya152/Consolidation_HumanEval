@@ -1,0 +1,24 @@
+{
+    "summary": "The paper proposes a novel approach called Continuous Length EXtrapolation (CLEX) for Large Language Models (LLMs) to efficiently extrapolate the context length of LLMs to over 4x the training length without any decline in performance. CLEX utilizes the neural ODE to learn the continuous dynamics over the length scaling factor during PE scaling, enabling fine-grained extension for the frequency basis in the RoPE. The experimental results demonstrate the exceptional extrapolation ability of CLEX, where our CLEX trained with a sequence length of 4k holds the potential to remain competitive to any open-source long-context LLMs (e.g., CodeLLaMA) trained on lengths up to 32k.",
+    "strengths": [
+        "The paper proposes a novel approach to extend the context length of LLMs without sacrificing performance.",
+        "The experimental results demonstrate the exceptional extrapolation ability of CLEX.",
+        "The paper provides a thorough evaluation of CLEX on various tasks, including language modeling and LongBench benchmark.",
+        "The authors provide a clear and concise explanation of the method and its components.",
+        "The paper discusses the limitations of previous methods and how CLEX addresses them."
+    ],
+    "weaknesses": [
+        "The paper assumes that the reader is familiar with the basics of LLMs and PE scaling methods.",
+        "The paper does not provide a clear explanation of the neural ODE used in CLEX.",
+        "The paper does not discuss the computational cost of CLEX.",
+        "The paper does not provide a detailed comparison with other methods that use neural ODEs.",
+        "The paper assumes that the reader is familiar with the LongBench benchmark."
+    ],
+    "questions": [
+        "How does the neural ODE used in CLEX learn the continuous dynamics over the length scaling factor?",
+        "What is the computational cost of CLEX compared to other methods?",
+        "How does CLEX compare to other methods that use neural ODEs?",
+        "What are the limitations of CLEX and how can they be addressed?",
+        "Can CLEX be applied to other tasks beyond language modeling and LongBench benchmark?"
+    ]
+}

@@ -1,0 +1,127 @@
+{
+  "username": "yash-1",
+  "assigned_papers": [
+    "iclr25_gyHoR6uFhU",
+    "iclr24_lFYj0oibGR",
+    "iclr25_M8OGl34Pmg",
+    "iclr26_gIaAuu8UZZ",
+    "colm25_U2ihVSREUb"
+  ],
+  "current_paper_index": 0,
+  "responses": {
+    "iclr25_gyHoR6uFhU": {
+      "paper_id": "iclr25_gyHoR6uFhU",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "iclr24_lFYj0oibGR": {
+      "paper_id": "iclr24_lFYj0oibGR",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "iclr25_M8OGl34Pmg": {
+      "paper_id": "iclr25_M8OGl34Pmg",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "iclr26_gIaAuu8UZZ": {
+      "paper_id": "iclr26_gIaAuu8UZZ",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "colm25_U2ihVSREUb": {
+      "paper_id": "colm25_U2ihVSREUb",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    }
+  },
+  "completed": false,
+  "completed_at": null,
+  "created_at": "2026-05-12T09:11:00.361286+00:00",
+  "updated_at": "2026-05-12T09:11:00.361314+00:00"
+}

@@ -1,0 +1,24 @@
+{
+    "summary": "This paper investigates the impact of removing hidden states from the gate mechanisms of gated linear RNNs and proposes a method to mitigate the distribution shift caused by this removal. The authors use synthetic data to analyze the dynamics of gate mechanisms and find that gate values near zero or one highly depend on hidden states. They propose applying the Gumbel-Softmax trick to bias initialization to mitigate the distribution shift and show that this approach improves performance on long-sequence modeling tasks.",
+    "strengths": [
+        "The paper provides a clear and concise introduction to the problem of removing hidden states from gated linear RNNs and its impact on gate mechanisms.",
+        "The authors use synthetic data to analyze the dynamics of gate mechanisms, which allows for a controlled and clear comparison between gated linear and nonlinear RNNs.",
+        "The proposed method of applying the Gumbel-Softmax trick to bias initialization is simple and effective in mitigating the distribution shift.",
+        "The authors provide a thorough evaluation of their proposed method on various tasks, including synthetic tasks and a language modeling task.",
+        "The paper provides a clear and concise conclusion that summarizes the main contributions and implications of the work."
+    ],
+    "weaknesses": [
+        "The paper assumes that the removal of hidden states from gated linear RNNs is the primary cause of the distribution shift, but it would be beneficial to explore other potential causes and factors.",
+        "The authors use synthetic data to analyze the dynamics of gate mechanisms, but it would be interesting to see how this analysis translates to real-world data and tasks.",
+        "The proposed method of applying the Gumbel-Softmax trick to bias initialization may not be applicable to all types of RNNs or tasks, and further exploration of its limitations and generalizability is needed.",
+        "The paper could benefit from a more detailed discussion of the implications of the distribution shift and its potential impact on the performance of gated linear RNNs in real-world applications.",
+        "The authors could provide more information about the hyperparameters used in their experiments and how they were chosen."
+    ],
+    "questions": [
+        "How does the distribution shift caused by removing hidden states from gated linear RNNs affect the performance of the model on real-world tasks?",
+        "Can the proposed method of applying the Gumbel-Softmax trick to bias initialization be applied to other types of RNNs or tasks?",
+        "What are the potential limitations and challenges of using synthetic data to analyze the dynamics of gate mechanisms?",
+        "How does the distribution shift caused by removing hidden states from gated linear RNNs compare to other types of RNNs or models?",
+        "What are the implications of the distribution shift for the design and development of gated linear RNNs and other types of RNNs?"
+    ]
+}

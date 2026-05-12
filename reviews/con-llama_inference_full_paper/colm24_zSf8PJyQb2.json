@@ -1,0 +1,21 @@
+{
+    "summary": "The paper presents a critical examination of the current methods used to measure the faithfulness of transformer circuits, which are subgraphs of a neural network that explain specific tasks. The authors argue that existing methods are highly sensitive to small changes in the ablation methodology and metrics used, leading to inconsistent results. They demonstrate this sensitivity using case studies on three existing circuits and propose a new library, AutoCircuit, which provides efficient implementations of various ablation methodologies and circuit discovery algorithms. The authors conclude that the optimal circuit for a task cannot be defined without specifying the ablation methodology and metric used, and recommend that researchers precisely describe their experimental procedures when reporting circuit evaluations.",
+    "strengths": [
+        "The paper provides a thorough analysis of the limitations of current faithfulness metrics for transformer circuits.",
+        "The authors propose a new library, AutoCircuit, which offers efficient implementations of various ablation methodologies and circuit discovery algorithms.",
+        "The paper highlights the importance of precisely describing experimental procedures when reporting circuit evaluations.",
+        "The authors demonstrate the sensitivity of faithfulness metrics to small changes in ablation methodology and metrics using case studies on three existing circuits."
+    ],
+    "weaknesses": [
+        "The paper may benefit from a more detailed explanation of the AutoCircuit library and its implementation.",
+        "Some sections of the paper may be difficult to follow due to the technical nature of the subject matter.",
+        "The paper could benefit from more concrete recommendations for future research directions.",
+        "The authors may have been more explicit in their discussion of the implications of their findings for the broader field of mechanistic interpretability."
+    ],
+    "questions": [
+        "How do the authors plan to address the limitations of the AutoCircuit library, such as its potential bias towards certain ablation methodologies?",
+        "Can the authors provide more concrete examples of how the sensitivity of faithfulness metrics to ablation methodology and metrics affects the interpretation of circuit evaluations?",
+        "How do the authors propose to address the issue of inconsistent results across different ablation methodologies and metrics?",
+        "Can the authors provide more information on the potential applications of the AutoCircuit library beyond the specific use cases presented in the paper?"
+    ]
+}

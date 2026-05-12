@@ -1,0 +1,11 @@
+{
+    "summary": "The paper proposes a new framework called STAGE, which addresses the challenges of applying Group Relative Policy Optimization (GRPO) to autoregressive (AR) image generation. The authors identify two key issues: contradictory gradients from unnecessary tokens and unstable policy entropy dynamics. To address these issues, they introduce two targeted solutions: Advantage/KL reweighting and entropy reward. The Advantage/KL reweighting leverages similarities among token embeddings within rollouts of the same prompt to dynamically adjust per-token advantages, reducing updates on redundant similar background tokens. The entropy reward calculates the entropy gap between current and reference policies and incorporates it as an auxiliary reward, further discouraging abrupt entropy drops and stabilizing policy updates. The authors conduct extensive experiments on GenEval, T2I-CompBench, and HPS, showing that their method outperforms baseline GRPO in stability and generalization.",
+    "strengths": "The paper has several strengths: (1) it identifies two key issues in applying GRPO to AR image generation and proposes targeted solutions to address them; (2) the proposed framework, STAGE, is well-structured and easy to follow; (3) the authors provide extensive experiments to demonstrate the effectiveness of their method; (4) the paper is well-written and easy to understand.",
+    "weaknesses": "The paper has several weaknesses: (1) the authors do not provide a clear explanation of why the proposed solutions are effective; (2) the experiments are limited to a specific set of benchmarks and rewards; (3) the paper does not discuss the potential limitations and challenges of the proposed method; (4) the authors do not provide a clear comparison with other state-of-the-art methods.",
+    "questions": [
+        "How do the authors plan to address the potential limitations and challenges of the proposed method?",
+        "Can the authors provide more detailed explanations of why the proposed solutions are effective?",
+        "Are there any other state-of-the-art methods that the authors could compare their results with?",
+        "How do the authors plan to extend the proposed method to other types of rewards and benchmarks?"
+    ]
+}

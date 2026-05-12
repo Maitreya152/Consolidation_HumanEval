@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes a new automated bias quantification framework called Calm, which systematically quantifies and analyzes 12 key potential biases in LLM-as-a-Judge. The framework uses automated and principle-guided modification to inject biases into the input prompts and evaluate the LLM's performance. The authors conduct experiments on multiple popular language models and find that even advanced models can exhibit unexpected vulnerabilities in judgment. They also identify explicit and implicit biases in LLMs and provide suggestions for mitigating biases in LLM-as-a-Judge applications.",
+    "strengths": "The paper provides a comprehensive framework for bias quantification and analysis in LLM-as-a-Judge. The authors conduct thorough experiments on multiple language models and identify various biases. The paper also provides suggestions for mitigating biases in LLM-as-a-Judge applications.",
+    "weaknesses": "The paper has some missing pages and figures, which may make it difficult to follow the authors' arguments. The authors could have provided more detailed explanations of the bias types and their effects on LLMs. Additionally, the paper could have included more discussion on the limitations of the proposed framework and potential future work.",
+    "questions": [
+        "How do the authors plan to address the limitations of the proposed framework?",
+        "Can the authors provide more detailed explanations of the bias types and their effects on LLMs?",
+        "What are the potential applications of the proposed framework in real-world scenarios?",
+        "How do the authors plan to extend the framework to other types of biases and LLMs?",
+        "What are the potential risks and challenges associated with using LLMs as judges in various applications?"
+    ]
+}

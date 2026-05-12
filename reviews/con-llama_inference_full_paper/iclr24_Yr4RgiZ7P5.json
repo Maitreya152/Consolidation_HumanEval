@@ -1,0 +1,24 @@
+{
+    "summary": "This paper proposes a novel metric called Distorted Shape Testbench (DiST) to evaluate shape bias in deep learning models more effectively than traditional style-transfer-based methods. The authors argue that existing models acclaimed for shape bias perform poorly on DiST, and Vision Transformers (ViTs) do not outperform Convolutional Neural Networks (CNNs) on this new benchmark. They also introduce DiSTinguish, a carefully designed training approach that shows significant improvements on DiST without sacrificing accuracy on standard tasks.",
+    "strengths": [
+        "The paper proposes a novel and effective metric for evaluating shape bias in deep learning models.",
+        "The authors provide a comprehensive analysis of the strengths and weaknesses of different models on the DiST benchmark.",
+        "The paper introduces a new training approach called DiSTinguish, which shows significant improvements on the DiST benchmark.",
+        "The authors provide a clear and concise explanation of the methods and results, making it easy to follow and understand.",
+        "The paper provides a thorough analysis of the sensitivity maps of different models, which helps to understand the strengths and weaknesses of each model."
+    ],
+    "weaknesses": [
+        "The paper assumes that the DiST benchmark is a more effective measure of shape bias than traditional style-transfer-based methods, but this assumption is not fully justified.",
+        "The authors do not provide a clear explanation of why ViTs do not outperform CNNs on the DiST benchmark.",
+        "The paper relies heavily on the DiST benchmark, which may not be representative of all real-world scenarios.",
+        "The authors do not provide a thorough analysis of the limitations of the DiST benchmark and how it can be improved.",
+        "The paper assumes that the DiSTinguish training approach is effective, but this assumption is not fully justified by the results."
+    ],
+    "questions": [
+        "How does the DiST benchmark compare to other shape bias evaluation methods, and what are its limitations?",
+        "Why do ViTs not outperform CNNs on the DiST benchmark, and what are the implications of this result?",
+        "How can the DiST benchmark be improved to make it more representative of real-world scenarios?",
+        "What are the limitations of the DiSTinguish training approach, and how can it be improved?",
+        "How does the DiSTinguish training approach compare to other shape bias evaluation methods, and what are its advantages and disadvantages?"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes a precise and robust text watermarking method for open-source large language models (LLMs) called PRO. The method addresses the challenges of low learnability of predefined watermark patterns and their vulnerability to model modifications. PRO jointly trains a learnable watermark policy with the LLM and incorporates perturbation-aware optimization to enhance robustness. The method improves watermark detectability and resilience while maintaining generation quality, providing a practical solution for open-source LLM text watermarking.",
+    "strengths": "The paper has several strengths, including: (1) it addresses a critical challenge in open-source LLM watermarking, (2) it proposes a novel and effective method for learning-friendly watermark patterns, (3) it incorporates perturbation-aware optimization to enhance robustness, (4) it provides a comprehensive evaluation of the method on various LLMs and datasets, and (5) it discusses the implications of the method for open-source LLMs and their applications.",
+    "weaknesses": "The paper has some limitations, including: (1) the method requires a large amount of training data, (2) the method may not be effective for very large LLMs, (3) the method may not be suitable for all types of LLMs, and (4) the method may require additional computational resources for training and deployment.",
+    "questions": [
+        "How does the proposed method compare to existing watermarking methods for open-source LLMs?",
+        "What are the implications of the method for the development and deployment of open-source LLMs?",
+        "How does the method handle the challenge of low learnability of predefined watermark patterns?",
+        "What are the potential applications of the method in real-world scenarios?",
+        "How does the method balance the trade-off between watermark detectability and generation quality?"
+    ]
+}

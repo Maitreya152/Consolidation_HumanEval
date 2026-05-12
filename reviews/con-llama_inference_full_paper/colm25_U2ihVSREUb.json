@@ -1,0 +1,12 @@
+{
+    "summary": "The paper presents a Bayesian scaling law for in-context learning (ICL), which approximates a Bayesian learner and models the ICL curve. The law is derived using Bayes' theorem and is shown to be a good fit for both ICL behaviour in small LMs trained on controlled synthetic data and real-world LLMs trained on natural language. The law provides interpretable parameters for the prior, learning efficiency, and task-conditional probabilities, which can help understand how model behaviour changes under alignment. The paper also presents experiments on synthetic and real-world LLMs, including a new many-shot jailbreaking dataset, and shows that the Bayesian law accurately predicts the conditions under which ICL will cause suppressed behaviours to reemerge.",
+    "strengths": "The paper presents a novel Bayesian scaling law for ICL, which is a good fit for both ICL behaviour in small LMs and real-world LLMs. The law provides interpretable parameters, which can help understand how model behaviour changes under alignment. The paper presents extensive experiments on synthetic and real-world LLMs, including a new many-shot jailbreaking dataset.",
+    "weaknesses": "The paper assumes that the ICL curve is a power law, which may not be the case in all situations. The law may not be able to capture the full complexity of ICL behaviour. The paper does not provide a clear explanation of how the Bayesian law is derived, making it difficult to understand the underlying assumptions.",
+    "questions": [
+        "How does the Bayesian law compare to other scaling laws, such as the power law and the bounded power law?",
+        "Can the Bayesian law be used to predict the conditions under which ICL will cause suppressed behaviours to reemerge in real-world LLMs?",
+        "How does the Bayesian law perform on other tasks, such as few-shot learning and multi-turn dialogue?",
+        "Can the Bayesian law be used to understand the effects of alignment on real-world LLMs?",
+        "How does the Bayesian law compare to other approaches, such as the logistic function and the power law?"
+    ]
+}

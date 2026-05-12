@@ -1,0 +1,21 @@
+{
+    "summary": "This research paper investigates the robustness of Large Language Models (LLMs) to irrelevant information, specifically when it is semantically related to the question. The authors introduce a framework to construct high-quality irrelevant information and demonstrate that current LLMs struggle to discriminate between highly semantically related information and relevant information. They also find that current solutions for handling irrelevant information have limitations in improving the robustness of LLMs. The study highlights the need for focused research on mitigating misleading irrelevant interference in the development of reliable RAG systems.",
+    "strengths": [
+        "The paper provides a comprehensive investigation into the robustness of LLMs to irrelevant information, which is a critical issue in real-world RAG applications.",
+        "The authors introduce a framework to construct high-quality irrelevant information that ranges from semantically unrelated, partially related, and related to questions.",
+        "The study demonstrates the effectiveness of the framework in evaluating the robustness of LLMs to irrelevant information.",
+        "The paper highlights the limitations of current solutions for handling irrelevant information and provides valuable insights for improving the efficiency and effectiveness of RAG systems."
+    ],
+    "weaknesses": [
+        "The paper assumes that the constructed irrelevant information is representative of real-world scenarios, which may not be the case.",
+        "The study only evaluates the robustness of LLMs to irrelevant information in a controlled environment, which may not reflect real-world applications.",
+        "The paper does not provide a clear solution to the problem of irrelevant information interference in RAG systems.",
+        "The study relies heavily on the quality of the constructed irrelevant information, which may be biased towards certain types of information."
+    ],
+    "questions": [
+        "How can the authors ensure that the constructed irrelevant information is representative of real-world scenarios?",
+        "Can the authors provide more detailed information on the limitations of current solutions for handling irrelevant information?",
+        "How can the authors improve the robustness of LLMs to irrelevant information in real-world applications?",
+        "What are the potential biases in the constructed irrelevant information and how can they be addressed?"
+    ]
+}

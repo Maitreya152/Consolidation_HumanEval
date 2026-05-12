@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes Attribution-to-Action (A2A), an efficient layer selection framework for activation steering in large language models (LLMs). A2A leverages mechanistic interpretability to identify layers where steering is most impactful, reducing the search space and computational cost. Experiments on behavior control tasks demonstrate that A2A achieves performance comparable to exhaustive search while requiring significantly fewer interventions and offering improved interpretability.",
+    "strengths": "The paper presents a novel approach to layer selection for activation steering, leveraging mechanistic interpretability to identify impactful layers. The proposed framework, A2A, is efficient, scalable, and generalizable across different LLMs and tasks. The experiments demonstrate the effectiveness of A2A in reducing computational cost and improving interpretability.",
+    "weaknesses": "The paper assumes a fixed attribution dataset size, which may not be optimal for all scenarios. The choice of top-k selection may not always be optimal, and the paper does not provide a clear justification for the choice of k. The paper assumes that the attribution graph is a good representation of the model's behavior, which may not always be the case.",
+    "questions": [
+        "How does the choice of attribution dataset size affect the performance of A2A?",
+        "What is the optimal value of k for top-k selection, and how does it depend on the specific task and model?",
+        "Can the attribution graph be improved or modified to better represent the model's behavior?",
+        "How does A2A perform on tasks with different levels of complexity and difficulty?",
+        "Can A2A be extended to other types of models, such as transformers or recurrent neural networks?"
+    ]
+}

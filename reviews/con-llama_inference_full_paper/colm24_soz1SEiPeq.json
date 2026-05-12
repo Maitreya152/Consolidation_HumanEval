@@ -1,0 +1,24 @@
+{
+    "summary": "The paper presents two new architectures, Eagle (RWKV-5) and Finch (RWKV-6), which improve upon the RWKV (RWKV-4) architecture by introducing multi-headed matrix-valued states and a dynamic recurrence mechanism. The authors also introduce a new multilingual corpus with 1.12 trillion tokens and a fast tokenizer based on greedy matching. They trained four Eagle models, ranging from 0.46 to 7.5 billion parameters, and two Finch models with 1.6 and 3.1 billion parameters, and found that they achieve competitive performance across a wide variety of benchmarks. The authors also release all their models on HuggingFace under the Apache 2.0 license.",
+    "strengths": [
+        "The paper presents a novel approach to combining the efficiency of Transformers with the scalability and performance of RNNs, allowing parallelization and scalability during training while maintaining constant computational and memory complexity during inference.",
+        "The authors introduce a new multilingual corpus with 1.12 trillion tokens and a fast tokenizer based on greedy matching, which can handle underrepresented languages more efficiently.",
+        "The paper demonstrates competitive performance across a wide variety of benchmarks, including English-only and multilingual text benchmarks, associative recall, music modeling, and vision-language benchmarks.",
+        "The authors release all their models on HuggingFace under the Apache 2.0 license, making them accessible to the research community.",
+        "The paper presents a detailed analysis of the performance of the proposed architectures on various benchmarks, including a comparison with other state-of-the-art models."
+    ],
+    "weaknesses": [
+        "The paper assumes that the reader is familiar with the RWKV architecture and its variants, which may make it difficult for readers who are not familiar with the topic to understand the paper.",
+        "The paper does not provide a detailed explanation of the mathematical derivations of the proposed architectures, which may make it difficult for readers to follow the paper.",
+        "The paper does not provide a clear comparison with other state-of-the-art models on all the benchmarks, which may make it difficult to evaluate the performance of the proposed architectures.",
+        "The paper assumes that the reader is familiar with the concept of matrix-valued states and dynamic recurrence mechanisms, which may make it difficult for readers who are not familiar with the topic to understand the paper.",
+        "The paper does not provide a clear explanation of the hyperparameters used in the experiments, which may make it difficult for readers to reproduce the results."
+    ],
+    "questions": [
+        "How does the proposed architecture compare with other state-of-the-art models on the benchmarks?",
+        "What are the advantages and disadvantages of using matrix-valued states and dynamic recurrence mechanisms in the proposed architecture?",
+        "How does the proposed architecture handle underrepresented languages more efficiently than other tokenizers?",
+        "What are the hyperparameters used in the experiments, and how do they affect the performance of the proposed architectures?",
+        "How can the proposed architecture be scaled up to larger model sizes, and what are the potential benefits and challenges of doing so?"
+    ]
+}

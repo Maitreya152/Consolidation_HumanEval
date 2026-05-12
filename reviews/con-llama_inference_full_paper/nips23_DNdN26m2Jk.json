@@ -1,0 +1,24 @@
+{
+    "summary": "The paper proposes a novel diffusion-based learning framework, called DiffCSP, for crystal structure prediction. The method jointly optimizes the lattice and fractional coordinates, ensuring the generated distribution is periodic E(3) invariant. The authors demonstrate the efficacy of DiffCSP on various crystal datasets, outperforming existing methods in terms of accuracy and efficiency. The method is also extended to ab initio generation and property optimization tasks, showing promising results. The authors provide a detailed analysis of the method's theoretical properties and implementation details.",
+    "strengths": [
+        "The paper proposes a novel and effective method for crystal structure prediction, which is a challenging task in materials science.",
+        "The method jointly optimizes the lattice and fractional coordinates, ensuring the generated distribution is periodic E(3) invariant, which is a key property of crystal structures.",
+        "The authors demonstrate the efficacy of DiffCSP on various crystal datasets, outperforming existing methods in terms of accuracy and efficiency.",
+        "The method is also extended to ab initio generation and property optimization tasks, showing promising results.",
+        "The authors provide a detailed analysis of the method's theoretical properties and implementation details."
+    ],
+    "weaknesses": [
+        "The paper assumes that the composition is fixed, which may not be the case in real-world applications.",
+        "The method requires a large number of training samples, which may not be available for all materials.",
+        "The authors do not provide a detailed comparison with other methods that do not use diffusion-based models.",
+        "The paper assumes that the lattice and fractional coordinates are jointly optimized, which may not be the case in all materials.",
+        "The authors do not provide a detailed analysis of the computational cost of the method."
+    ],
+    "questions": [
+        "How does the method handle cases where the composition is not fixed?",
+        "Can the method be extended to handle cases where the lattice and fractional coordinates are not jointly optimized?",
+        "How does the method compare with other methods that do not use diffusion-based models?",
+        "What is the computational cost of the method, and how does it compare with other methods?",
+        "Can the method be used for property optimization tasks other than formation energy?"
+    ]
+}

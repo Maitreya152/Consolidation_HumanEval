@@ -1,0 +1,12 @@
+{
+    "summary": "The paper introduces CLIPPER, a compression-based pipeline for generating synthetic narrative claims. The authors create 19K true/false claims at both book and chapter levels and fine-tune three open-weight models on this dataset. The fine-tuned models set a new state-of-the-art among <10B models on claim verification and achieve improvement on narrative understanding tasks. The authors also analyze the performance of the models on various benchmarks and discuss the limitations of the approach.",
+    "strengths": "The paper presents a novel approach to generating synthetic narrative claims, which can be used to improve the performance of language models on long-context tasks. The authors provide a detailed analysis of the performance of the models on various benchmarks and discuss the limitations of the approach. The paper also presents a taxonomy of perturbations that can cause false claims to be misclassified as true.",
+    "weaknesses": "The paper has some limitations, including the high cost of training the models and the difficulty of verifying the accuracy of the compressed representations. The authors also note that the compression stage can be challenging to fine-tune and is subject to model biases. Additionally, the paper does not provide a detailed analysis of the performance of the models on other narrative understanding tasks.",
+    "questions": [
+        "How does the performance of the models change when the distance between chapters in a claim is varied?",
+        "What is the effect of book length on the performance of the models?",
+        "Can the authors provide more details on the taxonomy of perturbations that can cause false claims to be misclassified as true?",
+        "How does the performance of the models change when the models are fine-tuned on different types of claims (e.g., book-level vs. chapter-level)?",
+        "Can the authors provide more details on the limitations of the approach and potential future work?"
+    ]
+}

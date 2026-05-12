@@ -1,0 +1,12 @@
+{
+    "summary": "The paper proposes PortLLM, a training-free framework that enables seamless transfer of domain-specific knowledge between different iterations of large language models (LLMs). The framework leverages lightweight model patches to adapt to evolving LLMs, reducing the need for repeated fine-tuning and extensive computational resources. The authors demonstrate the effectiveness of PortLLM across various downstream tasks and models, achieving comparable or even improved performance compared to fine-tuning. They also provide theoretical insights into the portability of model patches and highlight the potential for on-device, training-free models for downstream tasks.",
+    "strengths": "The paper has several strengths, including: (1) the proposal of a training-free framework that addresses the challenges of adapting to evolving LLMs; (2) the demonstration of the effectiveness of PortLLM across various downstream tasks and models; (3) the provision of theoretical insights into the portability of model patches; (4) the potential for on-device, training-free models for downstream tasks; and (5) the reduction of computational resources required for fine-tuning.",
+    "weaknesses": "The paper has some weaknesses, including: (1) the assumption that the rank of the residual matrix is negligible compared to the naive update; (2) the lack of evaluation on a diverse set of tasks and models; (3) the limited discussion of the potential risks and challenges of using model patches; and (4) the need for further investigation into the generalizability of PortLLM across different model architectures and tasks.",
+    "questions": [
+        "How does the rank of the residual matrix affect the performance of PortLLM?",
+        "Can PortLLM be applied to other types of models, such as those with different architectures or tasks?",
+        "What are the potential risks and challenges of using model patches, and how can they be mitigated?",
+        "How does the choice of pretraining dataset impact the performance of PortLLM?",
+        "Can PortLLM be used for on-device, training-free models for downstream tasks, and what are the potential benefits and limitations?"
+    ]
+}

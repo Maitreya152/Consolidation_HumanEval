@@ -1,0 +1,22 @@
+{
+    "summary": "This study presents a large-scale survey of 816 verified research article authors to understand how the research community leverages and perceives large language models (LLMs) as research tools. The survey reveals that 81% of researchers have already incorporated LLMs into their research workflow, with the tasks of information seeking and editing reported most frequently. The study also finds that traditionally disadvantaged groups in academia (non-white, junior, and non-native English speaking researchers) report higher LLM usage and perceived benefits, suggesting potential for improved research equity. However, women, non-binary, and senior researchers have greater ethical concerns. The study provides evidence about how LLMs are currently being used as research tools, highlighting the need for further discussion and development of norms around their use.",
+    "strengths": [
+        "The study provides a large-scale and diverse sample of researchers, allowing for a comprehensive understanding of LLM usage and perceptions.",
+        "The survey design and analysis are well-described, and the authors provide a clear and concise presentation of their findings.",
+        "The study highlights the potential benefits of LLMs for research equity, particularly for non-native English speakers and junior researchers.",
+        "The authors provide a thorough discussion of the limitations of their study and potential avenues for future research."
+    ],
+    "weaknesses": [
+        "The study relies on self-reported data, which may be subject to biases and limitations.",
+        "The survey questions may not have captured the full range of LLM usage and perceptions, particularly for researchers who may not have responded to the survey.",
+        "The study does not provide a detailed analysis of the potential risks and challenges associated with LLM usage, particularly for researchers who may not have the necessary expertise or resources.",
+        "The study's findings may not be generalizable to all research communities, particularly those with different cultural or linguistic backgrounds."
+    ],
+    "questions": [
+        "How can the research community ensure that LLMs are used in a way that promotes research equity and reduces existing biases?",
+        "What are the potential risks and challenges associated with LLM usage, and how can researchers mitigate these risks?",
+        "How can researchers ensure that LLMs are used in a way that promotes transparency, reproducibility, and accountability?",
+        "What are the implications of LLM usage for research quality, creativity, and the development of research skills?",
+        "How can the research community develop norms and standards for LLM usage that are inclusive and equitable?"
+    ]
+}

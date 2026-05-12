@@ -1,0 +1,24 @@
+{
+    "summary": "The paper proposes SpeechAlign, an iterative self-improvement strategy that aligns speech language models to human preferences. It addresses the distribution gap in codec language models and leverages preference optimization to bridge the gap. The authors introduce a preference codec dataset contrasting golden codec tokens against synthetic tokens and conduct preference optimization using various strategies. The results show that SpeechAlign can bridge the distribution gap and facilitate continuous self-improvement of the speech language model.",
+    "strengths": [
+        "The paper provides a clear and concise introduction to the problem of distribution gap in codec language models and its impact on speech generation.",
+        "The authors propose a novel approach, SpeechAlign, to address the distribution gap and leverage preference optimization to improve speech language models.",
+        "The paper presents a comprehensive evaluation of SpeechAlign, including subjective and objective evaluations, and demonstrates its effectiveness in bridging the distribution gap and improving speech generation.",
+        "The authors provide a detailed analysis of the results, including the impact of preference data size and the effectiveness of different preference optimization strategies.",
+        "The paper discusses the limitations of the work and potential future directions for improvement."
+    ],
+    "weaknesses": [
+        "The paper assumes that the preference dataset is collected using a specific method, which may not be scalable or practical for real-world applications.",
+        "The authors do not provide a detailed explanation of how the preference optimization strategies are implemented and evaluated.",
+        "The paper does not discuss the potential risks and challenges associated with collecting and using human preference data.",
+        "The authors do not provide a clear comparison with other existing methods for aligning speech language models to human preferences.",
+        "The paper assumes that the speech language model is trained on a specific dataset, which may not be representative of real-world speech data."
+    ],
+    "questions": [
+        "How does the authors plan to address the scalability and practicality of collecting preference data in real-world applications?",
+        "Can the authors provide more details on the implementation and evaluation of the preference optimization strategies?",
+        "What are the potential risks and challenges associated with collecting and using human preference data, and how can they be mitigated?",
+        "How does SpeechAlign compare with other existing methods for aligning speech language models to human preferences?",
+        "Can the authors provide more information on the dataset used to train the speech language model and how it represents real-world speech data?"
+    ]
+}

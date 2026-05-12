@@ -1,0 +1,127 @@
+{
+  "username": "maitreya-1",
+  "assigned_papers": [
+    "iclr24_wXpSidPpc5",
+    "colm25_2Kl8Ztw6wk",
+    "colm25_akHq1QcqeZ",
+    "iclr24_EyfOZKXpcN",
+    "colm24_zSf8PJyQb2"
+  ],
+  "current_paper_index": 0,
+  "responses": {
+    "iclr24_wXpSidPpc5": {
+      "paper_id": "iclr24_wXpSidPpc5",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "colm25_2Kl8Ztw6wk": {
+      "paper_id": "colm25_2Kl8Ztw6wk",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "colm25_akHq1QcqeZ": {
+      "paper_id": "colm25_akHq1QcqeZ",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "iclr24_EyfOZKXpcN": {
+      "paper_id": "iclr24_EyfOZKXpcN",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    },
+    "colm24_zSf8PJyQb2": {
+      "paper_id": "colm24_zSf8PJyQb2",
+      "section_rankings": {
+        "summary": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "strengths": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "weaknesses": {
+          "ordering": [],
+          "saved_at": null
+        },
+        "questions": {
+          "ordering": [],
+          "saved_at": null
+        }
+      },
+      "last_saved_at": null
+    }
+  },
+  "completed": false,
+  "completed_at": null,
+  "created_at": "2026-05-12T09:11:12.714602+00:00",
+  "updated_at": "2026-05-12T09:11:12.714620+00:00"
+}
