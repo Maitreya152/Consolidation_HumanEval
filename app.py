@@ -203,7 +203,6 @@ def render_ranking_widget(
             key=f"save_{paper_id}_{section}",
             type="primary",
         ):
-            # Group by rank value -> list of real_ids
             from collections import defaultdict
             groups: dict[int, list[str]] = defaultdict(list)
             for rid, r in current_ranks.items():
@@ -214,8 +213,7 @@ def render_ranking_widget(
             sec_data["saved_at"] = utc_now()
             result["responses"][paper_id]["last_saved_at"] = utc_now()
             save_result(result)
-            st.session_state["_save_msg"] = f"Saved {SECTION_TITLES[section]} for `{paper_id}`."
-            st.rerun()
+            st.toast(f"✅ Saved {SECTION_TITLES[section]} for `{paper_id}`.", icon="✅")
 
     with col_status:
         if section_is_complete(sec_data):
@@ -391,7 +389,8 @@ def render_completion_panel(result: dict) -> None:
             result["completed"] = True
             result["completed_at"] = utc_now()
             save_result(result)
-            st.rerun()
+            st.toast("🔒 Submission locked! Please share your results file.", icon="🔒")
+            st.success("✅ Submission received! This assignment is now read-only.")
 
 
 # ── main app ──────────────────────────────────────────────────────────────────
@@ -412,8 +411,6 @@ def render_app() -> None:
 
     st.title("📄 Human Evaluation — Consolidated Paper Reviews")
 
-    if st.session_state.get("_save_msg"):
-        st.success(st.session_state.pop("_save_msg"))
 
     eval_tab, instructions_tab = st.tabs(["📊 Evaluation", "📖 Instructions"])
 
