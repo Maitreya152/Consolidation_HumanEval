@@ -1,0 +1,335 @@
+{
+  "username": "durga",
+  "assigned_papers": [
+    "iclr25_MwIbzfu93a",
+    "nips23_nCLdsEzZBV",
+    "colm25_p0BwJk3R1p",
+    "iclr26_sC9gjsv7p7",
+    "nips24_CbHz30KeA4"
+  ],
+  "current_paper_index": 0,
+  "responses": {
+    "iclr25_MwIbzfu93a": {
+      "paper_id": "iclr25_MwIbzfu93a",
+      "section_rankings": {
+        "summary": {
+          "ordering": [
+            [
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_inference_full_paper"
+            ],
+            [
+              "con-llama_consolidated_inf_final"
+            ]
+          ],
+          "saved_at": "2026-05-12T19:57:49.968964+00:00"
+        },
+        "strengths": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-12T20:09:00.981068+00:00"
+        },
+        "weaknesses": {
+          "ordering": [
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T05:35:50.070058+00:00"
+        },
+        "questions": {
+          "ordering": [
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T05:40:21.280262+00:00"
+        }
+      },
+      "last_saved_at": "2026-05-13T05:40:21.280273+00:00"
+    },
+    "nips23_nCLdsEzZBV": {
+      "paper_id": "nips23_nCLdsEzZBV",
+      "section_rankings": {
+        "summary": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ]
+          ],
+          "saved_at": "2026-05-13T06:32:28.532823+00:00"
+        },
+        "strengths": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T06:42:26.259531+00:00"
+        },
+        "weaknesses": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-multiref_llama_inf_14000"
+            ],
+            [
+              "con-llama_highconf_inf"
+            ]
+          ],
+          "saved_at": "2026-05-13T06:45:28.570793+00:00"
+        },
+        "questions": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T06:52:31.640995+00:00"
+        }
+      },
+      "last_saved_at": "2026-05-13T06:52:31.641006+00:00"
+    },
+    "colm25_p0BwJk3R1p": {
+      "paper_id": "colm25_p0BwJk3R1p",
+      "section_rankings": {
+        "summary": {
+          "ordering": [
+            [
+              "con-llama_inference_full_paper"
+            ],
+            [
+              "con-llama_consolidated_inf_final",
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ]
+          ],
+          "saved_at": "2026-05-13T07:06:49.821431+00:00"
+        },
+        "strengths": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final",
+              "con-llama_inference_full_paper"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ],
+            [
+              "con-llama_highconf_inf"
+            ]
+          ],
+          "saved_at": "2026-05-13T07:31:24.122659+00:00"
+        },
+        "weaknesses": {
+          "ordering": [
+            [
+              "con-llama_inference_full_paper"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-llama_consolidated_inf_final"
+            ]
+          ],
+          "saved_at": "2026-05-13T07:34:54.200032+00:00"
+        },
+        "questions": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final",
+              "con-llama_inference_full_paper",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ]
+          ],
+          "saved_at": "2026-05-13T07:36:42.048702+00:00"
+        }
+      },
+      "last_saved_at": "2026-05-13T07:36:42.048712+00:00"
+    },
+    "iclr26_sC9gjsv7p7": {
+      "paper_id": "iclr26_sC9gjsv7p7",
+      "section_rankings": {
+        "summary": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:05:13.687808+00:00"
+        },
+        "strengths": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:14:43.301964+00:00"
+        },
+        "weaknesses": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000",
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:18:07.812313+00:00"
+        },
+        "questions": {
+          "ordering": [
+            [
+              "con-llama_inference_full_paper"
+            ],
+            [
+              "con-llama_consolidated_inf_final",
+              "con-llama_highconf_inf"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:19:40.754332+00:00"
+        }
+      },
+      "last_saved_at": "2026-05-13T08:19:40.754342+00:00"
+    },
+    "nips24_CbHz30KeA4": {
+      "paper_id": "nips24_CbHz30KeA4",
+      "section_rankings": {
+        "summary": {
+          "ordering": [
+            [
+              "con-llama_highconf_inf",
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-multiref_llama_inf_14000"
+            ],
+            [
+              "con-llama_inference_full_paper"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:37:45.107556+00:00"
+        },
+        "strengths": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-multiref_llama_inf_14000"
+            ],
+            [
+              "con-llama_highconf_inf"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:41:42.892020+00:00"
+        },
+        "weaknesses": {
+          "ordering": [
+            [
+              "con-llama_consolidated_inf_final"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-llama_highconf_inf",
+              "con-multiref_llama_inf_14000"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:44:08.481157+00:00"
+        },
+        "questions": {
+          "ordering": [
+            [
+              "con-llama_highconf_inf",
+              "con-multiref_llama_inf_14000"
+            ],
+            [
+              "con-llama_inference_full_paper",
+              "con-llama_consolidated_inf_final"
+            ]
+          ],
+          "saved_at": "2026-05-13T08:45:33.544447+00:00"
+        }
+      },
+      "last_saved_at": "2026-05-13T08:45:33.544459+00:00"
+    }
+  },
+  "completed": true,
+  "completed_at": "2026-05-13T08:45:43.202522+00:00",
+  "created_at": "2026-05-12T18:23:24.435615+00:00",
+  "updated_at": "2026-05-13T08:45:43.202531+00:00"
+}
