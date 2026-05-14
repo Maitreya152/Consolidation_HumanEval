@@ -214,6 +214,7 @@ def render_ranking_widget(
             result["responses"][paper_id]["last_saved_at"] = utc_now()
             save_result(result)
             st.toast(f"✅ Saved {SECTION_TITLES[section]} for `{paper_id}`.", icon="✅")
+            st.rerun()
 
     with col_status:
         if section_is_complete(sec_data):
@@ -424,10 +425,7 @@ def render_app() -> None:
             text=f"{done_papers}/{len(assigned_papers)} papers complete"
         )
 
-        paper_labels = [
-            f"{'✅ ' if paper_is_complete(result['responses'][pid]) else ''}Paper {i+1}"
-            for i, pid in enumerate(assigned_papers)
-        ]
+        paper_labels = [f"Paper {i+1}" for i in range(len(assigned_papers))]
         paper_tabs = st.tabs(paper_labels)
 
         for p_idx, paper_id in enumerate(assigned_papers):
@@ -443,10 +441,7 @@ def render_app() -> None:
                     text="✅ All sections complete" if complete else f"{secs_done}/{len(SECTIONS)} sections saved"
                 )
 
-                sec_labels = [
-                    f"{'✅ ' if section_is_complete(response['section_rankings'][s]) else ''}{SECTION_TITLES[s]}"
-                    for s in SECTIONS
-                ]
+                sec_labels = [SECTION_TITLES[s] for s in SECTIONS]
                 sec_tabs = st.tabs(sec_labels)
 
                 for s_idx, section in enumerate(SECTIONS):
